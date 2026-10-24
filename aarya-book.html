@@ -15,13 +15,9 @@
   --reader-font: 16px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-[hidden] {
-  display: none !important;
-}
+[hidden] { display: none !important; }
 
 html {
   min-height: 100%;
@@ -83,6 +79,7 @@ button:disabled {
 
 select {
   max-width: 240px;
+  min-width: 0;
 }
 
 .reader-actions,
@@ -109,8 +106,10 @@ select {
 }
 
 .book-shell {
+  position: relative;
   width: 100%;
   height: min(68vh, 620px);
+  height: min(68dvh, 620px);
   min-height: 360px;
   display: flex;
   justify-content: center;
@@ -120,8 +119,11 @@ select {
 }
 
 #book {
+  position: relative;
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   margin: 0 auto;
 }
 
@@ -134,8 +136,10 @@ select {
 
 .page-inner {
   position: relative;
+  width: 100%;
   height: 100%;
   padding: 30px 24px 42px;
+  overflow: hidden;
   background: linear-gradient(
     90deg,
     #d2c09d 0%,
@@ -198,6 +202,7 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
   padding: 24px 14px;
   background: radial-gradient(
@@ -230,13 +235,9 @@ select {
   line-height: 1.8;
 }
 
-.back-cover .page-inner {
-  text-align: center;
-}
+.back-cover .page-inner { text-align: center; }
 
-.back-cover h2 {
-  letter-spacing: 4px;
-}
+.back-cover h2 { letter-spacing: 4px; }
 
 .progress-area {
   width: min(420px, 95%);
@@ -293,7 +294,7 @@ select {
   margin: 12px 10px 24px;
 }
 
-/* Immersive reader */
+/* Full-window reader */
 
 body.reader-mode {
   position: fixed;
@@ -306,9 +307,7 @@ body.reader-mode {
   z-index: 9999;
 }
 
-body.reader-mode header {
-  display: none;
-}
+body.reader-mode header { display: none; }
 
 body.reader-mode main {
   position: absolute;
@@ -323,7 +322,7 @@ body.reader-mode main {
     max(5px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
   overflow: hidden;
   background: radial-gradient(ellipse at top, #40331f, #080808 75%);
 }
@@ -353,6 +352,7 @@ body.reader-mode select {
 }
 
 body.reader-mode .book-shell {
+  position: relative;
   flex: 1 1 0;
   height: auto;
   width: 100%;
@@ -364,8 +364,10 @@ body.reader-mode .book-shell {
 body.reader-mode #book {
   width: 100%;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   max-width: 100%;
-  margin: auto;
+  margin: 0 auto;
 }
 
 body.reader-mode #status {
@@ -391,9 +393,7 @@ body.reader-mode #counter {
   font-size: 11px;
 }
 
-body.reader-mode .hint {
-  display: none;
-}
+body.reader-mode .hint { display: none; }
 
 @media (max-width: 500px) {
   main {
@@ -401,25 +401,11 @@ body.reader-mode .hint {
     margin-top: 12px;
   }
 
-  .page-inner {
-    padding: 24px 18px 40px;
-  }
-
-  .page h2 {
-    font-size: 20px;
-  }
-
-  .reader-actions {
-    gap: 6px;
-  }
-
-  .reader-actions button {
-    padding: 9px 8px;
-  }
-
-  .toolbar {
-    gap: 6px;
-  }
+  .page-inner { padding: 24px 18px 40px; }
+  .page h2 { font-size: 20px; }
+  .reader-actions { gap: 6px; }
+  .reader-actions button { padding: 9px 8px; }
+  .toolbar { gap: 6px; }
 
   body.reader-mode main {
     padding-left: 5px;
@@ -431,7 +417,7 @@ body.reader-mode .hint {
   body.reader-mode main {
     padding-top: max(3px, env(safe-area-inset-top));
     padding-bottom: max(3px, env(safe-area-inset-bottom));
-    gap: 2px;
+    gap: 3px;
   }
 
   body.reader-mode .reader-actions,
@@ -452,21 +438,19 @@ body.reader-mode .hint {
 }
 
 @media (max-height: 450px) {
-  body.reader-mode .reader-actions .brand {
-    display: none;
-  }
-
+  body.reader-mode .reader-actions .brand,
   body.reader-mode #status {
     display: none;
   }
 
-  body.reader-mode .progress-label {
-    margin-bottom: 2px;
-  }
+  body.reader-mode .progress-label { margin-bottom: 2px; }
+  body.reader-mode .progress-track { height: 3px; }
+}
 
-  body.reader-mode .progress-track {
-    height: 3px;
-  }
+@media (max-width: 350px) {
+  body.reader-mode .reader-actions .brand { display: none; }
+  body.reader-mode .reader-actions { justify-content: flex-end; }
+  body.reader-mode .toolbar select { max-width: 145px; }
 }
 </style>
 </head>
@@ -553,50 +537,53 @@ body.reader-mode .hint {
   let fontSize = 16;
   let pageFlip = null;
   let resizeTimer = null;
-  let lastOrientation = window.innerWidth > window.innerHeight
-    ? "landscape"
-    : "portrait";
+  let layoutTimer = null;
+  let lastOrientation = "";
 
+  /*
+   * Let StPageFlip respond to the browser's own resize handling.
+   * Do not repeatedly call update() from ResizeObserver: that can
+   * create competing size calculations while the container is changing.
+   */
   function refreshLayout() {
     window.dispatchEvent(new Event("resize"));
+  }
 
-    if (pageFlip && typeof pageFlip.update === "function") {
-      try {
-        pageFlip.update();
-      } catch (error) {
-        console.debug("Reader resize handled by the page-turn library.");
-      }
-    }
+  function scheduleLayoutRefresh() {
+    clearTimeout(layoutTimer);
+    layoutTimer = setTimeout(refreshLayout, 180);
   }
 
   function setReaderMode(enabled) {
     document.body.classList.toggle("reader-mode", enabled);
-
-    requestAnimationFrame(() => {
-      refreshLayout();
-      setTimeout(refreshLayout, 180);
-    });
+    scheduleLayoutRefresh();
   }
 
-  minimise.addEventListener("click", function () {
+  minimise.addEventListener("click", async function () {
     setReaderMode(false);
 
     if (document.fullscreenElement && document.exitFullscreen) {
-      document.exitFullscreen().catch(() => {});
+      try {
+        await document.exitFullscreen();
+      } catch (error) {
+        console.debug("Browser fullscreen could not be exited.");
+      }
     }
+
+    scheduleLayoutRefresh();
   });
 
   fullscreen.addEventListener("click", async function () {
-    setReaderMode(true);
-
     if (document.fullscreenElement) {
       try {
         await document.exitFullscreen();
       } catch (error) {
-        status.textContent = "Use your browser controls to exit system fullscreen.";
+        status.textContent = "Use your browser controls to exit fullscreen.";
       }
       return;
     }
+
+    setReaderMode(true);
 
     if (document.documentElement.requestFullscreen) {
       try {
@@ -606,11 +593,10 @@ body.reader-mode .hint {
           "Reader view is open. System fullscreen isn't available in this browser.";
       }
     } else {
-      status.textContent =
-        "Reader view is open and fitted to your screen.";
+      status.textContent = "Reader view is fitted to your screen.";
     }
 
-    setTimeout(refreshLayout, 180);
+    scheduleLayoutRefresh();
   });
 
   document.addEventListener("fullscreenchange", function () {
@@ -618,26 +604,22 @@ body.reader-mode .hint {
       ? "Exit Fullscreen"
       : "Fullscreen ⛶";
 
-    setTimeout(refreshLayout, 100);
+    scheduleLayoutRefresh();
   });
 
   window.addEventListener("resize", function () {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(refreshLayout, 120);
+    resizeTimer = setTimeout(function () {
+      lastOrientation = window.innerWidth > window.innerHeight
+        ? "landscape"
+        : "portrait";
+    }, 150);
   });
 
   window.addEventListener("orientationchange", function () {
-    setTimeout(refreshLayout, 250);
-    setTimeout(refreshLayout, 600);
+    scheduleLayoutRefresh();
+    setTimeout(refreshLayout, 500);
   });
-
-  if ("ResizeObserver" in window) {
-    const observer = new ResizeObserver(() => {
-      if (pageFlip) refreshLayout();
-    });
-
-    observer.observe(bookShell);
-  }
 
   function updateFontSize() {
     document.documentElement.style.setProperty(
@@ -751,7 +733,6 @@ body.reader-mode .hint {
 
     progressBar.style.width = percent + "%";
     progressText.textContent = percent + "%";
-
     chapterSelect.value = index === 1 ? "1" : "0";
   }
 
@@ -791,30 +772,39 @@ body.reader-mode .hint {
 
     try {
       pageFlip = new St.PageFlip(bookElement, {
-        width: 420,
+        width: 400,
         height: 600,
+
         size: "stretch",
         minWidth: 260,
-        maxWidth: 1000,
-        minHeight: 320,
-        maxHeight: 1400,
-        drawShadow: true,
-        flippingTime: 850,
-        usePortrait: true,
+        maxWidth: 800,
+        minHeight: 360,
+        maxHeight: 1200,
+
         startPage: 0,
-        autoSize: true,
-        maxShadowOpacity: 0.55,
+        drawShadow: true,
+        flippingTime: 700,
+        usePortrait: true,
+        startZIndex: 0,
+
+        /*
+         * Stretch to the measured book container.
+         * Do not let the library resize the parent container.
+         */
+        autoSize: false,
+
+        maxShadowOpacity: 0.45,
         showCover: true,
-        mobileScrollSupport: false,
+        mobileScrollSupport: true,
         clickEventForward: true,
         useMouseEvents: true,
-        swipeDistance: 25,
+        swipeDistance: 30,
         showPageCorners: true,
         disableFlipByClick: false
       });
 
       pageFlip.loadFromHTML(
-        document.querySelectorAll("#book .page")
+        bookElement.querySelectorAll(".page")
       );
 
       prev.addEventListener("click", function () {
@@ -838,8 +828,7 @@ body.reader-mode .hint {
       status.textContent =
         "Aarya's cover is ready. Turn the cover to read the free preview.";
 
-      setTimeout(refreshLayout, 200);
-      setTimeout(refreshLayout, 700);
+      scheduleLayoutRefresh();
     } catch (error) {
       console.error("Reader initialization error:", error);
       status.textContent =
@@ -882,6 +871,10 @@ body.reader-mode .hint {
       next.disabled = true;
     }
   }
+
+  lastOrientation = window.innerWidth > window.innerHeight
+    ? "landscape"
+    : "portrait";
 
   loadPreview();
 })();
