@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AARYA | Sovereign Pictures</title>
+<style>
+:root {
+  --gold: #d8b568;
+  --paper: #f4ead4;
+  --ink: #302719;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #252019, #080808 75%);
+  color: #f7f0e2;
+  font-family: Georgia, serif;
+}
+header {
+  padding: 22px 16px;
+  text-align: center;
+  border-bottom: 1px solid #6e572b;
+}
+.brand {
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-size: 12px;
+}
+header a {
+  display: inline-block;
+  margin-top: 12px;
+  color: #e7d5a8;
+  font-size: 13px;
+  text-decoration: none;
+}
+main {
+  width: min(920px, 94%);
+  margin: 32px auto;
+}
+.book {
+  min-height: 460px;
+  perspective: 1800px;
+  position: relative;
+}
+.page {
+  display: none;
+  min-height: 460px;
+  padding: clamp(25px, 6vw, 60px);
+  background:
+    linear-gradient(90deg, #d6c7a9, transparent 7%, transparent 94%, #d9c9a8),
+    var(--paper);
+  color: var(--ink);
+  border: 1px solid #c6b38c;
+  box-shadow: 0 20px 65px #000b;
+  transform-origin: left center;
+  overflow-wrap: anywhere;
+}
+.page.active {
+  display: block;
+  animation: appear .45s ease both;
+}
+.page.turning {
+  animation: flip .48s ease both;
+}
+@keyframes appear {
+  from { opacity: .5; transform: rotateY(-7deg); }
+  to { opacity: 1; transform: rotateY(0); }
+}
+@keyframes flip {
+  0% { opacity: 1; transform: rotateY(0); }
+  50% { opacity: .55; transform: rotateY(-18deg); }
+  100% { opacity: 1; transform: rotateY(0); }
+}
+.cover {
+  background:
+    radial-gradient(ellipse at center, #352a18, #11100d 72%);
+  color: var(--gold);
+  border: 3px double var(--gold);
+  text-align: center;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cover.active { display: flex; }
+.cover .ornament {
+  font-size: 42px;
+  margin-bottom: 30px;
+}
+.cover h1 {
+  font-size: clamp(42px, 10vw, 76px);
+  letter-spacing: 9px;
+  margin: 10px 0;
+  font-weight: normal;
+}
+.cover p {
+  letter-spacing: 3px;
+  line-height: 1.9;
+  font-size: 11px;
+}
+.page h2 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 25px;
+  margin: 0 0 30px;
+}
+.page .chapter {
+  text-align: center;
+  color: #80672f;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+.page p {
+  font-size: 17px;
+  line-height: 1.95;
+  white-space: pre-line;
+}
+.page .dropcap:first-letter {
+  float: left;
+  font-size: 52px;
+  line-height: .9;
+  padding: 5px 7px 0 0;
+  color: #8c6c2c;
+}
+.page-number {
+  position: absolute;
+  bottom: 17px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: #80672f;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 24px auto 10px;
+  flex-wrap: wrap;
+}
+button {
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: #17140f;
+  border-radius: 3px;
+  padding: 12px 18px;
+  font-family: inherit;
+  cursor: pointer;
+}
+button:disabled { opacity: .3; cursor: default; }
+#counter { color: #c5b895; font-size: 13px; }
+.hint {
+  text-align: center;
+  color: #a99c80;
+  font: 12px Arial, sans-serif;
+  margin: 18px 0 30px;
+}
+@media (max-width: 500px) {
+  .book, .page { min-height: 500px; }
+  .page p { font-size: 16px; line-height: 1.85; }
+  .controls { gap: 8px; }
+  button { padding: 11px 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page.active, .page.turning { animation: none; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">SOVEREIGN PICTURES</div>
+  <a href="library.html">← BACK TO STORY LIBRARY</a>
+</header>
+
+<main>
+  <div class="book" id="book">
+
+    <section class="page cover active" data-page="0">
+      <div class="ornament">✧ ❖ ✧</div>
+      <p>A SOVEREIGN PICTURES ORIGINAL</p>
+      <h1>AARYA</h1>
+      <p>A LEGEND BEGINS<br><br>OPEN THE BOOK</p>
+      <div class="page-number">✦</div>
+    </section>
+
+    <section class="page" data-page="1">
+      <div class="chapter">PROLOGUE</div>
+      <h2>The Beginning of a Legend</h2>
+      <p class="dropcap">Beyond the world we know, beyond the skies we see, there exist realms untouched by human imagination.
+
+Worlds with their own kingdoms. Their own legends. Their own secrets.
+
+And in one such world, hidden from the eyes of the universe, stood a kingdom unlike any other.</p>
+      <div class="page-number">1</div>
+    </section>
+
+    <section class="page" data-page="2">
+      <div class="chapter">THE ROYAL KINGDOM</div>
+      <p>For generations, its people lived beneath the protection of their royal bloodline, unaware that the greatest threat to their future would not come from beyond their borders…
+
+But from a destiny already set in motion.
+
+Then, on a night when the stars seemed brighter than ever, a child was born within the royal palace.
+
+A princess.</p>
+      <div class="page-number">2</div>
+    </section>
+
+    <section class="page" data-page="3">
+      <div class="chapter">A PRINCESS IS BORN</div>
+      <p>Her arrival brought joy to the kingdom. Bells rang, celebrations filled the streets, and the people welcomed their future with hope.
+
+Her name was Aarya.
+
+Yet, beyond the celebrations, a secret was being prepared—a secret whose purpose even time itself had not yet revealed.</p>
+      <div class="page-number">3</div>
+    </section>
+
+    <section class="page" data-page="4">
+      <div class="chapter">THE MYSTERIOUS BRACELET</div>
+      <p>A mysterious bracelet, created to protect its bearer, carried a power unlike anything the kingdom had ever known.
+
+It would remain silent until the day it was needed.
+
+And when that day arrived, the fate of more than one world would rest upon the shoulders of a girl who had once known nothing beyond the walls of her home.</p>
+      <div class="page-number">4</div>
+    </section>
+
+    <section class="page" data-page="5">
+      <div class="chapter">THE LEGEND BEGINS</div>
+      <p>For some lives are born into royalty.
+
+Others are born into legend.
+
+But once in an age…
+
+A life is born to change the fate of worlds.
+
+This is the story of Aarya.</p>
+      <div class="page-number">5</div>
+    </section>
+
+  </div>
+
+  <div class="controls">
+    <button id="prev" disabled>← Previous</button>
+    <span id="counter">Cover</span>
+    <button id="next">Open Book →</button>
+  </div>
+  <p class="hint">Turn the pages to discover the story.</p>
+</main>
+
+<script>
+const pages = Array.from(document.querySelectorAll(".page"));
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const counter = document.getElementById("counter");
+let current = 0;
+let busy = false;
+
+function showPage(index, direction) {
+  if (busy || index < 0 || index >= pages.length || index === current) return;
+  busy = true;
+  const oldPage = pages[current];
+  const newPage = pages[index];
+
+  oldPage.classList.remove("active", "turning");
+  newPage.classList.add("active", "turning");
+  current = index;
+
+  counter.textContent = current === 0
+    ? "Cover"
+    : "Page " + current + " of " + (pages.length - 1);
+
+  prev.disabled = current === 0;
+  next.disabled = current === pages.length - 1;
+  next.textContent = current === pages.length - 1 ? "The End" : "Next Page →";
+  prev.textContent = "← Previous";
+
+  setTimeout(() => {
+    newPage.classList.remove("turning");
+    busy = false;
+  }, 480);
+}
+
+prev.addEventListener("click", () => showPage(current - 1, -1));
+next.addEventListener("click", () => showPage(current + 1, 1));
+
+pages.forEach(page => {
+  page.addEventListener("click", event => {
+    if (event.target.closest("a, button")) return;
+    if (current < pages.length - 1) showPage(current + 1, 1);
+  });
+});
+</script>
+</body>
+</html>
