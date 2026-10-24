@@ -13,9 +13,7 @@
   --ink: #302719;
   --reader-font: 16px;
 }
-
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
   min-height: 100vh;
@@ -23,19 +21,16 @@ body {
   color: #f7f0e2;
   font-family: Georgia, serif;
 }
-
 header {
   padding: 22px 16px;
   text-align: center;
   border-bottom: 1px solid #6e572b;
 }
-
 .brand {
   color: var(--gold);
   letter-spacing: 4px;
   font-size: 12px;
 }
-
 header a {
   display: inline-block;
   margin-top: 12px;
@@ -43,13 +38,11 @@ header a {
   font-size: 13px;
   text-decoration: none;
 }
-
 main {
   width: min(1000px, 96%);
   margin: 24px auto;
 }
-
-.toolbar {
+.toolbar, .controls {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +50,6 @@ main {
   gap: 10px;
   margin: 0 auto 18px;
 }
-
 button, select {
   border: 1px solid var(--gold);
   color: var(--gold);
@@ -67,20 +59,9 @@ button, select {
   font-family: inherit;
   font-size: 14px;
 }
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .35;
-  cursor: default;
-}
-
-select {
-  max-width: 220px;
-}
-
+button { cursor: pointer; }
+button:disabled { opacity: .35; cursor: default; }
+select { max-width: 240px; }
 .book-shell {
   width: 100%;
   display: flex;
@@ -88,30 +69,19 @@ select {
   align-items: center;
   padding: 8px 0;
 }
-
-#book {
-  margin: 0 auto;
-}
-
+#book { margin: 0 auto; }
 .page {
   background: var(--paper);
   color: var(--ink);
   border: 1px solid #c6b38c;
   overflow: hidden;
 }
-
 .page-inner {
   position: relative;
   height: 100%;
   padding: 38px 30px 48px;
-  background:
-    linear-gradient(90deg,
-      #d2c09d 0%,
-      #f4ead4 7%,
-      #f8f0df 50%,
-      #f1e4c9 100%);
+  background: linear-gradient(90deg,#d2c09d 0%,#f4ead4 7%,#f8f0df 50%,#f1e4c9 100%);
 }
-
 .page h2 {
   font-size: 23px;
   font-weight: normal;
@@ -119,7 +89,6 @@ select {
   line-height: 1.4;
   margin: 12px 0 28px;
 }
-
 .chapter {
   text-align: center;
   color: #80672f;
@@ -127,7 +96,6 @@ select {
   letter-spacing: 2.5px;
   line-height: 1.8;
 }
-
 .page p {
   font-size: var(--reader-font);
   line-height: 1.8;
@@ -136,7 +104,6 @@ select {
   overflow-wrap: anywhere;
   margin-bottom: 18px;
 }
-
 .page-number {
   position: absolute;
   bottom: 17px;
@@ -146,129 +113,90 @@ select {
   font-size: 12px;
   color: #80672f;
 }
-
-.cover {
-  background: radial-gradient(ellipse at center,
-    #45351e 0%, #20180e 60%, #0b0907 100%);
+.cover, .back-cover {
+  background: radial-gradient(ellipse at center,#45351e 0%,#20180e 60%,#0b0907 100%);
   color: var(--gold);
   text-align: center;
 }
-
-.cover .page-inner {
+.cover .page-inner, .back-cover .page-inner {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
   padding: 32px 20px;
-  background: radial-gradient(ellipse at center,
-    #45351e 0%, #20180e 60%, #0b0907 100%);
+  background: radial-gradient(ellipse at center,#45351e 0%,#20180e 60%,#0b0907 100%);
   border: 5px double var(--gold);
-  outline: 1px solid #72572b;
-  outline-offset: -12px;
   color: var(--gold);
 }
-
-.cover .ornament {
+.cover .ornament, .back-cover .ornament {
   font-size: 36px;
   margin-bottom: 22px;
 }
-
 .cover h1 {
-  font-size: clamp(38px, 7vw, 58px);
+  font-size: clamp(38px,7vw,58px);
   letter-spacing: 6px;
   font-weight: normal;
   margin: 14px 0;
 }
-
-.cover p {
+.cover p, .back-cover p {
   font-size: 10px;
   letter-spacing: 2px;
   line-height: 1.9;
 }
-
-.back-cover .page-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  background: radial-gradient(ellipse at center,
-    #45351e, #0b0907 80%);
-  color: var(--gold);
-  height: 100%;
-  border: 5px double var(--gold);
-}
-
-.back-cover h2 {
-  letter-spacing: 4px;
-}
-
+.back-cover .page-inner { text-align: center; }
+.back-cover h2 { letter-spacing: 4px; }
 .progress-area {
-  width: min(420px, 95%);
+  width: min(420px,95%);
   margin: 20px auto 8px;
 }
-
 .progress-label {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   color: #c5b895;
-  font: 12px Arial, sans-serif;
+  font: 12px Arial,sans-serif;
   margin-bottom: 8px;
 }
-
 .progress-track {
   height: 5px;
   background: #383024;
   border-radius: 5px;
   overflow: hidden;
 }
-
 #progress-bar {
   width: 0%;
   height: 100%;
   background: var(--gold);
   transition: width .2s ease;
 }
-
-.controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 20px auto 10px;
-}
-
+.controls { margin: 20px auto 10px; }
 #counter {
   color: #c5b895;
   font-size: 13px;
   min-width: 115px;
   text-align: center;
 }
-
 .hint {
   text-align: center;
   color: #a99c80;
-  font: 12px Arial, sans-serif;
+  font: 12px Arial,sans-serif;
   line-height: 1.7;
   margin: 18px 10px 30px;
 }
-
-@media (max-width: 500px) {
+#status {
+  text-align: center;
+  color: #e7d5a8;
+  font: 13px Arial,sans-serif;
+  line-height: 1.7;
+  margin: 12px auto;
+}
+@media (max-width:500px) {
   main { width: 98%; margin-top: 18px; }
   .page-inner { padding: 30px 22px 45px; }
   .page h2 { font-size: 21px; }
   .toolbar { gap: 7px; }
   button, select { padding: 10px; }
-  .controls { gap: 8px; }
-}
-
-@media (max-height: 560px) and (orientation: landscape) {
-  main { margin-top: 10px; }
-  header { padding: 12px; }
-  .hint { margin: 8px; }
 }
 </style>
 </head>
@@ -280,111 +208,20 @@ select {
 </header>
 
 <main>
-
   <div class="toolbar">
     <button id="font-down" type="button" aria-label="Decrease text size">A−</button>
     <span id="font-label" style="color:#c5b895;font-size:13px">Text 16px</span>
     <button id="font-up" type="button" aria-label="Increase text size">A+</button>
-
     <select id="chapter-select" aria-label="Go to chapter">
       <option value="0">Go to a chapter…</option>
-      <option value="1">Prologue</option>
-      <option value="2">A Kingdom of Secrets</option>
-      <option value="3">The Arrival of Aarya</option>
-      <option value="4">A Secret of Protection</option>
-      <option value="5">A Fate Beyond Worlds</option>
+      <option value="1">Free Preview</option>
     </select>
   </div>
 
+  <div id="status" role="status">Loading Aarya's free preview…</div>
+
   <div class="book-shell">
-    <div id="book">
-
-      <div class="page cover" data-density="hard">
-        <div class="page-inner">
-          <div class="ornament">✧ ❖ ✧</div>
-          <p>A SOVEREIGN PICTURES ORIGINAL</p>
-          <h1>AARYA</h1>
-          <p>A LEGEND BEGINS<br><br>DRAG THE PAGE TO OPEN</p>
-        </div>
-      </div>
-
-      <div class="page">
-        <div class="page-inner">
-          <div class="chapter">PROLOGUE</div>
-          <h2>The Beginning of a Legend</h2>
-          <p>Beyond the world we know, beyond the skies we see, there exist realms untouched by human imagination.
-
-Worlds with their own kingdoms. Their own legends. Their own secrets.
-
-And in one such world, hidden from the eyes of the universe, stood a kingdom unlike any other.</p>
-          <div class="page-number">1</div>
-        </div>
-      </div>
-
-      <div class="page">
-        <div class="page-inner">
-          <div class="chapter">THE ROYAL KINGDOM</div>
-          <h2>A Kingdom of Secrets</h2>
-          <p>For generations, its people lived beneath the protection of their royal bloodline, unaware that the greatest threat to their future would not come from beyond their borders…
-
-But from a destiny already set in motion.
-
-Then, on a night when the stars seemed brighter than ever, a child was born within the royal palace.
-A princess.</p>
-          <div class="page-number">2</div>
-        </div>
-      </div>
-
-      <div class="page">
-        <div class="page-inner">
-          <div class="chapter">A PRINCESS IS BORN</div>
-          <h2>The Arrival of Aarya</h2>
-          <p>Her arrival brought joy to the kingdom. Bells rang, celebrations filled the streets, and the people welcomed their future with hope.
-
-Her name was Aarya.
-Yet, beyond the celebrations, a secret was being prepared—a secret whose purpose even time itself had not yet revealed.</p>
-          <div class="page-number">3</div>
-        </div>
-      </div>
-
-      <div class="page">
-        <div class="page-inner">
-          <div class="chapter">THE MYSTERIOUS BRACELET</div>
-          <h2>A Secret of Protection</h2>
-          <p>A mysterious bracelet, created to protect its bearer, carried a power unlike anything the kingdom had ever known.
-It would remain silent until the day it was needed.
-
-And when that day arrived, the fate of more than one world would rest upon the shoulders of a girl who had once known nothing beyond the walls of her home.</p>
-          <div class="page-number">4</div>
-        </div>
-      </div>
-
-      <div class="page">
-        <div class="page-inner">
-          <div class="chapter">THE LEGEND BEGINS</div>
-          <h2>A Fate Beyond Worlds</h2>
-          <p>For some lives are born into royalty.
-Others are born into legend.
-
-But once in an age…
-
-A life is born to change the fate of worlds.
-
-This is the story of Aarya.</p>
-          <div class="page-number">5</div>
-        </div>
-      </div>
-
-      <div class="page back-cover" data-density="hard">
-        <div class="page-inner">
-          <div class="ornament">✧</div>
-          <h2>AARYA</h2>
-          <p>A SOVEREIGN PICTURES ORIGINAL</p>
-          <p>THE LEGEND CONTINUES</p>
-        </div>
-      </div>
-
-    </div>
+    <div id="book"></div>
   </div>
 
   <div class="progress-area">
@@ -399,20 +236,25 @@ This is the story of Aarya.</p>
 
   <div class="controls">
     <button id="prev" type="button" disabled>← Previous</button>
-    <span id="counter">Cover</span>
-    <button id="next" type="button">Open Book →</button>
+    <span id="counter">Loading…</span>
+    <button id="next" type="button" disabled>Open Book →</button>
   </div>
 
   <p class="hint">
     Touch and drag a page corner, or swipe across the page to turn it.
-    <br>Use A− and A+ to adjust text size. Choose a chapter to jump ahead.
-    <br>Turn your device sideways for a two-page view when space allows.
+    <br>Use A− and A+ to adjust text size.
+    <br>Aarya's free preview is available to everyone.
   </p>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
+
 <script>
 (function () {
+  const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
+
   const bookElement = document.getElementById("book");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
@@ -423,13 +265,13 @@ This is the story of Aarya.</p>
   const fontDown = document.getElementById("font-down");
   const fontUp = document.getElementById("font-up");
   const chapterSelect = document.getElementById("chapter-select");
+  const status = document.getElementById("status");
 
   let fontSize = 16;
+  let pageFlip = null;
 
   function updateFontSize() {
-    document.documentElement.style.setProperty(
-      "--reader-font", fontSize + "px"
-    );
+    document.documentElement.style.setProperty("--reader-font", fontSize + "px");
     fontLabel.textContent = "Text " + fontSize + "px";
     fontDown.disabled = fontSize <= 12;
     fontUp.disabled = fontSize >= 24;
@@ -447,42 +289,72 @@ This is the story of Aarya.</p>
 
   updateFontSize();
 
-  if (!window.St || !window.St.PageFlip) {
-    counter.textContent = "Book library failed to load";
-    next.disabled = true;
-    prev.disabled = true;
-    return;
+  function makePage(className, chapterName, heading, text, number) {
+    const page = document.createElement("div");
+    page.className = "page" + (className ? " " + className : "");
+
+    if (className === "cover" || className === "back-cover") {
+      page.dataset.density = "hard";
+    }
+
+    const inner = document.createElement("div");
+    inner.className = "page-inner";
+
+    if (className === "cover") {
+      const ornament = document.createElement("div");
+      ornament.className = "ornament";
+      ornament.textContent = "✧ ❖ ✧";
+
+      const brand = document.createElement("p");
+      brand.textContent = "A SOVEREIGN PICTURES ORIGINAL";
+
+      const title = document.createElement("h1");
+      title.textContent = "AARYA";
+
+      const subtitle = document.createElement("p");
+      subtitle.innerHTML = "A LEGEND BEGINS<br><br>DRAG THE PAGE TO OPEN";
+
+      inner.append(ornament, brand, title, subtitle);
+    } else if (className === "back-cover") {
+      const ornament = document.createElement("div");
+      ornament.className = "ornament";
+      ornament.textContent = "✧";
+
+      const title = document.createElement("h2");
+      title.textContent = "AARYA";
+
+      const brand = document.createElement("p");
+      brand.textContent = "A SOVEREIGN PICTURES ORIGINAL";
+
+      const ending = document.createElement("p");
+      ending.textContent = "THE LEGEND CONTINUES";
+
+      inner.append(ornament, title, brand, ending);
+    } else {
+      const chapter = document.createElement("div");
+      chapter.className = "chapter";
+      chapter.textContent = chapterName;
+
+      const title = document.createElement("h2");
+      title.textContent = heading;
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+
+      const pageNumber = document.createElement("div");
+      pageNumber.className = "page-number";
+      pageNumber.textContent = String(number);
+
+      inner.append(chapter, title, paragraph, pageNumber);
+    }
+
+    page.appendChild(inner);
+    return page;
   }
 
-  const pageFlip = new St.PageFlip(bookElement, {
-    width: 420,
-    height: 600,
-    size: "stretch",
-    minWidth: 260,
-    maxWidth: 1000,
-    minHeight: 380,
-    maxHeight: 1400,
-    drawShadow: true,
-    flippingTime: 1000,
-    usePortrait: true,
-    startPage: 0,
-    startZIndex: 0,
-    autoSize: true,
-    maxShadowOpacity: 0.65,
-    showCover: true,
-    mobileScrollSupport: false,
-    clickEventForward: true,
-    useMouseEvents: true,
-    swipeDistance: 25,
-    showPageCorners: true,
-    disableFlipByClick: false
-  });
-
-  pageFlip.loadFromHTML(
-    document.querySelectorAll("#book .page")
-  );
-
   function updateControls() {
+    if (!pageFlip) return;
+
     const index = pageFlip.getCurrentPageIndex();
     const total = pageFlip.getPageCount();
 
@@ -506,31 +378,126 @@ This is the story of Aarya.</p>
 
     progressBar.style.width = percent + "%";
     progressText.textContent = percent + "%";
+    chapterSelect.value = index === 1 ? "1" : "0";
+  }
 
-    if (index >= 1 && index <= 5) {
-      chapterSelect.value = String(index);
-    } else {
-      chapterSelect.value = "0";
+  function showBook(sample) {
+    bookElement.replaceChildren();
+
+    bookElement.appendChild(
+      makePage("cover", "", "", "", 0)
+    );
+
+    bookElement.appendChild(
+      makePage(
+        "",
+        "FREE PREVIEW",
+        sample.title || "Aarya",
+        sample.sample_content,
+        1
+      )
+    );
+
+    const lockedPage = makePage(
+      "",
+      "CONTINUE THE JOURNEY",
+      "The Story Continues",
+      "You've reached the end of the free preview.\n\nThe complete Aarya story will be available to active subscribers once premium reading is connected.",
+      2
+    );
+    bookElement.appendChild(lockedPage);
+
+    bookElement.appendChild(
+      makePage("back-cover", "", "", "", 0)
+    );
+
+    if (!window.St || !window.St.PageFlip) {
+      status.textContent = "The page-turn library did not load. Please refresh and try again.";
+      counter.textContent = "Reader unavailable";
+      return;
+    }
+
+    pageFlip = new St.PageFlip(bookElement, {
+      width: 420,
+      height: 600,
+      size: "stretch",
+      minWidth: 260,
+      maxWidth: 1000,
+      minHeight: 380,
+      maxHeight: 1400,
+      drawShadow: true,
+      flippingTime: 1000,
+      usePortrait: true,
+      startPage: 0,
+      autoSize: true,
+      maxShadowOpacity: 0.65,
+      showCover: true,
+      mobileScrollSupport: false,
+      clickEventForward: true,
+      useMouseEvents: true,
+      swipeDistance: 25,
+      showPageCorners: true,
+      disableFlipByClick: false
+    });
+
+    pageFlip.loadFromHTML(
+      document.querySelectorAll("#book .page")
+    );
+
+    prev.addEventListener("click", function () {
+      pageFlip.flipPrev();
+    });
+
+    next.addEventListener("click", function () {
+      pageFlip.flipNext();
+    });
+
+    chapterSelect.addEventListener("change", function () {
+      if (chapterSelect.value === "1") {
+        pageFlip.flip(1);
+      }
+    });
+
+    pageFlip.on("flip", updateControls);
+    updateControls();
+    status.textContent = "Aarya's free preview is ready.";
+  }
+
+  async function loadPreview() {
+    try {
+      if (!window.supabase) {
+        throw new Error("The database library did not load.");
+      }
+
+      const client = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+      const { data, error } = await client
+        .from("story_samples")
+        .select("title, sample_content")
+        .eq("slug", "aarya")
+        .eq("is_published", true)
+        .single();
+
+      if (error) throw error;
+      if (!data || !data.sample_content) {
+        throw new Error("No published preview was found.");
+      }
+
+      showBook(data);
+    } catch (error) {
+      console.error("Aarya preview error:", error);
+      status.textContent =
+        "We couldn't load the preview. Please refresh and try again.";
+      counter.textContent = "Preview unavailable";
+      prev.disabled = true;
+      next.disabled = true;
     }
   }
 
-  prev.addEventListener("click", function () {
-    pageFlip.flipPrev();
-  });
-
-  next.addEventListener("click", function () {
-    pageFlip.flipNext();
-  });
-
-  chapterSelect.addEventListener("change", function () {
-    const target = Number(chapterSelect.value);
-    if (target > 0) {
-      pageFlip.flip(target);
-    }
-  });
-
-  pageFlip.on("flip", updateControls);
-  updateControls();
+  loadPreview();
 })();
 </script>
 </body>
