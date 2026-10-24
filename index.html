@@ -1,593 +1,257 @@
 
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Sovereign Pictures | Stories Beyond Imagination</title>
-
-  <meta name="description" content="Discover original fantasy stories and cinematic adventures at Sovereign Pictures.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sovereign Pictures | Stories Beyond Worlds</title>
+  <meta name="description" content="Discover original stories and cinematic worlds from Sovereign Pictures.">
 
   <style>
-
     * {
-
-      margin: 0;
-
-      padding: 0;
-
       box-sizing: border-box;
-
-    }
-
-    html {
-
-      scroll-behavior: smooth;
-
     }
 
     body {
-
-      font-family: Arial, Helvetica, sans-serif;
-
-      background: #090909;
-
-      color: #f5f1e8;
-
-      line-height: 1.6;
-
-    }
-
-    a {
-
-      text-decoration: none;
-
-      color: inherit;
-
-    }
-
-    .container {
-
-      width: 90%;
-
-      max-width: 1100px;
-
-      margin: auto;
-
+      margin: 0;
+      background: #101010;
+      color: #f6f0e5;
+      font-family: Georgia, "Times New Roman", serif;
     }
 
     header {
-
-      border-bottom: 1px solid #292929;
-
-      background: #090909;
-
-    }
-
-    .navbar {
-
-      min-height: 80px;
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
-      gap: 20px;
-
+      gap: 16px;
+      padding: 20px 6%;
+      background: #151515;
+      border-bottom: 1px solid #40321e;
     }
 
-    .logo {
-
-      color: #d8b46a;
-
-      font-size: 21px;
-
+    .brand {
+      color: #d6b36a;
+      font-size: 22px;
       font-weight: bold;
-
       letter-spacing: 2px;
-
+      text-decoration: none;
     }
 
-    nav {
-
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 20px;
-
-    }
-
-    nav a {
-
-      color: #ddd;
-
-      font-size: 14px;
-
-    }
-
-    nav a:hover {
-
-      color: #d8b46a;
-
+    .account-button {
+      display: inline-block;
+      padding: 12px 17px;
+      border-radius: 6px;
+      background: #d6b36a;
+      color: #17130c;
+      font: bold 14px Arial, sans-serif;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
     .hero {
-
-      min-height: 500px;
-
-      display: flex;
-
-      align-items: center;
-
+      padding: 100px 20px 90px;
       text-align: center;
-
-      padding: 80px 0;
-
-      background: radial-gradient(ellipse at top, #352817, #17130e 45%, #090909 80%);
-
+      background: radial-gradient(
+        ellipse at top,
+        #392b19 0%,
+        #171512 48%,
+        #101010 80%
+      );
     }
 
     .eyebrow {
-
-      color: #d8b46a;
-
-      font-size: 12px;
-
-      font-weight: bold;
-
+      color: #d6b36a;
+      font: 12px Arial, sans-serif;
       letter-spacing: 4px;
-
-      margin-bottom: 20px;
-
+      text-transform: uppercase;
     }
 
     h1 {
-
-      font-size: clamp(42px, 8vw, 76px);
-
-      line-height: 1.1;
-
-      margin-bottom: 24px;
-
+      margin: 24px 0;
+      font-size: clamp(38px, 7vw, 68px);
+      font-weight: normal;
     }
 
     .hero p {
-
-      max-width: 650px;
-
-      margin: 0 auto 30px;
-
-      color: #c3c0ba;
-
-      font-size: 17px;
-
-    }
-
-    .button {
-
-      display: inline-block;
-
-      padding: 13px 24px;
-
-      border-radius: 3px;
-
-      background: #d8b46a;
-
-      color: #111;
-
-      font-weight: bold;
-
-      cursor: pointer;
-
-    }
-
-    .button:hover {
-
-      background: #f0d394;
-
-    }
-
-    section {
-
-      padding: 75px 0;
-
-    }
-
-    .section-heading {
-
-      text-align: center;
-
-      margin-bottom: 38px;
-
-    }
-
-    .section-heading h2 {
-
-      font-size: 34px;
-
-      margin-bottom: 10px;
-
-    }
-
-    .section-heading p {
-
-      color: #aaa59b;
-
-    }
-
-    .stories {
-
-      display: grid;
-
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
-      gap: 22px;
-
-    }
-
-    .story {
-
-      padding: 28px;
-
-      background: #121212;
-
-      border: 1px solid #33302a;
-
-      border-radius: 6px;
-
-    }
-
-    .story:hover {
-
-      border-color: #d8b46a;
-
-    }
-
-    .story small {
-
-      color: #d8b46a;
-
-      font-size: 11px;
-
-      letter-spacing: 2px;
-
-      font-weight: bold;
-
-    }
-
-    .story h3 {
-
-      font-size: 27px;
-
-      margin: 14px 0;
-
-    }
-
-    .story p {
-
-      color: #bdb9b1;
-
-      margin-bottom: 24px;
-
-    }
-
-    .read {
-
-      display: inline-block;
-
-      position: relative;
-
-      z-index: 10;
-
-      color: #d8b46a;
-
-      font-weight: bold;
-
-      border-bottom: 1px solid #d8b46a;
-
-      padding: 8px 0;
-
-      cursor: pointer;
-
-      pointer-events: auto;
-
-      touch-action: manipulation;
-
-    }
-
-    .membership {
-
-      text-align: center;
-
-      background: #12110f;
-
-      border-top: 1px solid #29251e;
-
-      border-bottom: 1px solid #29251e;
-
-    }
-
-    .membership p {
-
       max-width: 620px;
-
-      margin: 0 auto 25px;
-
-      color: #c3c0ba;
-
+      margin: 0 auto 30px;
+      color: #c6bfb2;
+      font: 16px/1.8 Arial, sans-serif;
     }
 
-    .notice {
+    .explore-button {
+      display: inline-block;
+      padding: 13px 22px;
+      border: 1px solid #d6b36a;
+      border-radius: 5px;
+      color: #e4c783;
+      text-decoration: none;
+      font: bold 14px Arial, sans-serif;
+    }
 
-      font-size: 13px;
+    section.stories {
+      padding: 50px 6%;
+    }
 
-      color: #8f8a80;
+    .section-title {
+      color: #d6b36a;
+      font-size: 30px;
+      font-weight: normal;
+    }
 
-      margin-top: 20px !important;
+    .story-card {
+      max-width: 850px;
+      padding: 30px;
+      border: 1px solid #4b3a21;
+      border-radius: 10px;
+      background: #181715;
+    }
 
+    .story-card h3 {
+      margin: 18px 0;
+      font-size: 32px;
+    }
+
+    .story-card p {
+      color: #c6bfb2;
+      font: 15px/1.8 Arial, sans-serif;
+    }
+
+    .story-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 18px;
+      border-radius: 5px;
+      background: #d6b36a;
+      color: #17130c;
+      font: bold 14px Arial, sans-serif;
+      text-decoration: none;
     }
 
     footer {
-
-      padding: 30px 0;
-
+      padding: 28px 15px;
+      border-top: 1px solid #40321e;
+      color: #8f887b;
       text-align: center;
-
-      color: #8f8a80;
-
-      font-size: 13px;
-
+      font: 12px Arial, sans-serif;
     }
 
-    @media (max-width: 600px) {
-
-      .navbar {
-
-        padding: 18px 0;
-
-        flex-direction: column;
-
+    @media (max-width: 480px) {
+      header {
+        padding: 16px 4%;
+        gap: 10px;
       }
 
-      nav {
+      .brand {
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
 
-        justify-content: center;
-
-        gap: 16px;
-
+      .account-button {
+        padding: 10px;
+        font-size: 12px;
       }
 
       .hero {
-
-        min-height: 420px;
-
+        padding: 70px 18px;
       }
 
-      section {
-
-        padding: 55px 0;
-
+      .story-card {
+        padding: 22px;
       }
-
     }
-
   </style>
-
 </head>
 
 <body>
-
   <header>
+    <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
 
-    <div class="container navbar">
-
-      <a class="logo" href="index.html">SOVEREIGN PICTURES</a>
-
-      <nav>
-
-        <a href="#home">Home</a>
-
-        <a href="#stories">Stories</a>
-
-        <a href="#membership">Membership</a>
-
-      </nav>
-
-    </div>
-
+    <a
+      class="account-button"
+      id="accountButton"
+      href="./login.html"
+      style="visibility:hidden"
+    >Log In / Create Account</a>
   </header>
 
   <main>
+    <section class="hero">
+      <div class="eyebrow">Enter the extraordinary</div>
 
-    <section class="hero" id="home">
+      <h1>Stories Beyond Worlds.</h1>
 
-      <div class="container">
+      <p>
+        Discover original universes, unforgettable characters,
+        epic adventures and cinematic stories created exclusively
+        for Sovereign Pictures.
+      </p>
 
-        <div class="eyebrow">ORIGINAL STORIES · NEW WORLDS</div>
+      <a class="explore-button" href="#stories">Explore Our Stories</a>
+    </section>
 
-        <h1>Stories Beyond<br>Imagination.</h1>
+    <section class="stories" id="stories">
+      <div class="eyebrow">Our universe begins here</div>
+
+      <h2 class="section-title">Featured Story</h2>
+
+      <article class="story-card">
+        <div class="eyebrow">Fantasy · Multiverse · Adventure</div>
+
+        <h3>AARYA</h3>
 
         <p>
-
-          Enter extraordinary worlds filled with powerful kingdoms,
-
-          unforgettable characters, hidden secrets and cinematic adventures.
-
-          Every world begins with a story.
-
+          A universe divided. Two brothers destined for conflict.
+          A forgotten power that could change every world.
+          When destiny awakens, one princess must discover who
+          she truly is and what she was chosen to become.
         </p>
 
-        <a class="button" href="#stories">Explore Our Stories</a>
-
-      </div>
-
+        <a class="story-link" href="./aarya.html">Discover Aarya</a>
+      </article>
     </section>
-
-    <section id="stories">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <h2>Our Stories</h2>
-
-          <p>Discover original worlds created by Sovereign Pictures.</p>
-
-        </div>
-
-        <div class="stories">
-
-          <article class="story">
-
-            <small>FANTASY · MULTIVERSE</small>
-
-            <h3>Aarya</h3>
-
-            <p>
-
-              A forgotten kingdom. Two brothers divided by destiny.
-
-              A hidden portal that could change every universe.
-
-              A princess caught in a conflict beyond her world.
-
-            </p>
-
-            <a
-
-              class="read"
-
-              href="https://venkat050403-commits.github.io/sovereign-pictures/aarya.html"
-
-              style="position:relative; z-index:10; cursor:pointer;"
-
-            >
-
-              Discover the story →
-
-            </a>
-
-          </article>
-
-          <article class="story">
-
-            <small>COMING SOON</small>
-
-            <h3>New Worlds</h3>
-
-            <p>
-
-              Original adventures, mysterious realms,
-
-              unforgettable characters and new cinematic
-
-              universes are on their way.
-
-            </p>
-
-            <a class="read" href="#membership">
-
-              Join the journey →
-
-            </a>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="membership" id="membership">
-
-      <div class="container">
-
-        <div class="section-heading">
-
-          <h2>Become Part of the Story</h2>
-
-        </div>
-
-        <p>
-
-          Our vision is to build a home for exclusive written stories
-
-          and AI-generated cinematic experiences. Membership will
-
-          give readers a way to support original storytelling and
-
-          explore more of our worlds.
-
-        </p>
-
-        <a
-
-          class="button"
-
-          href="https://venkat050403-commits.github.io/sovereign-pictures/aarya.html"
-
-        >
-
-          Start with Aarya
-
-        </a>
-
-        <p class="notice">
-
-          Paid subscriptions are not active yet. Stay tuned for updates.
-
-        </p>
-
-      </div>
-
-    </section>
-
   </main>
 
   <footer>
-
-    <div class="container">
-
-      © 2026 Sovereign Pictures. Original worlds. Boundless stories.
-
-    </div>
-
+    © 2026 Sovereign Pictures. Original worlds. Exclusive stories.
   </footer>
 
-<div style="text-align:center; margin:30px auto;">
-  <a href="login.html" style="display:inline-block; background:#b89552; color:#111; padding:12px 28px; border-radius:8px; text-decoration:none; font-weight:bold;">
-    Log In / Create Account
-  </a>
-</div>
+  <script type="module">
+    import { createClient } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-<div style="text-align:center; margin:20px auto;">
-  <a href="dashboard.html"
-     style="display:inline-block; background:#c6a15b; color:#111; padding:12px 24px; border-radius:8px; text-decoration:none; font-weight:bold;">
-    My Account
-  </a>
-</div>
+    const supabase = createClient(
+      "https://ffxmmzxknnrmglqvxwbc.supabase.co",
+      "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
+    );
 
-<div style="display:flex; justify-content:flex-end; gap:10px; padding:16px 20px; flex-wrap:wrap;">
-  <a href="login.html"
-     style="background:#c6a15b; color:#111; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:bold;">
-    Log In / Create Account
-  </a>
-  <a href="dashboard.html"
-     style="background:#c6a15b; color:#111; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:bold;">
-    My Account
-  </a>
-</div>
+    const button = document.getElementById("accountButton");
 
+    function showAccountButton(session) {
+      if (session) {
+        button.textContent = "My Account";
+        button.href = "./dashboard.html";
+      } else {
+        button.textContent = "Log In / Create Account";
+        button.href = "./login.html";
+      }
+
+      button.style.visibility = "visible";
+    }
+
+    const { data: { session }, error } =
+      await supabase.auth.getSession();
+
+    if (error) {
+      showAccountButton(null);
+    } else {
+      showAccountButton(session);
+    }
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      showAccountButton(session);
+    });
+  </script>
 </body>
-
 </html>
