@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
   <title>Sovereign Pictures | Stories Beyond Worlds</title>
   <meta name="description" content="Discover original stories and cinematic worlds from Sovereign Pictures.">
 
@@ -88,6 +88,11 @@
       color: #e4c783;
       text-decoration: none;
       font: bold 14px Arial, sans-serif;
+    }
+
+    .explore-button:hover {
+      background: #d6b36a;
+      color: #17130c;
     }
 
     section.stories {
@@ -188,7 +193,9 @@
         for Sovereign Pictures.
       </p>
 
-      <a class="explore-button" href="#stories">Explore Our Stories</a>
+      <a class="explore-button" href="./library.html?v=3">
+        Explore Our Stories
+      </a>
     </section>
 
     <section class="stories" id="stories">
@@ -208,7 +215,9 @@
           she truly is and what she was chosen to become.
         </p>
 
-        <a class="story-link" href="./aarya.html">Discover Aarya</a>
+        <a class="story-link" href="./aarya.html">
+          Discover Aarya
+        </a>
       </article>
     </section>
   </main>
@@ -240,18 +249,17 @@
       button.style.visibility = "visible";
     }
 
-    const { data: { session }, error } =
-      await supabase.auth.getSession();
+    try {
+      const { data, error } = await supabase.auth.getSession();
 
-    if (error) {
+      showAccountButton(error ? null : data.session);
+
+      supabase.auth.onAuthStateChange((_event, session) => {
+        showAccountButton(session);
+      });
+    } catch (error) {
       showAccountButton(null);
-    } else {
-      showAccountButton(session);
     }
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      showAccountButton(session);
-    });
   </script>
 </body>
 </html>
