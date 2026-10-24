@@ -4,14 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101010">
-
   <title>Sovereign Pictures | Stories Beyond Worlds</title>
-  <meta name="description" content="Discover original stories and cinematic worlds from Sovereign Pictures.">
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -24,6 +20,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 14px;
       padding: 20px 6%;
       background: #151515;
@@ -32,46 +29,38 @@
 
     .brand {
       color: #d6b36a;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       letter-spacing: 2px;
       text-decoration: none;
     }
 
-    .nav-buttons {
+    nav {
       display: flex;
-      align-items: center;
-      justify-content: flex-end;
       flex-wrap: wrap;
       gap: 10px;
     }
 
     .nav-button {
       display: inline-block;
-      padding: 11px 15px;
+      padding: 11px 14px;
       border: 1px solid #d6b36a;
       border-radius: 6px;
       color: #d6b36a;
       text-decoration: none;
-      text-align: center;
       font: bold 13px Arial, sans-serif;
-      white-space: nowrap;
     }
 
-    .account-button {
+    .account-button,
+    .explore-button {
       background: #d6b36a;
       color: #17130c;
     }
 
     .hero {
-      padding: 110px 20px 100px;
+      padding: 100px 20px;
       text-align: center;
-      background: radial-gradient(
-        ellipse at top,
-        #392b19 0%,
-        #171512 48%,
-        #101010 80%
-      );
+      background: radial-gradient(ellipse at top, #392b19, #171512 48%, #101010 80%);
     }
 
     .eyebrow {
@@ -100,14 +89,8 @@
       padding: 14px 24px;
       border: 1px solid #d6b36a;
       border-radius: 5px;
-      background: #d6b36a;
-      color: #17130c;
       text-decoration: none;
       font: bold 14px Arial, sans-serif;
-    }
-
-    .explore-button:hover {
-      background: #ead29b;
     }
 
     .about {
@@ -142,29 +125,14 @@
     @media (max-width: 600px) {
       header {
         flex-direction: column;
-        padding: 18px 4%;
       }
 
-      .brand {
-        font-size: 18px;
-        letter-spacing: 1px;
-      }
-
-      .nav-buttons {
+      nav {
         justify-content: center;
-      }
-
-      .nav-button {
-        padding: 10px 12px;
-        font-size: 12px;
       }
 
       .hero {
         padding: 75px 18px;
-      }
-
-      .about {
-        padding: 45px 6%;
       }
     }
   </style>
@@ -172,34 +140,21 @@
 
 <body>
   <header>
-    <a class="brand" href="./index.html">
-      SOVEREIGN PICTURES
-    </a>
+    <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
 
-    <nav class="nav-buttons" aria-label="Main navigation">
-      <a class="nav-button" href="./library.html?v=3">
-        Stories
+    <nav>
+      <a class="nav-button" href="./library.html?v=3">Stories</a>
+      <a class="nav-button" href="./membership.html">Membership</a>
+      <a class="nav-button account-button" id="accountButton"
+         href="./login.html" style="visibility:hidden">
+        Log In / Create Account
       </a>
-
-      <a class="nav-button" href="./membership.html">
-        Membership
-      </a>
-
-      <a
-        class="nav-button account-button"
-        id="accountButton"
-        href="./login.html"
-        style="visibility:hidden"
-      >Log In / Create Account</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="eyebrow">
-        An independent storytelling studio
-      </div>
-
+      <div class="eyebrow">An independent storytelling studio</div>
       <h1>Stories Beyond Worlds.</h1>
 
       <p>
@@ -217,7 +172,6 @@
     <section class="about">
       <div class="about-inner">
         <div class="eyebrow">Our vision</div>
-
         <h2 class="section-title">Beyond Imagination</h2>
 
         <p>
@@ -254,13 +208,11 @@
         button.textContent = "Log In / Create Account";
         button.href = "./login.html";
       }
-
       button.style.visibility = "visible";
     }
 
     try {
       const { data, error } = await supabase.auth.getSession();
-
       showAccountButton(error ? null : data.session);
 
       supabase.auth.onAuthStateChange((_event, session) => {
