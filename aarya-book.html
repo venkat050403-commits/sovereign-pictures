@@ -7,106 +7,6 @@
 <meta name="theme-color" content="#080808">
 <title>AARYA | Sovereign Pictures</title>
 
-/* Sovereign Pictures responsive reader */
-.reader-view-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  flex-wrap: wrap;
-}
-
-.reader-view-controls button {
-  min-width: 110px;
-}
-
-body.reader-fullscreen {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  height: 100dvh;
-  min-height: 0;
-  overflow: hidden;
-  z-index: 9999;
-  background: #080808;
-  display: flex;
-  flex-direction: column;
-}
-
-body.reader-fullscreen header {
-  display: none;
-}
-
-body.reader-fullscreen main {
-  width: 100%;
-  max-width: none;
-  height: 100%;
-  min-height: 0;
-  margin: 0;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-body.reader-fullscreen .reader-view-controls {
-  flex: 0 0 auto;
-  padding: 4px;
-}
-
-body.reader-fullscreen .book-shell {
-  flex: 1 1 auto;
-  min-height: 0;
-  width: 100%;
-  padding: 0;
-  overflow: hidden;
-}
-
-body.reader-fullscreen #book {
-  margin: auto;
-}
-
-body.reader-fullscreen .controls {
-  flex: 0 0 auto;
-  margin: 6px auto;
-  gap: 8px;
-}
-
-body.reader-fullscreen .hint {
-  display: none;
-}
-
-body.reader-fullscreen button {
-  padding: 9px 12px;
-}
-
-@media (orientation: landscape) {
-  body.reader-fullscreen main {
-    padding: 4px;
-  }
-
-  body.reader-fullscreen .controls {
-    margin: 2px auto;
-  }
-
-  body.reader-fullscreen .reader-view-controls {
-    padding: 2px;
-  }
-}
-
-@media (max-height: 450px) {
-  body.reader-fullscreen button {
-    padding: 6px 9px;
-    font-size: 12px;
-  }
-
-  body.reader-fullscreen .controls {
-    margin: 2px auto;
-  }
-}
-
 <style>
 :root {
   --gold: #d8b568;
@@ -114,7 +14,20 @@ body.reader-fullscreen button {
   --ink: #302719;
   --reader-font: 16px;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  min-height: 100%;
+  background: #080808;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -122,16 +35,19 @@ body {
   color: #f7f0e2;
   font-family: Georgia, serif;
 }
+
 header {
   padding: 18px 16px;
   text-align: center;
   border-bottom: 1px solid #6e572b;
 }
+
 .brand {
   color: var(--gold);
   letter-spacing: 4px;
   font-size: 12px;
 }
+
 header a {
   display: inline-block;
   margin-top: 12px;
@@ -139,10 +55,12 @@ header a {
   font-size: 13px;
   text-decoration: none;
 }
+
 main {
   width: min(1000px, 96%);
   margin: 18px auto;
 }
+
 button, select {
   border: 1px solid var(--gold);
   color: var(--gold);
@@ -152,207 +70,409 @@ button, select {
   font-family: inherit;
   font-size: 14px;
 }
-button { cursor: pointer; }
-button:disabled { opacity: .35; cursor: default; }
-select { max-width: 240px; }
-.reader-actions, .toolbar, .controls {
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+select {
+  max-width: 240px;
+}
+
+.reader-actions,
+.toolbar,
+.controls {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
 }
+
 .reader-actions {
   justify-content: space-between;
   margin-bottom: 12px;
 }
-.reader-actions .brand { margin-right: auto; }
-.toolbar { margin-bottom: 12px; }
+
+.reader-actions .brand {
+  margin-right: auto;
+}
+
+.toolbar {
+  margin-bottom: 12px;
+}
+
 .book-shell {
   width: 100%;
+  height: min(68vh, 620px);
+  min-height: 360px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 6px 0;
+  overflow: hidden;
 }
-#book { margin: 0 auto; }
+
+#book {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
 .page {
   background: var(--paper);
   color: var(--ink);
   border: 1px solid #c6b38c;
   overflow: hidden;
 }
+
 .page-inner {
   position: relative;
   height: 100%;
-  padding: 38px 30px 48px;
-  background: linear-gradient(90deg,#d2c09d 0%,#f4ead4 7%,#f8f0df 50%,#f1e4c9 100%);
+  padding: 30px 24px 42px;
+  background: linear-gradient(
+    90deg,
+    #d2c09d 0%,
+    #f4ead4 7%,
+    #f8f0df 50%,
+    #f1e4c9 100%
+  );
 }
+
 .page h2 {
   font-size: 23px;
   font-weight: normal;
   text-align: center;
   line-height: 1.4;
-  margin: 12px 0 28px;
+  margin: 12px 0 24px;
 }
+
 .chapter {
   text-align: center;
   color: #80672f;
   font-size: 10px;
-  letter-spacing: 2.5px;
+  letter-spacing: 2px;
   line-height: 1.8;
 }
+
 .page p {
   font-size: var(--reader-font);
-  line-height: 1.8;
+  line-height: 1.7;
   letter-spacing: .2px;
   white-space: pre-line;
   overflow-wrap: anywhere;
-  margin-bottom: 18px;
+  margin: 0 0 16px;
 }
+
 .page-number {
   position: absolute;
-  bottom: 17px;
+  bottom: 13px;
   left: 0;
   right: 0;
   text-align: center;
   font-size: 12px;
   color: #80672f;
 }
-.cover, .back-cover {
-  background: radial-gradient(ellipse at center,#45351e 0%,#20180e 60%,#0b0907 100%);
+
+.cover,
+.back-cover {
+  background: radial-gradient(
+    ellipse at center,
+    #45351e 0%,
+    #20180e 60%,
+    #0b0907 100%
+  );
   color: var(--gold);
   text-align: center;
 }
-.cover .page-inner, .back-cover .page-inner {
+
+.cover .page-inner,
+.back-cover .page-inner {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 32px 20px;
-  background: radial-gradient(ellipse at center,#45351e 0%,#20180e 60%,#0b0907 100%);
+  padding: 24px 14px;
+  background: radial-gradient(
+    ellipse at center,
+    #45351e 0%,
+    #20180e 60%,
+    #0b0907 100%
+  );
   border: 5px double var(--gold);
   color: var(--gold);
 }
-.cover .ornament, .back-cover .ornament {
-  font-size: 36px;
-  margin-bottom: 22px;
+
+.cover .ornament,
+.back-cover .ornament {
+  font-size: 30px;
+  margin-bottom: 16px;
 }
+
 .cover h1 {
-  font-size: clamp(38px,7vw,58px);
-  letter-spacing: 6px;
+  font-size: clamp(32px, 6vw, 54px);
+  letter-spacing: 5px;
   font-weight: normal;
-  margin: 14px 0;
+  margin: 12px 0;
 }
-.cover p, .back-cover p {
+
+.cover p,
+.back-cover p {
   font-size: 10px;
-  letter-spacing: 2px;
-  line-height: 1.9;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
 }
-.back-cover .page-inner { text-align: center; }
-.back-cover h2 { letter-spacing: 4px; }
+
+.back-cover .page-inner {
+  text-align: center;
+}
+
+.back-cover h2 {
+  letter-spacing: 4px;
+}
+
 .progress-area {
-  width: min(420px,95%);
-  margin: 12px auto 8px;
+  width: min(420px, 95%);
+  margin: 10px auto 6px;
 }
+
 .progress-label {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   color: #c5b895;
-  font: 12px Arial,sans-serif;
-  margin-bottom: 8px;
+  font: 12px Arial, sans-serif;
+  margin-bottom: 7px;
 }
+
 .progress-track {
   height: 5px;
   background: #383024;
   border-radius: 5px;
   overflow: hidden;
 }
+
 #progress-bar {
   width: 0%;
   height: 100%;
   background: var(--gold);
   transition: width .2s ease;
 }
-.controls { margin: 14px auto 8px; }
+
+.controls {
+  margin: 10px auto 6px;
+}
+
 #counter {
   color: #c5b895;
   font-size: 13px;
-  min-width: 115px;
+  min-width: 105px;
   text-align: center;
 }
+
 #status {
   text-align: center;
   color: #e7d5a8;
-  font: 13px Arial,sans-serif;
-  line-height: 1.7;
-  margin: 10px auto;
+  font: 13px Arial, sans-serif;
+  line-height: 1.6;
+  margin: 8px auto;
 }
+
 .hint {
   text-align: center;
   color: #a99c80;
-  font: 12px Arial,sans-serif;
+  font: 12px Arial, sans-serif;
   line-height: 1.7;
-  margin: 14px 10px 24px;
+  margin: 12px 10px 24px;
 }
 
-/* Immersive reader mode */
+/* Immersive reader */
+
 body.reader-mode {
-  overflow: hidden;
-  height: 100vh;
-  height: 100dvh;
-}
-body.reader-mode header { display: none; }
-body.reader-mode main {
   position: fixed;
   inset: 0;
-  z-index: 1000;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+body.reader-mode header {
+  display: none;
+}
+
+body.reader-mode main {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   max-width: none;
+  height: 100%;
   margin: 0;
-  padding: max(10px, env(safe-area-inset-top)) 14px
-           max(8px, env(safe-area-inset-bottom));
+  padding:
+    max(5px, env(safe-area-inset-top))
+    8px
+    max(5px, env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  overflow: auto;
-  background: radial-gradient(ellipse at top,#40331f,#080808 75%);
+  gap: 3px;
+  overflow: hidden;
+  background: radial-gradient(ellipse at top, #40331f, #080808 75%);
 }
-body.reader-mode .reader-actions { flex-shrink: 0; }
-body.reader-mode .toolbar { flex-shrink: 0; }
+
+body.reader-mode .reader-actions {
+  flex: 0 0 auto;
+  width: 100%;
+  margin: 0;
+  gap: 7px;
+}
+
+body.reader-mode .reader-actions .brand {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+body.reader-mode .toolbar {
+  flex: 0 0 auto;
+  margin: 1px auto;
+  gap: 6px;
+}
+
+body.reader-mode button,
+body.reader-mode select {
+  padding: 7px 9px;
+  font-size: 12px;
+}
+
 body.reader-mode .book-shell {
-  flex: 1 1 auto;
-  min-height: 180px;
+  flex: 1 1 0;
+  height: auto;
+  width: 100%;
+  min-height: 0;
   padding: 0;
+  overflow: hidden;
 }
+
 body.reader-mode #book {
+  width: 100%;
+  height: 100%;
   max-width: 100%;
+  margin: auto;
 }
-body.reader-mode .progress-area,
-body.reader-mode .controls,
-body.reader-mode .hint,
+
 body.reader-mode #status {
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  margin: 1px auto;
+  font-size: 11px;
 }
-body.reader-mode .hint { margin: 8px 4px 0; }
+
+body.reader-mode .progress-area {
+  flex: 0 0 auto;
+  width: min(420px, 95%);
+  margin: 2px auto;
+}
+
+body.reader-mode .controls {
+  flex: 0 0 auto;
+  margin: 2px auto;
+  gap: 6px;
+}
+
+body.reader-mode #counter {
+  min-width: 90px;
+  font-size: 11px;
+}
+
+body.reader-mode .hint {
+  display: none;
+}
 
 @media (max-width: 500px) {
-  main { width: 98%; margin-top: 12px; }
-  .page-inner { padding: 30px 22px 45px; }
-  .page h2 { font-size: 21px; }
-  .reader-actions { gap: 7px; }
-  .reader-actions button { padding: 9px; }
-  .toolbar { gap: 7px; }
-  button, select { padding: 10px; }
-  body.reader-mode main { padding-left: 8px; padding-right: 8px; }
+  main {
+    width: 98%;
+    margin-top: 12px;
+  }
+
+  .page-inner {
+    padding: 24px 18px 40px;
+  }
+
+  .page h2 {
+    font-size: 20px;
+  }
+
+  .reader-actions {
+    gap: 6px;
+  }
+
+  .reader-actions button {
+    padding: 9px 8px;
+  }
+
+  .toolbar {
+    gap: 6px;
+  }
+
+  body.reader-mode main {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+@media (orientation: landscape) {
+  body.reader-mode main {
+    padding-top: max(3px, env(safe-area-inset-top));
+    padding-bottom: max(3px, env(safe-area-inset-bottom));
+    gap: 2px;
+  }
+
+  body.reader-mode .reader-actions,
+  body.reader-mode .toolbar,
+  body.reader-mode .controls {
+    gap: 4px;
+  }
+
+  body.reader-mode button,
+  body.reader-mode select {
+    padding: 5px 7px;
+    font-size: 11px;
+  }
+
+  body.reader-mode .progress-area {
+    width: min(320px, 55%);
+  }
+}
+
+@media (max-height: 450px) {
+  body.reader-mode .reader-actions .brand {
+    display: none;
+  }
+
+  body.reader-mode #status {
+    display: none;
+  }
+
+  body.reader-mode .progress-label {
+    margin-bottom: 2px;
+  }
+
+  body.reader-mode .progress-track {
+    height: 3px;
+  }
 }
 </style>
 </head>
 
 <body class="reader-mode">
+
 <header>
   <div class="brand">SOVEREIGN PICTURES</div>
   <a href="library.html">← BACK TO STORY LIBRARY</a>
@@ -362,7 +482,6 @@ body.reader-mode .hint { margin: 8px 4px 0; }
   <div class="reader-actions">
     <div class="brand">SOVEREIGN PICTURES</div>
     <button id="minimise" type="button">Minimise −</button>
-    <button id="expand" type="button" hidden>Expand ⛶</button>
     <button id="fullscreen" type="button">Fullscreen ⛶</button>
   </div>
 
@@ -409,11 +528,15 @@ body.reader-mode .hint { margin: 8px 4px 0; }
 
 <script>
 (function () {
+  "use strict";
+
   const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
   const SUPABASE_KEY = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
 
   const $ = id => document.getElementById(id);
+
   const bookElement = $("book");
+  const bookShell = document.querySelector(".book-shell");
   const status = $("status");
   const prev = $("prev");
   const next = $("next");
@@ -425,56 +548,103 @@ body.reader-mode .hint { margin: 8px 4px 0; }
   const fontUp = $("font-up");
   const chapterSelect = $("chapter-select");
   const minimise = $("minimise");
-  const expand = $("expand");
   const fullscreen = $("fullscreen");
 
   let fontSize = 16;
   let pageFlip = null;
+  let resizeTimer = null;
+  let lastOrientation = window.innerWidth > window.innerHeight
+    ? "landscape"
+    : "portrait";
+
+  function refreshLayout() {
+    window.dispatchEvent(new Event("resize"));
+
+    if (pageFlip && typeof pageFlip.update === "function") {
+      try {
+        pageFlip.update();
+      } catch (error) {
+        console.debug("Reader resize handled by the page-turn library.");
+      }
+    }
+  }
 
   function setReaderMode(enabled) {
     document.body.classList.toggle("reader-mode", enabled);
-    minimise.hidden = !enabled;
-    expand.hidden = enabled;
 
-    if (!enabled && document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {});
-    }
+    requestAnimationFrame(() => {
+      refreshLayout();
+      setTimeout(refreshLayout, 180);
+    });
   }
 
   minimise.addEventListener("click", function () {
     setReaderMode(false);
-  });
 
-  expand.addEventListener("click", function () {
-    setReaderMode(true);
+    if (document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
   });
 
   fullscreen.addEventListener("click", async function () {
     setReaderMode(true);
-    try {
-      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
-        await document.documentElement.requestFullscreen();
+
+    if (document.fullscreenElement) {
+      try {
+        await document.exitFullscreen();
+      } catch (error) {
+        status.textContent = "Use your browser controls to exit system fullscreen.";
       }
-    } catch (error) {
-      status.textContent =
-        "Immersive reader is open. Your browser may not allow system fullscreen here.";
+      return;
     }
+
+    if (document.documentElement.requestFullscreen) {
+      try {
+        await document.documentElement.requestFullscreen();
+      } catch (error) {
+        status.textContent =
+          "Reader view is open. System fullscreen isn't available in this browser.";
+      }
+    } else {
+      status.textContent =
+        "Reader view is open and fitted to your screen.";
+    }
+
+    setTimeout(refreshLayout, 180);
   });
 
   document.addEventListener("fullscreenchange", function () {
     fullscreen.textContent = document.fullscreenElement
       ? "Exit Fullscreen"
       : "Fullscreen ⛶";
+
+    setTimeout(refreshLayout, 100);
   });
 
-  fullscreen.addEventListener("dblclick", function () {
-    if (document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {});
-    }
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(refreshLayout, 120);
   });
+
+  window.addEventListener("orientationchange", function () {
+    setTimeout(refreshLayout, 250);
+    setTimeout(refreshLayout, 600);
+  });
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(() => {
+      if (pageFlip) refreshLayout();
+    });
+
+    observer.observe(bookShell);
+  }
 
   function updateFontSize() {
-    document.documentElement.style.setProperty("--reader-font", fontSize + "px");
+    document.documentElement.style.setProperty(
+      "--reader-font",
+      fontSize + "px"
+    );
+
     fontLabel.textContent = "Text " + fontSize + "px";
     fontDown.disabled = fontSize <= 12;
     fontUp.disabled = fontSize >= 24;
@@ -542,7 +712,7 @@ body.reader-mode .hint { margin: 8px 4px 0; }
       title.textContent = heading;
 
       const paragraph = document.createElement("p");
-      paragraph.textContent = text;
+      paragraph.textContent = text || "";
 
       const pageNumber = document.createElement("div");
       pageNumber.className = "page-number";
@@ -581,64 +751,101 @@ body.reader-mode .hint { margin: 8px 4px 0; }
 
     progressBar.style.width = percent + "%";
     progressText.textContent = percent + "%";
+
     chapterSelect.value = index === 1 ? "1" : "0";
   }
 
   function showBook(sample) {
     bookElement.replaceChildren();
+
     bookElement.appendChild(makePage("cover", "", "", "", 0));
+
     bookElement.appendChild(
-      makePage("", "FREE PREVIEW", sample.title || "Aarya",
-        sample.sample_content, 1)
+      makePage(
+        "",
+        "FREE PREVIEW",
+        sample.title || "Aarya",
+        sample.sample_content,
+        1
+      )
     );
+
     bookElement.appendChild(
-      makePage("", "CONTINUE THE JOURNEY", "The Story Continues",
+      makePage(
+        "",
+        "CONTINUE THE JOURNEY",
+        "The Story Continues",
         "You've reached the end of the free preview.\n\nThe complete Aarya story will be available to active subscribers once premium reading is connected.",
-        2)
+        2
+      )
     );
+
     bookElement.appendChild(makePage("back-cover", "", "", "", 0));
 
     if (!window.St || !window.St.PageFlip) {
-      status.textContent = "The page-turn library did not load. Refresh and try again.";
+      status.textContent =
+        "The page-turn library did not load. Refresh and try again.";
       counter.textContent = "Reader unavailable";
       return;
     }
 
-    pageFlip = new St.PageFlip(bookElement, {
-      width: 420,
-      height: 600,
-      size: "stretch",
-      minWidth: 260,
-      maxWidth: 1000,
-      minHeight: 380,
-      maxHeight: 1400,
-      drawShadow: true,
-      flippingTime: 1000,
-      usePortrait: true,
-      startPage: 0,
-      autoSize: true,
-      maxShadowOpacity: 0.65,
-      showCover: true,
-      mobileScrollSupport: false,
-      clickEventForward: true,
-      useMouseEvents: true,
-      swipeDistance: 25,
-      showPageCorners: true,
-      disableFlipByClick: false
-    });
+    try {
+      pageFlip = new St.PageFlip(bookElement, {
+        width: 420,
+        height: 600,
+        size: "stretch",
+        minWidth: 260,
+        maxWidth: 1000,
+        minHeight: 320,
+        maxHeight: 1400,
+        drawShadow: true,
+        flippingTime: 850,
+        usePortrait: true,
+        startPage: 0,
+        autoSize: true,
+        maxShadowOpacity: 0.55,
+        showCover: true,
+        mobileScrollSupport: false,
+        clickEventForward: true,
+        useMouseEvents: true,
+        swipeDistance: 25,
+        showPageCorners: true,
+        disableFlipByClick: false
+      });
 
-    pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
+      pageFlip.loadFromHTML(
+        document.querySelectorAll("#book .page")
+      );
 
-    prev.addEventListener("click", () => pageFlip.flipPrev());
-    next.addEventListener("click", () => pageFlip.flipNext());
+      prev.addEventListener("click", function () {
+        if (pageFlip) pageFlip.flipPrev();
+      });
 
-    chapterSelect.addEventListener("change", function () {
-      if (chapterSelect.value === "1") pageFlip.flip(1);
-    });
+      next.addEventListener("click", function () {
+        if (pageFlip) pageFlip.flipNext();
+      });
 
-    pageFlip.on("flip", updateControls);
-    updateControls();
-    status.textContent = "Aarya's cover is ready. Turn the cover to read the free preview.";
+      chapterSelect.addEventListener("change", function () {
+        if (pageFlip && chapterSelect.value === "1") {
+          pageFlip.flip(1);
+        }
+      });
+
+      pageFlip.on("flip", updateControls);
+
+      updateControls();
+
+      status.textContent =
+        "Aarya's cover is ready. Turn the cover to read the free preview.";
+
+      setTimeout(refreshLayout, 200);
+      setTimeout(refreshLayout, 700);
+    } catch (error) {
+      console.error("Reader initialization error:", error);
+      status.textContent =
+        "The reader couldn't start. Please refresh and try again.";
+      counter.textContent = "Reader unavailable";
+    }
   }
 
   async function loadPreview() {
@@ -647,7 +854,11 @@ body.reader-mode .hint { margin: 8px 4px 0; }
         throw new Error("The database library did not load.");
       }
 
-      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      const client = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
       const { data, error } = await client
         .from("story_samples")
         .select("title, sample_content")
@@ -656,6 +867,7 @@ body.reader-mode .hint { margin: 8px 4px 0; }
         .single();
 
       if (error) throw error;
+
       if (!data || !data.sample_content) {
         throw new Error("No published preview was found.");
       }
@@ -663,7 +875,8 @@ body.reader-mode .hint { margin: 8px 4px 0; }
       showBook(data);
     } catch (error) {
       console.error("Aarya preview error:", error);
-      status.textContent = "We couldn't load the preview. Please refresh and try again.";
+      status.textContent =
+        "We couldn't load the preview. Please refresh and try again.";
       counter.textContent = "Preview unavailable";
       prev.disabled = true;
       next.disabled = true;
