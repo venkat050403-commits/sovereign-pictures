@@ -1,177 +1,212 @@
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>My Account | Sovereign Pictures</title>
 
   <style>
+    * { box-sizing: border-box; }
 
     body {
-
       margin: 0;
-
-      background: #111;
-
-      color: #f5f0e6;
-
+      background: #101010;
+      color: #f6f0e5;
       font-family: Arial, sans-serif;
-
-      text-align: center;
-
     }
 
     header {
-
-      padding: 24px;
-
-      border-bottom: 1px solid #6d5730;
-
+      padding: 22px 6%;
+      background: #171717;
+      border-bottom: 1px solid #514024;
     }
 
-    h1 { color: #c6a15b; }
-
-    main { padding: 35px 20px; }
-
-    .panel {
-
-      max-width: 500px;
-
-      margin: 25px auto;
-
-      padding: 25px;
-
-      border: 1px solid #6d5730;
-
-      border-radius: 12px;
-
-    }
-
-    a, button {
-
-      display: inline-block;
-
-      margin: 8px;
-
-      padding: 12px 18px;
-
-      background: #c6a15b;
-
-      color: #111;
-
-      border: 0;
-
-      border-radius: 6px;
-
+    header a {
+      color: #d6b36a;
       text-decoration: none;
-
+      font-family: Georgia, serif;
+      font-size: 20px;
       font-weight: bold;
-
-      cursor: pointer;
-
+      letter-spacing: 2px;
     }
 
-    #status { overflow-wrap: anywhere; }
+    main {
+      max-width: 650px;
+      margin: 55px auto;
+      padding: 20px;
+    }
 
+    h1 {
+      color: #d6b36a;
+      font-family: Georgia, serif;
+      font-size: 38px;
+      font-weight: normal;
+    }
+
+    .card {
+      margin-top: 25px;
+      padding: 28px;
+      background: #1b1a17;
+      border: 1px solid #514024;
+      border-radius: 12px;
+    }
+
+    .label {
+      color: #aaa293;
+      font-size: 13px;
+      margin-top: 24px;
+    }
+
+    .value {
+      font-size: 17px;
+      overflow-wrap: anywhere;
+    }
+
+    .tier {
+      color: #e5c477;
+      font-size: 23px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 13px 22px;
+      background: #d6b36a;
+      color: #17130c;
+      border: 0;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .message {
+      color: #d6b36a;
+      line-height: 1.6;
+    }
+
+    .home {
+      display: inline-block;
+      margin-top: 20px;
+      color: #d6b36a;
+    }
   </style>
-
 </head>
 
 <body>
-
   <header>
-
-    <h1>SOVEREIGN PICTURES</h1>
-
-    <p>Your stories. Your universe.</p>
-
+    <a href="./index.html">SOVEREIGN PICTURES</a>
   </header>
 
   <main>
+    <h1>My Account</h1>
+    <p>Welcome to your personal corner of our universe.</p>
 
-    <h2>My Account</h2>
+    <div class="card">
+      <p class="message" id="message">Loading your account...</p>
 
-    <div class="panel">
+      <div id="accountDetails" hidden>
+        <div class="label">EMAIL ADDRESS</div>
+        <p class="value" id="email"></p>
 
-      <p id="status">Checking your account...</p>
+        <div class="label">MEMBERSHIP</div>
+        <p class="tier" id="tier">Free</p>
 
-      <p id="membership"></p>
+        <p class="message" id="membershipMessage">
+          You are currently a free member.
+        </p>
 
-      <a href="./index.html">Explore Stories</a>
-
-      <button id="logout" hidden>Log Out</button>
-
+        <button id="logoutButton">Log Out</button>
+      </div>
     </div>
 
+    <a class="home" href="./index.html">← Back to homepage</a>
   </main>
 
   <script type="module">
-
     import { createClient } from
-
       "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
     const supabase = createClient(
-
       "https://ffxmmzxknnrmglqvxwbc.supabase.co",
-
       "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
-
     );
 
-    const status = document.getElementById("status");
+    const message = document.getElementById("message");
+    const details = document.getElementById("accountDetails");
 
-    const membership = document.getElementById("membership");
+    async function loadAccount() {
+      const { data, error } = await supabase.auth.getSession();
 
-    const logout = document.getElementById("logout");
+      if (error || !data.session) {
+        window.location.replace("./login.html");
+        return;
+      }
 
-    const { data, error } = await supabase.auth.getUser();
+      const user = data.session.user;
 
-    if (error || !data.user) {
+      document.getElementById("email").textContent =
+        user.email || "Email unavailable";
 
-      window.location.replace("./login.html");
+      const { data: profile, error: profileError } =
+        await supabase
+          .from("profiles")
+          .select("membership_tier")
+          .eq("id", user.id)
+          .single();
 
-    } else {
+      let tier = "Free";
 
-      status.textContent = "Signed in as " + data.user.email;
+      if (!profileError && profile) {
+        const tiers = {
+          free: "Free",
+          stories: "Stories",
+          cinema: "Cinema",
+          all_access: "All-Access"
+        };
 
-      logout.hidden = false;
+        tier = tiers[profile.membership_tier] || "Free";
+      }
 
-      const { data: profile } = await supabase
+      document.getElementById("tier").textContent = tier;
 
-        .from("profiles")
+      document.getElementById("membershipMessage").textContent =
+        tier === "Free"
+          ? "You are currently a free member."
+          : "Your membership is: " + tier + ".";
 
-        .select("membership_tier")
+      if (profileError) {
+        document.getElementById("membershipMessage").textContent =
+          "Your account is active, but membership details could not be loaded.";
+      }
 
-        .eq("id", data.user.id)
-
-        .maybeSingle();
-
-      membership.textContent = profile
-
-        ? "Membership: " + profile.membership_tier
-
-        : "Membership details unavailable.";
-
+      message.textContent = "Your account is ready.";
+      details.hidden = false;
     }
 
-    logout.addEventListener("click", async () => {
+    document.getElementById("logoutButton").addEventListener(
+      "click",
+      async () => {
+        const button = document.getElementById("logoutButton");
+        button.disabled = true;
+        button.textContent = "Logging out...";
 
-      await supabase.auth.signOut();
+        const { error } = await supabase.auth.signOut();
 
-      window.location.replace("./login.html");
+        if (error) {
+          button.disabled = false;
+          button.textContent = "Log Out";
+          message.textContent = "Could not log out. Please try again.";
+          return;
+        }
 
+        window.location.replace("./login.html");
+      }
+    );
+
+    loadAccount().catch(() => {
+      message.textContent =
+        "Could not load your account. Please refresh and try again.";
     });
-
   </script>
-
 </body>
-
 </html>
