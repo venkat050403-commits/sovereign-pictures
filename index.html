@@ -50,7 +50,7 @@
     }
 
     .hero {
-      padding: 100px 20px 90px;
+      padding: 110px 20px 100px;
       text-align: center;
       background: radial-gradient(
         ellipse at top,
@@ -71,32 +71,39 @@
       margin: 24px 0;
       font-size: clamp(38px, 7vw, 68px);
       font-weight: normal;
+      line-height: 1.2;
     }
 
     .hero p {
       max-width: 620px;
-      margin: 0 auto 30px;
+      margin: 0 auto 32px;
       color: #c6bfb2;
       font: 16px/1.8 Arial, sans-serif;
     }
 
     .explore-button {
       display: inline-block;
-      padding: 13px 22px;
+      padding: 14px 24px;
       border: 1px solid #d6b36a;
       border-radius: 5px;
-      color: #e4c783;
+      background: #d6b36a;
+      color: #17130c;
       text-decoration: none;
       font: bold 14px Arial, sans-serif;
     }
 
     .explore-button:hover {
-      background: #d6b36a;
-      color: #17130c;
+      background: #ead29b;
     }
 
-    section.stories {
-      padding: 50px 6%;
+    .about {
+      padding: 65px 6%;
+      text-align: center;
+    }
+
+    .about-inner {
+      max-width: 720px;
+      margin: auto;
     }
 
     .section-title {
@@ -105,33 +112,9 @@
       font-weight: normal;
     }
 
-    .story-card {
-      max-width: 850px;
-      padding: 30px;
-      border: 1px solid #4b3a21;
-      border-radius: 10px;
-      background: #181715;
-    }
-
-    .story-card h3 {
-      margin: 18px 0;
-      font-size: 32px;
-    }
-
-    .story-card p {
+    .about p {
       color: #c6bfb2;
-      font: 15px/1.8 Arial, sans-serif;
-    }
-
-    .story-link {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 18px;
-      border-radius: 5px;
-      background: #d6b36a;
-      color: #17130c;
-      font: bold 14px Arial, sans-serif;
-      text-decoration: none;
+      font: 15px/1.9 Arial, sans-serif;
     }
 
     footer {
@@ -139,7 +122,7 @@
       border-top: 1px solid #40321e;
       color: #8f887b;
       text-align: center;
-      font: 12px Arial, sans-serif;
+      font: 12px/1.8 Arial, sans-serif;
     }
 
     @media (max-width: 480px) {
@@ -159,11 +142,11 @@
       }
 
       .hero {
-        padding: 70px 18px;
+        padding: 75px 18px;
       }
 
-      .story-card {
-        padding: 22px;
+      .about {
+        padding: 45px 6%;
       }
     }
   </style>
@@ -183,14 +166,15 @@
 
   <main>
     <section class="hero">
-      <div class="eyebrow">Enter the extraordinary</div>
+      <div class="eyebrow">An independent storytelling studio</div>
 
       <h1>Stories Beyond Worlds.</h1>
 
       <p>
-        Discover original universes, unforgettable characters,
-        epic adventures and cinematic stories created exclusively
-        for Sovereign Pictures.
+        Enter extraordinary universes filled with unforgettable
+        characters, powerful kingdoms, impossible choices and
+        cinematic adventures. Discover original stories created
+        exclusively for Sovereign Pictures.
       </p>
 
       <a class="explore-button" href="./library.html?v=3">
@@ -198,32 +182,25 @@
       </a>
     </section>
 
-    <section class="stories" id="stories">
-      <div class="eyebrow">Our universe begins here</div>
+    <section class="about">
+      <div class="about-inner">
+        <div class="eyebrow">Our vision</div>
 
-      <h2 class="section-title">Featured Story</h2>
-
-      <article class="story-card">
-        <div class="eyebrow">Fantasy · Multiverse · Adventure</div>
-
-        <h3>AARYA</h3>
+        <h2 class="section-title">Beyond Imagination</h2>
 
         <p>
-          A universe divided. Two brothers destined for conflict.
-          A forgotten power that could change every world.
-          When destiny awakens, one princess must discover who
-          she truly is and what she was chosen to become.
+          Sovereign Pictures is building original story worlds
+          through written adventures and cinematic experiences.
+          Every story opens the door to a universe waiting to
+          be discovered.
         </p>
-
-        <a class="story-link" href="./aarya.html">
-          Discover Aarya
-        </a>
-      </article>
+      </div>
     </section>
   </main>
 
   <footer>
-    © 2026 Sovereign Pictures. Original worlds. Exclusive stories.
+    © 2026 Sovereign Pictures.<br>
+    Original worlds. Exclusive stories.
   </footer>
 
   <script type="module">
