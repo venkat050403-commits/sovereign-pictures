@@ -162,5 +162,20 @@
   <footer>
     © 2026 Sovereign Pictures. All rights reserved.
   </footer>
+
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+  const supabase = createClient(
+    "https://ffxmmzxknnrmglqvxwbc.supabase.co",
+    "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
+  );
+
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (!session) {
+    window.location.href = "login.html";
+  }
+</script>
 </body>
 </html>
