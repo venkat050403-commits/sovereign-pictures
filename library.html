@@ -1,617 +1,312 @@
 
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <meta name="theme-color" content="#101827">
-
-  <meta name="description" content="Discover exclusive original stories and cinematic worlds at Sovereign Pictures.">
-
-  <title>Story Library | Sovereign Pictures</title>
+  <title>Story Library | Sovereign Pictures">
 
   <style>
-
-    * {
-
-      box-sizing: border-box;
-
-    }
+    * { box-sizing: border-box; }
 
     body {
-
       margin: 0;
-
       background: #101827;
-
       color: #f4f0e8;
-
       font-family: Arial, sans-serif;
-
     }
 
     header {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
-
       gap: 12px;
-
       padding: 20px 6%;
-
       background: #111b2c;
-
       border-bottom: 1px solid #344563;
-
     }
 
     .brand {
-
       color: #d6b36a;
-
       font-family: Georgia, serif;
-
       font-size: 19px;
-
       font-weight: bold;
-
       letter-spacing: 2px;
-
       text-decoration: none;
-
     }
 
     .account {
-
-      color: #101827;
-
-      background: #d6b36a;
-
-      border-radius: 5px;
-
       padding: 11px 14px;
-
+      border-radius: 5px;
+      background: #d6b36a;
+      color: #101827;
       text-decoration: none;
-
       font-weight: bold;
-
       font-size: 13px;
-
       white-space: nowrap;
-
     }
 
     .hero {
-
       padding: 75px 20px;
-
       text-align: center;
-
-      background:
-
-        radial-gradient(
-
-          ellipse at 50% 0%,
-
-          #263e60 0%,
-
-          #182840 35%,
-
-          #101827 78%
-
-        );
-
+      background: radial-gradient(
+        ellipse at 50% 0%,
+        #263e60 0%,
+        #182840 38%,
+        #101827 80%
+      );
       border-bottom: 1px solid #293b56;
-
     }
 
     .eyebrow {
-
       color: #d6b36a;
-
       font-size: 11px;
-
       letter-spacing: 4px;
-
       text-transform: uppercase;
-
     }
 
     h1 {
-
       margin: 22px 0 14px;
-
       font: normal clamp(36px, 7vw, 58px) Georgia, serif;
-
-      color: #f4f0e8;
-
     }
 
     .hero p {
-
       max-width: 580px;
-
       margin: auto;
-
       color: #c1ccdc;
-
       font-size: 15px;
-
       line-height: 1.9;
-
     }
 
     main {
-
       max-width: 1100px;
-
       margin: auto;
-
       padding: 45px 6% 75px;
-
     }
 
     .section-title {
-
       color: #e0c17d;
-
       font: normal 30px Georgia, serif;
-
     }
 
     .grid {
-
       display: grid;
-
       grid-template-columns: repeat(
-
-        auto-fit,
-
-        minmax(230px, 1fr)
-
+        auto-fit, minmax(230px, 1fr)
       );
-
       gap: 24px;
-
       margin-top: 28px;
-
     }
 
     .card {
-
       overflow: hidden;
-
       background: #172338;
-
       border: 1px solid #354968;
-
       border-radius: 10px;
-
       box-shadow: 0 8px 25px #080f1b55;
-
       transition: transform 0.2s, border-color 0.2s;
-
     }
 
     .card:hover {
-
       transform: translateY(-4px);
-
       border-color: #b99a5d;
-
     }
 
     .poster {
-
       min-height: 190px;
-
       display: flex;
-
       align-items: center;
-
       justify-content: center;
-
       padding: 20px;
-
       text-align: center;
-
-      background:
-
-        radial-gradient(
-
-          ellipse at center,
-
-          #304b70 0%,
-
-          #1c2d47 48%,
-
-          #121d30 100%
-
-        );
-
+      background: radial-gradient(
+        ellipse at center,
+        #304b70,
+        #1c2d47 55%,
+        #121d30
+      );
       border-bottom: 1px solid #354968;
-
       color: #e4c77f;
-
       font: normal 34px Georgia, serif;
-
       letter-spacing: 3px;
-
     }
 
-    .card-content {
-
-      padding: 22px;
-
-    }
+    .card-content { padding: 22px; }
 
     .category {
-
       color: #d6b36a;
-
       font-size: 10px;
-
       letter-spacing: 2px;
-
       text-transform: uppercase;
-
     }
 
     h3 {
-
       margin: 13px 0;
-
-      color: #f4f0e8;
-
       font: normal 26px Georgia, serif;
-
     }
 
     .description {
-
       min-height: 78px;
-
       color: #bac6d7;
-
       font-size: 14px;
-
       line-height: 1.8;
-
     }
 
     .button {
-
       display: inline-block;
-
       margin-top: 12px;
-
       padding: 12px 17px;
-
       background: #d6b36a;
-
       color: #101827;
-
       border: 1px solid #e6ca8a;
-
       border-radius: 5px;
-
       text-decoration: none;
-
       font-size: 13px;
-
       font-weight: bold;
-
-      transition: background 0.2s;
-
-    }
-
-    .button:hover {
-
-      background: #ead29b;
-
     }
 
     .notice {
-
       margin-top: 32px;
-
       padding: 19px;
-
       background: #152137;
-
       border: 1px solid #344563;
-
       border-radius: 8px;
-
       color: #bac6d7;
-
       font-size: 13px;
-
       line-height: 1.8;
-
     }
 
-    .notice strong {
-
-      color: #e0c17d;
-
-    }
+    .notice strong { color: #e0c17d; }
 
     footer {
-
       padding: 28px 20px;
-
       background: #111b2c;
-
       border-top: 1px solid #344563;
-
       color: #95a4ba;
-
       text-align: center;
-
       font-size: 12px;
-
       line-height: 1.8;
-
     }
 
     @media (max-width: 480px) {
-
-      header {
-
-        padding: 16px 4%;
-
-      }
-
-      .brand {
-
-        font-size: 15px;
-
-        letter-spacing: 1px;
-
-      }
-
-      .account {
-
-        padding: 10px;
-
-        font-size: 11px;
-
-      }
-
-      .hero {
-
-        padding: 60px 20px;
-
-      }
-
-      main {
-
-        padding: 35px 5% 55px;
-
-      }
-
-      .poster {
-
-        min-height: 165px;
-
-      }
-
+      header { padding: 16px 4%; }
+      .brand { font-size: 15px; letter-spacing: 1px; }
+      .account { padding: 10px; font-size: 11px; }
+      .hero { padding: 60px 20px; }
+      main { padding: 35px 5% 55px; }
+      .poster { min-height: 165px; }
     }
-
   </style>
-
 </head>
 
 <body>
-
   <header>
-
     <a class="brand" href="./index.html">
-
       SOVEREIGN PICTURES
-
     </a>
-
-    <a
-
-      class="account"
-
-      id="accountButton"
-
-      href="./login.html"
-
-      style="visibility:hidden"
-
-    >
-
+    <a class="account" id="accountButton"
+       href="./login.html" style="visibility:hidden">
       Log In / Create Account
-
     </a>
-
   </header>
 
   <section class="hero">
-
     <div class="eyebrow">Discover your next universe</div>
-
     <h1>The Story Library</h1>
-
     <p>
-
       Enter original worlds filled with forgotten kingdoms,
-
       powerful characters, impossible choices and extraordinary
-
       adventures. Every universe begins with a story.
-
     </p>
-
   </section>
 
   <main>
-
     <div class="eyebrow">Original creations</div>
-
     <h2 class="section-title">Explore Our Universe</h2>
 
     <div class="grid">
-
       <article class="card">
-
         <div class="poster">AARYA</div>
-
         <div class="card-content">
-
           <div class="category">
-
             Fantasy · Multiverse · Adventure
-
           </div>
-
           <h3>Aarya</h3>
-
           <p class="description">
-
             A divided kingdom. Two brothers destined for conflict.
-
             A forgotten power that could change every world.
-
             A princess must discover her true destiny.
-
           </p>
-
           <a class="button" href="./aarya.html">
-
             Discover Story
-
           </a>
-
         </div>
-
       </article>
 
       <article class="card">
-
         <div class="poster">COMING SOON</div>
-
         <div class="card-content">
-
           <div class="category">New original universe</div>
-
           <h3>New Worlds</h3>
-
           <p class="description">
-
             More original stories, unexpected adventures and
-
             cinematic universes are in development.
-
           </p>
-
           <a class="button" href="./index.html">
-
             Back to Home
-
           </a>
-
         </div>
-
       </article>
-
     </div>
 
     <div class="notice">
-
       <strong>Welcome to Sovereign Pictures.</strong>
-
       This library is under development. Story previews,
-
       membership plans and premium video access will be added
-
       as the platform grows.
-
     </div>
-
   </main>
 
   <footer>
-
     © 2026 Sovereign Pictures.
-
     <br>
-
     Original worlds. Exclusive stories.
-
   </footer>
 
   <script type="module">
-
     import { createClient } from
-
       "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
     const supabase = createClient(
-
       "https://ffxmmzxknnrmglqvxwbc.supabase.co",
-
       "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
-
     );
 
     const button = document.getElementById("accountButton");
 
     function showAccountButton(session) {
-
       if (session) {
-
         button.textContent = "My Account";
-
         button.href = "./dashboard.html";
-
       } else {
-
         button.textContent = "Log In / Create Account";
-
         button.href = "./login.html";
-
       }
 
       button.style.visibility = "visible";
-
     }
 
     try {
-
-      const { data, error } =
-
-        await supabase.auth.getSession();
-
+      const { data, error } = await supabase.auth.getSession();
       showAccountButton(error ? null : data.session);
 
       supabase.auth.onAuthStateChange((_event, session) => {
-
         showAccountButton(session);
-
       });
-
     } catch (error) {
-
       showAccountButton(null);
-
     }
-
   </script>
-
 </body>
-
 </html>
