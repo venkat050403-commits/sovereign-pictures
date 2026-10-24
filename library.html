@@ -1,603 +1,446 @@
 
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <meta name="theme-color" content="#090909">
-
 <title>Story Library | Sovereign Pictures</title>
 
 <style>
-
 :root {
-
   --gold: #d8b568;
-
+  --gold-light: #f0d69b;
   --bg: #090909;
-
-  --card: #151515;
-
-  --muted: #b8b0a0;
-
+  --panel: #15130f;
+  --muted: #b6ad9b;
 }
 
 * { box-sizing: border-box; }
 
 body {
-
   margin: 0;
-
   background: var(--bg);
-
-  color: #f7f0e2;
-
+  color: #f8f2e6;
   font-family: Georgia, "Times New Roman", serif;
-
 }
 
 a { color: inherit; text-decoration: none; }
 
 header {
-
   padding: 20px 6%;
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
-  gap: 15px;
-
   flex-wrap: wrap;
-
-  border-bottom: 1px solid #493b22;
-
+  gap: 16px;
+  border-bottom: 1px solid #382d1a;
+  background: #0c0b09;
 }
 
-.brand {
-
+.logo {
   color: var(--gold);
-
-  letter-spacing: 3px;
-
-  font-size: 14px;
-
-  font-weight: bold;
-
+  font-size: 17px;
+  letter-spacing: 4px;
 }
 
 nav {
-
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 18px;
-
-  align-items: center;
-
   font: 13px Arial, sans-serif;
-
 }
 
+nav a { color: #ddd2bd; }
 nav a:hover { color: var(--gold); }
 
-main {
-
-  width: min(1100px, 90%);
-
-  margin: 0 auto;
-
-}
-
-.intro {
-
+.hero {
+  padding: 72px 20px 55px;
   text-align: center;
-
-  padding: 55px 10px 35px;
-
+  background:
+    radial-gradient(ellipse at center, #352817 0%, #17120b 38%, #090909 75%);
 }
 
 .eyebrow {
-
   color: var(--gold);
-
-  letter-spacing: 4px;
-
   font: 11px Arial, sans-serif;
-
+  letter-spacing: 4px;
   text-transform: uppercase;
-
 }
 
-h1 {
-
-  font-size: clamp(36px, 7vw, 58px);
-
+.hero h1 {
+  margin: 20px 0 12px;
+  font-size: clamp(36px, 7vw, 66px);
   font-weight: normal;
-
-  margin: 16px 0;
-
-}
-
-.intro p {
-
-  color: var(--muted);
-
-  line-height: 1.8;
-
-  max-width: 600px;
-
-  margin: 0 auto;
-
-}
-
-.section-title {
-
-  color: var(--gold);
-
   letter-spacing: 2px;
+}
 
-  font-size: 19px;
+.hero p {
+  max-width: 550px;
+  margin: 0 auto;
+  color: #c7bda9;
+  font-size: 16px;
+  line-height: 1.8;
+}
 
+main {
+  max-width: 1180px;
+  margin: auto;
+  padding: 25px 24px 65px;
+}
+
+.section {
+  margin-top: 38px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #352b1a;
+  padding-bottom: 14px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: var(--gold-light);
+  font-size: 27px;
   font-weight: normal;
+}
 
-  margin: 15px 0 22px;
-
+.section-heading p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font: 13px Arial, sans-serif;
 }
 
 .grid {
-
   display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
-
-  gap: 24px;
-
-  padding-bottom: 55px;
-
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
 }
 
 .card {
-
-  background: var(--card);
-
-  border: 1px solid #393126;
-
+  min-width: 0;
   overflow: hidden;
-
+  border: 1px solid #40321d;
+  border-radius: 5px;
+  background: linear-gradient(145deg, #1b1812, #100f0d);
   transition: border-color .2s, transform .2s;
-
 }
 
 .card:hover {
-
   border-color: var(--gold);
-
   transform: translateY(-3px);
-
 }
 
-.poster {
-
-  height: 300px;
-
+.art {
+  height: 245px;
   display: flex;
-
   flex-direction: column;
-
-  justify-content: center;
-
   align-items: center;
-
+  justify-content: center;
   text-align: center;
-
   padding: 20px;
-
-  background:
-
-    radial-gradient(ellipse at 50% 38%, #5c4422 0%, #211a10 35%, #090909 78%);
-
-  border-bottom: 1px solid #66502b;
-
-  position: relative;
-
-  overflow: hidden;
-
+  background: radial-gradient(ellipse at center, #49361e, #17120c 72%);
+  border-bottom: 1px solid #40321d;
 }
 
-.poster::before {
-
-  content: "✧";
-
-  position: absolute;
-
-  top: 20px;
-
-  font-size: 30px;
-
+.art .symbol {
+  font-size: 42px;
   color: var(--gold);
-
-  opacity: .8;
-
+  margin-bottom: 15px;
 }
 
-.poster::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 170px;
-
-  height: 220px;
-
-  border: 1px solid #b89650;
-
-  border-radius: 50% 50% 10% 10%;
-
-  opacity: .35;
-
-  bottom: -80px;
-
-}
-
-.poster .small {
-
-  color: #e2c57d;
-
-  font: 10px Arial, sans-serif;
-
+.art h3 {
+  margin: 0;
+  color: var(--gold-light);
+  font-size: 29px;
+  font-weight: normal;
   letter-spacing: 3px;
-
-  z-index: 1;
-
 }
 
-.poster h2 {
-
-  color: var(--gold);
-
-  font-size: clamp(38px, 7vw, 54px);
-
-  letter-spacing: 6px;
-
-  font-weight: normal;
-
-  margin: 18px 0 8px;
-
-  z-index: 1;
-
-}
-
-.poster .tagline {
-
-  color: #e8ddc5;
-
-  font-size: 12px;
-
+.art small {
+  margin-top: 12px;
+  color: #c4b18b;
+  font: 10px Arial, sans-serif;
   letter-spacing: 2px;
-
-  z-index: 1;
-
 }
 
-.card-content { padding: 20px; }
-
-.card-content h3 {
-
-  font-size: 23px;
-
-  font-weight: normal;
-
-  margin: 0 0 10px;
-
+.art.upcoming {
+  background: radial-gradient(ellipse at center, #29251e, #11100e 75%);
 }
 
-.card-content p {
+.card-body { padding: 20px; }
 
-  color: var(--muted);
-
-  font: 14px/1.7 Arial, sans-serif;
-
-  margin: 0 0 18px;
-
-}
-
-.meta {
-
-  color: #bda36d;
-
-  font: 11px Arial, sans-serif;
-
-  letter-spacing: 1px;
-
-  margin-bottom: 14px;
-
-}
-
-.button {
-
+.tag {
   display: inline-block;
-
-  width: 100%;
-
-  padding: 13px 16px;
-
-  text-align: center;
-
-  border: 1px solid var(--gold);
-
-  background: #211a10;
-
   color: var(--gold);
-
-  font: 13px Arial, sans-serif;
-
-  cursor: pointer;
-
+  border: 1px solid #6b532b;
+  padding: 5px 8px;
+  font: 10px Arial, sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.button:hover {
-
-  background: var(--gold);
-
-  color: #090909;
-
+.card-body h3 {
+  font-size: 22px;
+  font-weight: normal;
+  margin: 15px 0 9px;
 }
 
-.coming {
-
-  min-height: 300px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  background: linear-gradient(145deg, #1b1b1b, #090909);
-
-  color: #a79a7d;
-
+.card-body p {
+  min-height: 62px;
+  color: #c2b9a8;
   font-size: 14px;
-
-  letter-spacing: 2px;
-
-  border-bottom: 1px solid #393126;
-
+  line-height: 1.7;
+  margin: 0 0 18px;
 }
 
-.account {
-
-  border: 1px solid #393126;
-
-  padding: 22px;
-
-  margin: 0 0 55px;
-
-  background: #111;
-
-  font: 14px/1.8 Arial, sans-serif;
-
+.btn {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 16px;
+  width: 100%;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  color: #17120a;
+  background: var(--gold);
+  font: bold 12px Arial, sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
-.account strong { color: var(--gold); }
+.btn:hover { background: var(--gold-light); }
 
-.account a { color: var(--gold); text-decoration: underline; }
+.btn.secondary {
+  background: transparent;
+  color: var(--gold);
+}
+
+.btn.secondary:hover { background: #292114; }
+
+.btn.disabled {
+  background: #24211b;
+  color: #aaa08e;
+  border-color: #4a4234;
+  cursor: default;
+}
+
+.promo {
+  margin-top: 60px;
+  padding: 40px 25px;
+  text-align: center;
+  border: 1px solid #6a5128;
+  background: radial-gradient(ellipse at center, #302317, #13100c);
+}
+
+.promo h2 {
+  color: var(--gold-light);
+  font-size: 30px;
+  font-weight: normal;
+  margin: 0 0 12px;
+}
+
+.promo p {
+  max-width: 570px;
+  margin: 0 auto 22px;
+  color: #c8bdab;
+  line-height: 1.8;
+}
+
+.promo .btn {
+  width: auto;
+  min-width: 180px;
+}
 
 footer {
-
-  border-top: 1px solid #493b22;
-
+  padding: 30px 20px;
+  border-top: 1px solid #382d1a;
   text-align: center;
-
-  padding: 28px 15px;
-
-  color: #8f8676;
-
-  font: 12px/1.8 Arial, sans-serif;
-
+  color: #a99e89;
+  font: 12px Arial, sans-serif;
+  line-height: 2;
 }
 
 footer a { color: var(--gold); }
 
-@media(max-width: 500px) {
-
-  header { padding: 18px 5%; }
-
-  nav { gap: 12px; }
-
-  .poster { height: 280px; }
-
+@media (max-width: 760px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .art { height: 200px; }
+  header { justify-content: center; text-align: center; }
+  nav { justify-content: center; }
 }
 
+@media (max-width: 500px) {
+  .grid { grid-template-columns: 1fr; }
+  main { padding: 15px 16px 45px; }
+  .hero { padding: 55px 20px 42px; }
+  .art { height: 220px; }
+  .card-body p { min-height: 0; }
+}
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-  <a class="brand" href="index.html">SOVEREIGN PICTURES</a>
-
-  <nav>
-
+  <a class="logo" href="index.html">SOVEREIGN PICTURES</a>
+  <nav aria-label="Main navigation">
     <a href="index.html">Home</a>
-
-    <a href="library.html">Stories</a>
-
+    <a href="library.html">Library</a>
     <a href="membership.html">Membership</a>
-
-    <a href="login.html" id="accountLink">Login</a>
-
+    <a href="login.html">Login</a>
+    <a href="dashboard.html">My Account</a>
   </nav>
-
 </header>
+
+<section class="hero">
+  <div class="eyebrow">Original stories. Unlimited imagination.</div>
+  <h1>The Story Library</h1>
+  <p>Enter worlds beyond imagination. Discover original fantasy stories, unforgettable characters, and cinematic adventures created exclusively for Sovereign Pictures.</p>
+</section>
 
 <main>
 
-  <section class="intro">
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <h2>Featured Story</h2>
+        <p>Begin your next adventure.</p>
+      </div>
+    </div>
 
-    <div class="eyebrow">Enter another world</div>
-
-    <h1>The Story Library</h1>
-
-    <p>Discover original stories, extraordinary worlds, and legends created exclusively for Sovereign Pictures.</p>
-
+    <div class="grid">
+      <article class="card">
+        <div class="art">
+          <div class="symbol">✧ ❖ ✧</div>
+          <h3>AARYA</h3>
+          <small>A LEGEND BEGINS</small>
+        </div>
+        <div class="card-body">
+          <span class="tag">Original Fantasy</span>
+          <h3>Aarya</h3>
+          <p>A mysterious bracelet, a hidden destiny, and a secret that reaches beyond the boundaries of worlds.</p>
+          <a class="btn" href="aarya-book.html">READ THE STORY →</a>
+        </div>
+      </article>
+    </div>
   </section>
 
-  <h2 class="section-title">ORIGINAL STORIES</h2>
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <h2>Upcoming Stories</h2>
+        <p>New worlds are being created.</p>
+      </div>
+    </div>
 
-  <section class="grid">
-
-    <article class="card">
-
-      <a href="aarya-book.html" aria-label="Open Aarya book">
-
-        <div class="poster">
-
-          <div class="small">A SOVEREIGN ORIGINAL</div>
-
-          <h2>AARYA</h2>
-
-          <div class="tagline">A LEGEND BEGINS</div>
-
+    <div class="grid">
+      <article class="card">
+        <div class="art upcoming">
+          <div class="symbol">♜</div>
+          <h3>THE LOST KINGDOM</h3>
+          <small>COMING SOON</small>
         </div>
-
-      </a>
-
-      <div class="card-content">
-
-        <div class="meta">FANTASY · MULTIVERSE</div>
-
-        <h3>Aarya</h3>
-
-        <p>A princess, a mysterious bracelet, and a destiny that reaches beyond the boundaries of her world.</p>
-
-        <a class="button" href="aarya-book.html">Open the Book →</a>
-
-      </div>
-
-    </article>
-
-    <article class="card">
-
-      <div class="coming">
-
-        <div>
-
-          <div style="font-size:32px;color:#d8b568;margin-bottom:15px">✧</div>
-
-          MORE WORLDS<br><br>
-
-          <span style="font-size:11px;letter-spacing:1px">COMING SOON</span>
-
+        <div class="card-body">
+          <span class="tag">Upcoming</span>
+          <h3>The Lost Kingdom</h3>
+          <p>A future original story waiting to be written and revealed.</p>
+          <button class="btn disabled" type="button" disabled>COMING SOON</button>
         </div>
+      </article>
 
-      </div>
+      <article class="card">
+        <div class="art upcoming">
+          <div class="symbol">☾</div>
+          <h3>SHADOWS OF FATE</h3>
+          <small>COMING SOON</small>
+        </div>
+        <div class="card-body">
+          <span class="tag">Upcoming</span>
+          <h3>Shadows of Fate</h3>
+          <p>A future original adventure planned for the Sovereign universe.</p>
+          <button class="btn disabled" type="button" disabled>COMING SOON</button>
+        </div>
+      </article>
 
-      <div class="card-content">
-
-        <div class="meta">NEW ORIGINALS</div>
-
-        <h3>More stories await</h3>
-
-        <p>New stories and cinematic adventures will be added as Sovereign Pictures grows.</p>
-
-        <a class="button" href="membership.html">Explore Membership →</a>
-
-      </div>
-
-    </article>
-
+      <article class="card">
+        <div class="art upcoming">
+          <div class="symbol">✦</div>
+          <h3>BEYOND WORLDS</h3>
+          <small>COMING SOON</small>
+        </div>
+        <div class="card-body">
+          <span class="tag">Upcoming</span>
+          <h3>Beyond Worlds</h3>
+          <p>More original stories and unexplored worlds are on the way.</p>
+          <button class="btn disabled" type="button" disabled>COMING SOON</button>
+        </div>
+      </article>
+    </div>
   </section>
 
-  <section class="account">
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <h2>AI Movies</h2>
+        <p>Stories imagined for the screen.</p>
+      </div>
+    </div>
 
-    <strong>Your Sovereign Account</strong>
+    <div class="grid">
+      <article class="card">
+        <div class="art upcoming">
+          <div class="symbol">▶</div>
+          <h3>AARYA</h3>
+          <small>FUTURE SCREEN ADAPTATION</small>
+        </div>
+        <div class="card-body">
+          <span class="tag">In Development</span>
+          <h3>Aarya: The Movie</h3>
+          <p>A planned cinematic adaptation of our original fantasy story. The movie is not available yet.</p>
+          <button class="btn disabled" type="button" disabled>IN DEVELOPMENT</button>
+        </div>
+      </article>
 
-    <p id="accountStatus">You can browse the library and explore membership options.</p>
+      <article class="card">
+        <div class="art upcoming">
+          <div class="symbol">◈</div>
+          <h3>SOVEREIGN ORIGINALS</h3>
+          <small>FUTURE FILMS</small>
+        </div>
+        <div class="card-body">
+          <span class="tag">Planned</span>
+          <h3>Original AI Films</h3>
+          <p>Discover original animated worlds and AI-assisted films as they are produced.</p>
+          <button class="btn disabled" type="button" disabled>COMING SOON</button>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    <p><a href="login.html" id="accountAction">Log in or create an account</a></p>
-
-    <p><a href="membership.html">View membership plans</a></p>
-
+  <section class="promo">
+    <div class="eyebrow">Your next adventure awaits</div>
+    <h2>Become a Member</h2>
+    <p>Explore membership options as Sovereign Pictures grows. Exclusive paid access and payment processing will be enabled once the subscription system is implemented.</p>
+    <a class="btn" href="membership.html">EXPLORE MEMBERSHIP</a>
   </section>
 
 </main>
 
 <footer>
-
-  <div>© 2026 Sovereign Pictures</div>
-
-  <div>Original stories. Worlds without limits.</div>
-
-  <div><a href="index.html">Home</a> · <a href="membership.html">Membership</a></div>
-
+  <div>© 2026 Sovereign Pictures. Original stories, imagined worlds.</div>
+  <div>
+    <a href="index.html">Home</a> ·
+    <a href="membership.html">Membership</a> ·
+    <a href="login.html">Login</a> ·
+    <a href="dashboard.html">My Account</a>
+  </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-(async function () {
-
-  const projectUrl = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
-
-  const publishableKey = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
-
-  const status = document.getElementById("accountStatus");
-
-  const action = document.getElementById("accountAction");
-
-  const navLink = document.getElementById("accountLink");
-
-  try {
-
-    if (!window.supabase) throw new Error("Supabase library unavailable");
-
-    const client = window.supabase.createClient(projectUrl, publishableKey);
-
-    const result = await client.auth.getUser();
-
-    if (result.data && result.data.user) {
-
-      const user = result.data.user;
-
-      status.textContent = "Logged in as " + user.email;
-
-      action.textContent = "Open your dashboard";
-
-      action.href = "dashboard.html";
-
-      navLink.textContent = "My Account";
-
-      navLink.href = "dashboard.html";
-
-    }
-
-  } catch (error) {
-
-    console.log("Account status unavailable:", error.message);
-
-  }
-
-})();
-
-</script>
-
 </body>
-
 </html>
