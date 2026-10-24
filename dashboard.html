@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>My Account | Sovereign Pictures</title>
+
+  <style>
+
+    body {
+
+      margin: 0;
+
+      background: #111;
+
+      color: #f5f0e6;
+
+      font-family: Arial, sans-serif;
+
+      text-align: center;
+
+    }
+
+    header {
+
+      padding: 24px;
+
+      border-bottom: 1px solid #6d5730;
+
+    }
+
+    h1 { color: #c6a15b; }
+
+    main { padding: 35px 20px; }
+
+    .panel {
+
+      max-width: 500px;
+
+      margin: 25px auto;
+
+      padding: 25px;
+
+      border: 1px solid #6d5730;
+
+      border-radius: 12px;
+
+    }
+
+    a, button {
+
+      display: inline-block;
+
+      margin: 8px;
+
+      padding: 12px 18px;
+
+      background: #c6a15b;
+
+      color: #111;
+
+      border: 0;
+
+      border-radius: 6px;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+    #status { overflow-wrap: anywhere; }
+
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+
+    <h1>SOVEREIGN PICTURES</h1>
+
+    <p>Your stories. Your universe.</p>
+
+  </header>
+
+  <main>
+
+    <h2>My Account</h2>
+
+    <div class="panel">
+
+      <p id="status">Checking your account...</p>
+
+      <p id="membership"></p>
+
+      <a href="./index.html">Explore Stories</a>
+
+      <button id="logout" hidden>Log Out</button>
+
+    </div>
+
+  </main>
+
+  <script type="module">
+
+    import { createClient } from
+
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const supabase = createClient(
+
+      "https://ffxmmzxknnrmglqvxwbc.supabase.co",
+
+      "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
+
+    );
+
+    const status = document.getElementById("status");
+
+    const membership = document.getElementById("membership");
+
+    const logout = document.getElementById("logout");
+
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error || !data.user) {
+
+      window.location.replace("./login.html");
+
+    } else {
+
+      status.textContent = "Signed in as " + data.user.email;
+
+      logout.hidden = false;
+
+      const { data: profile } = await supabase
+
+        .from("profiles")
+
+        .select("membership_tier")
+
+        .eq("id", data.user.id)
+
+        .maybeSingle();
+
+      membership.textContent = profile
+
+        ? "Membership: " + profile.membership_tier
+
+        : "Membership details unavailable.";
+
+    }
+
+    logout.addEventListener("click", async () => {
+
+      await supabase.auth.signOut();
+
+      window.location.replace("./login.html");
+
+    });
+
+  </script>
+
+</body>
+
+</html>
