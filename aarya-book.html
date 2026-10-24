@@ -11,6 +11,7 @@
   --gold: #d8b568;
   --paper: #f4ead4;
   --ink: #302719;
+  --reader-font: 16px;
 }
 
 * { box-sizing: border-box; }
@@ -45,7 +46,39 @@ header a {
 
 main {
   width: min(1000px, 96%);
-  margin: 28px auto;
+  margin: 24px auto;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 auto 18px;
+}
+
+button, select {
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  background: #17140f;
+  border-radius: 3px;
+  padding: 10px 13px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+select {
+  max-width: 220px;
 }
 
 .book-shell {
@@ -96,10 +129,12 @@ main {
 }
 
 .page p {
-  font-size: 16px;
-  line-height: 1.85;
+  font-size: var(--reader-font);
+  line-height: 1.8;
+  letter-spacing: .2px;
   white-space: pre-line;
   overflow-wrap: anywhere;
+  margin-bottom: 18px;
 }
 
 .page-number {
@@ -169,35 +204,47 @@ main {
   letter-spacing: 4px;
 }
 
+.progress-area {
+  width: min(420px, 95%);
+  margin: 20px auto 8px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #c5b895;
+  font: 12px Arial, sans-serif;
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 5px;
+  background: #383024;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--gold);
+  transition: width .2s ease;
+}
+
 .controls {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
-  margin: 24px auto 10px;
-}
-
-button {
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  background: #17140f;
-  border-radius: 3px;
-  padding: 12px 17px;
-  font-family: inherit;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .35;
-  cursor: default;
+  margin: 20px auto 10px;
 }
 
 #counter {
   color: #c5b895;
   font-size: 13px;
-  min-width: 100px;
+  min-width: 115px;
   text-align: center;
 }
 
@@ -210,15 +257,14 @@ button:disabled {
 }
 
 @media (max-width: 500px) {
-  main { width: 98%; margin-top: 20px; }
+  main { width: 98%; margin-top: 18px; }
   .page-inner { padding: 30px 22px 45px; }
-  .page p { font-size: 15px; line-height: 1.8; }
   .page h2 { font-size: 21px; }
+  .toolbar { gap: 7px; }
+  button, select { padding: 10px; }
   .controls { gap: 8px; }
-  button { padding: 11px 12px; }
 }
 
-/* Keep the book readable on narrow or short screens. */
 @media (max-height: 560px) and (orientation: landscape) {
   main { margin-top: 10px; }
   header { padding: 12px; }
@@ -234,6 +280,22 @@ button:disabled {
 </header>
 
 <main>
+
+  <div class="toolbar">
+    <button id="font-down" type="button" aria-label="Decrease text size">A−</button>
+    <span id="font-label" style="color:#c5b895;font-size:13px">Text 16px</span>
+    <button id="font-up" type="button" aria-label="Increase text size">A+</button>
+
+    <select id="chapter-select" aria-label="Go to chapter">
+      <option value="0">Go to a chapter…</option>
+      <option value="1">Prologue</option>
+      <option value="2">A Kingdom of Secrets</option>
+      <option value="3">The Arrival of Aarya</option>
+      <option value="4">A Secret of Protection</option>
+      <option value="5">A Fate Beyond Worlds</option>
+    </select>
+  </div>
+
   <div class="book-shell">
     <div id="book">
 
@@ -268,7 +330,6 @@ And in one such world, hidden from the eyes of the universe, stood a kingdom unl
 But from a destiny already set in motion.
 
 Then, on a night when the stars seemed brighter than ever, a child was born within the royal palace.
-
 A princess.</p>
           <div class="page-number">2</div>
         </div>
@@ -281,7 +342,6 @@ A princess.</p>
           <p>Her arrival brought joy to the kingdom. Bells rang, celebrations filled the streets, and the people welcomed their future with hope.
 
 Her name was Aarya.
-
 Yet, beyond the celebrations, a secret was being prepared—a secret whose purpose even time itself had not yet revealed.</p>
           <div class="page-number">3</div>
         </div>
@@ -292,7 +352,6 @@ Yet, beyond the celebrations, a secret was being prepared—a secret whose purpo
           <div class="chapter">THE MYSTERIOUS BRACELET</div>
           <h2>A Secret of Protection</h2>
           <p>A mysterious bracelet, created to protect its bearer, carried a power unlike anything the kingdom had ever known.
-
 It would remain silent until the day it was needed.
 
 And when that day arrived, the fate of more than one world would rest upon the shoulders of a girl who had once known nothing beyond the walls of her home.</p>
@@ -305,7 +364,6 @@ And when that day arrived, the fate of more than one world would rest upon the s
           <div class="chapter">THE LEGEND BEGINS</div>
           <h2>A Fate Beyond Worlds</h2>
           <p>For some lives are born into royalty.
-
 Others are born into legend.
 
 But once in an age…
@@ -329,27 +387,65 @@ This is the story of Aarya.</p>
     </div>
   </div>
 
+  <div class="progress-area">
+    <div class="progress-label">
+      <span>Reading progress</span>
+      <span id="progress-text">0%</span>
+    </div>
+    <div class="progress-track">
+      <div id="progress-bar"></div>
+    </div>
+  </div>
+
   <div class="controls">
-    <button id="prev" disabled>← Previous</button>
+    <button id="prev" type="button" disabled>← Previous</button>
     <span id="counter">Cover</span>
-    <button id="next">Open Book →</button>
+    <button id="next" type="button">Open Book →</button>
   </div>
 
   <p class="hint">
     Touch and drag a page corner, or swipe across the page to turn it.
+    <br>Use A− and A+ to adjust text size. Choose a chapter to jump ahead.
     <br>Turn your device sideways for a two-page view when space allows.
   </p>
 </main>
 
-<!-- Free open-source StPageFlip library -->
 <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
-
 <script>
 (function () {
   const bookElement = document.getElementById("book");
   const prev = document.getElementById("prev");
   const next = document.getElementById("next");
   const counter = document.getElementById("counter");
+  const progressBar = document.getElementById("progress-bar");
+  const progressText = document.getElementById("progress-text");
+  const fontLabel = document.getElementById("font-label");
+  const fontDown = document.getElementById("font-down");
+  const fontUp = document.getElementById("font-up");
+  const chapterSelect = document.getElementById("chapter-select");
+
+  let fontSize = 16;
+
+  function updateFontSize() {
+    document.documentElement.style.setProperty(
+      "--reader-font", fontSize + "px"
+    );
+    fontLabel.textContent = "Text " + fontSize + "px";
+    fontDown.disabled = fontSize <= 12;
+    fontUp.disabled = fontSize >= 24;
+  }
+
+  fontDown.addEventListener("click", function () {
+    fontSize = Math.max(12, fontSize - 1);
+    updateFontSize();
+  });
+
+  fontUp.addEventListener("click", function () {
+    fontSize = Math.min(24, fontSize + 1);
+    updateFontSize();
+  });
+
+  updateFontSize();
 
   if (!window.St || !window.St.PageFlip) {
     counter.textContent = "Book library failed to load";
@@ -403,6 +499,19 @@ This is the story of Aarya.</p>
       counter.textContent = "Page " + index + " of " + (total - 2);
       next.textContent = "Next Page →";
     }
+
+    const percent = total > 1
+      ? Math.round((index / (total - 1)) * 100)
+      : 0;
+
+    progressBar.style.width = percent + "%";
+    progressText.textContent = percent + "%";
+
+    if (index >= 1 && index <= 5) {
+      chapterSelect.value = String(index);
+    } else {
+      chapterSelect.value = "0";
+    }
   }
 
   prev.addEventListener("click", function () {
@@ -411,6 +520,13 @@ This is the story of Aarya.</p>
 
   next.addEventListener("click", function () {
     pageFlip.flipNext();
+  });
+
+  chapterSelect.addEventListener("change", function () {
+    const target = Number(chapterSelect.value);
+    if (target > 0) {
+      pageFlip.flip(target);
+    }
   });
 
   pageFlip.on("flip", updateControls);
