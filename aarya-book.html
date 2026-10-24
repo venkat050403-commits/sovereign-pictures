@@ -3,7 +3,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080808">
 <title>AARYA | Sovereign Pictures</title>
 
 <style>
@@ -22,7 +23,7 @@ body {
   font-family: Georgia, serif;
 }
 header {
-  padding: 22px 16px;
+  padding: 18px 16px;
   text-align: center;
   border-bottom: 1px solid #6e572b;
 }
@@ -40,21 +41,13 @@ header a {
 }
 main {
   width: min(1000px, 96%);
-  margin: 24px auto;
-}
-.toolbar, .controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 auto 18px;
+  margin: 18px auto;
 }
 button, select {
   border: 1px solid var(--gold);
   color: var(--gold);
   background: #17140f;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 10px 13px;
   font-family: inherit;
   font-size: 14px;
@@ -62,12 +55,25 @@ button, select {
 button { cursor: pointer; }
 button:disabled { opacity: .35; cursor: default; }
 select { max-width: 240px; }
+.reader-actions, .toolbar, .controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.reader-actions {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.reader-actions .brand { margin-right: auto; }
+.toolbar { margin-bottom: 12px; }
 .book-shell {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 #book { margin: 0 auto; }
 .page {
@@ -148,7 +154,7 @@ select { max-width: 240px; }
 .back-cover h2 { letter-spacing: 4px; }
 .progress-area {
   width: min(420px,95%);
-  margin: 20px auto 8px;
+  margin: 12px auto 8px;
 }
 .progress-label {
   display: flex;
@@ -170,44 +176,96 @@ select { max-width: 240px; }
   background: var(--gold);
   transition: width .2s ease;
 }
-.controls { margin: 20px auto 10px; }
+.controls { margin: 14px auto 8px; }
 #counter {
   color: #c5b895;
   font-size: 13px;
   min-width: 115px;
   text-align: center;
 }
-.hint {
-  text-align: center;
-  color: #a99c80;
-  font: 12px Arial,sans-serif;
-  line-height: 1.7;
-  margin: 18px 10px 30px;
-}
 #status {
   text-align: center;
   color: #e7d5a8;
   font: 13px Arial,sans-serif;
   line-height: 1.7;
-  margin: 12px auto;
+  margin: 10px auto;
 }
-@media (max-width:500px) {
-  main { width: 98%; margin-top: 18px; }
+.hint {
+  text-align: center;
+  color: #a99c80;
+  font: 12px Arial,sans-serif;
+  line-height: 1.7;
+  margin: 14px 10px 24px;
+}
+
+/* Immersive reader mode */
+body.reader-mode {
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+}
+body.reader-mode header { display: none; }
+body.reader-mode main {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  margin: 0;
+  padding: max(10px, env(safe-area-inset-top)) 14px
+           max(8px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background: radial-gradient(ellipse at top,#40331f,#080808 75%);
+}
+body.reader-mode .reader-actions { flex-shrink: 0; }
+body.reader-mode .toolbar { flex-shrink: 0; }
+body.reader-mode .book-shell {
+  flex: 1 1 auto;
+  min-height: 180px;
+  padding: 0;
+}
+body.reader-mode #book {
+  max-width: 100%;
+}
+body.reader-mode .progress-area,
+body.reader-mode .controls,
+body.reader-mode .hint,
+body.reader-mode #status {
+  flex-shrink: 0;
+}
+body.reader-mode .hint { margin: 8px 4px 0; }
+
+@media (max-width: 500px) {
+  main { width: 98%; margin-top: 12px; }
   .page-inner { padding: 30px 22px 45px; }
   .page h2 { font-size: 21px; }
+  .reader-actions { gap: 7px; }
+  .reader-actions button { padding: 9px; }
   .toolbar { gap: 7px; }
   button, select { padding: 10px; }
+  body.reader-mode main { padding-left: 8px; padding-right: 8px; }
 }
 </style>
 </head>
 
-<body>
+<body class="reader-mode">
 <header>
   <div class="brand">SOVEREIGN PICTURES</div>
   <a href="library.html">← BACK TO STORY LIBRARY</a>
 </header>
 
 <main>
+  <div class="reader-actions">
+    <div class="brand">SOVEREIGN PICTURES</div>
+    <button id="minimise" type="button">Minimise −</button>
+    <button id="expand" type="button" hidden>Expand ⛶</button>
+    <button id="fullscreen" type="button">Fullscreen ⛶</button>
+  </div>
+
   <div class="toolbar">
     <button id="font-down" type="button" aria-label="Decrease text size">A−</button>
     <span id="font-label" style="color:#c5b895;font-size:13px">Text 16px</span>
@@ -241,9 +299,8 @@ select { max-width: 240px; }
   </div>
 
   <p class="hint">
-    Touch and drag a page corner, or swipe across the page to turn it.
+    Drag a page corner or swipe to turn pages.
     <br>Use A− and A+ to adjust text size.
-    <br>Aarya's free preview is available to everyone.
   </p>
 </main>
 
@@ -255,20 +312,66 @@ select { max-width: 240px; }
   const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
   const SUPABASE_KEY = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
 
-  const bookElement = document.getElementById("book");
-  const prev = document.getElementById("prev");
-  const next = document.getElementById("next");
-  const counter = document.getElementById("counter");
-  const progressBar = document.getElementById("progress-bar");
-  const progressText = document.getElementById("progress-text");
-  const fontLabel = document.getElementById("font-label");
-  const fontDown = document.getElementById("font-down");
-  const fontUp = document.getElementById("font-up");
-  const chapterSelect = document.getElementById("chapter-select");
-  const status = document.getElementById("status");
+  const $ = id => document.getElementById(id);
+  const bookElement = $("book");
+  const status = $("status");
+  const prev = $("prev");
+  const next = $("next");
+  const counter = $("counter");
+  const progressBar = $("progress-bar");
+  const progressText = $("progress-text");
+  const fontLabel = $("font-label");
+  const fontDown = $("font-down");
+  const fontUp = $("font-up");
+  const chapterSelect = $("chapter-select");
+  const minimise = $("minimise");
+  const expand = $("expand");
+  const fullscreen = $("fullscreen");
 
   let fontSize = 16;
   let pageFlip = null;
+
+  function setReaderMode(enabled) {
+    document.body.classList.toggle("reader-mode", enabled);
+    minimise.hidden = !enabled;
+    expand.hidden = enabled;
+
+    if (!enabled && document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  minimise.addEventListener("click", function () {
+    setReaderMode(false);
+  });
+
+  expand.addEventListener("click", function () {
+    setReaderMode(true);
+  });
+
+  fullscreen.addEventListener("click", async function () {
+    setReaderMode(true);
+    try {
+      if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch (error) {
+      status.textContent =
+        "Immersive reader is open. Your browser may not allow system fullscreen here.";
+    }
+  });
+
+  document.addEventListener("fullscreenchange", function () {
+    fullscreen.textContent = document.fullscreenElement
+      ? "Exit Fullscreen"
+      : "Fullscreen ⛶";
+  });
+
+  fullscreen.addEventListener("dblclick", function () {
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+  });
 
   function updateFontSize() {
     document.documentElement.style.setProperty("--reader-font", fontSize + "px");
@@ -289,18 +392,18 @@ select { max-width: 240px; }
 
   updateFontSize();
 
-  function makePage(className, chapterName, heading, text, number) {
+  function makePage(kind, chapterName, heading, text, number) {
     const page = document.createElement("div");
-    page.className = "page" + (className ? " " + className : "");
+    page.className = "page" + (kind ? " " + kind : "");
 
-    if (className === "cover" || className === "back-cover") {
+    if (kind === "cover" || kind === "back-cover") {
       page.dataset.density = "hard";
     }
 
     const inner = document.createElement("div");
     inner.className = "page-inner";
 
-    if (className === "cover") {
+    if (kind === "cover") {
       const ornament = document.createElement("div");
       ornament.className = "ornament";
       ornament.textContent = "✧ ❖ ✧";
@@ -315,7 +418,7 @@ select { max-width: 240px; }
       subtitle.innerHTML = "A LEGEND BEGINS<br><br>DRAG THE PAGE TO OPEN";
 
       inner.append(ornament, brand, title, subtitle);
-    } else if (className === "back-cover") {
+    } else if (kind === "back-cover") {
       const ornament = document.createElement("div");
       ornament.className = "ornament";
       ornament.textContent = "✧";
@@ -373,7 +476,7 @@ select { max-width: 240px; }
     }
 
     const percent = total > 1
-      ? Math.round((index / (total - 1)) * 100)
+      ? Math.round(index / (total - 1) * 100)
       : 0;
 
     progressBar.style.width = percent + "%";
@@ -383,36 +486,20 @@ select { max-width: 240px; }
 
   function showBook(sample) {
     bookElement.replaceChildren();
-
+    bookElement.appendChild(makePage("cover", "", "", "", 0));
     bookElement.appendChild(
-      makePage("cover", "", "", "", 0)
+      makePage("", "FREE PREVIEW", sample.title || "Aarya",
+        sample.sample_content, 1)
     );
-
     bookElement.appendChild(
-      makePage(
-        "",
-        "FREE PREVIEW",
-        sample.title || "Aarya",
-        sample.sample_content,
-        1
-      )
+      makePage("", "CONTINUE THE JOURNEY", "The Story Continues",
+        "You've reached the end of the free preview.\n\nThe complete Aarya story will be available to active subscribers once premium reading is connected.",
+        2)
     );
-
-    const lockedPage = makePage(
-      "",
-      "CONTINUE THE JOURNEY",
-      "The Story Continues",
-      "You've reached the end of the free preview.\n\nThe complete Aarya story will be available to active subscribers once premium reading is connected.",
-      2
-    );
-    bookElement.appendChild(lockedPage);
-
-    bookElement.appendChild(
-      makePage("back-cover", "", "", "", 0)
-    );
+    bookElement.appendChild(makePage("back-cover", "", "", "", 0));
 
     if (!window.St || !window.St.PageFlip) {
-      status.textContent = "The page-turn library did not load. Please refresh and try again.";
+      status.textContent = "The page-turn library did not load. Refresh and try again.";
       counter.textContent = "Reader unavailable";
       return;
     }
@@ -440,27 +527,18 @@ select { max-width: 240px; }
       disableFlipByClick: false
     });
 
-    pageFlip.loadFromHTML(
-      document.querySelectorAll("#book .page")
-    );
+    pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
 
-    prev.addEventListener("click", function () {
-      pageFlip.flipPrev();
-    });
-
-    next.addEventListener("click", function () {
-      pageFlip.flipNext();
-    });
+    prev.addEventListener("click", () => pageFlip.flipPrev());
+    next.addEventListener("click", () => pageFlip.flipNext());
 
     chapterSelect.addEventListener("change", function () {
-      if (chapterSelect.value === "1") {
-        pageFlip.flip(1);
-      }
+      if (chapterSelect.value === "1") pageFlip.flip(1);
     });
 
     pageFlip.on("flip", updateControls);
     updateControls();
-    status.textContent = "Aarya's free preview is ready.";
+    status.textContent = "Aarya's cover is ready. Turn the cover to read the free preview.";
   }
 
   async function loadPreview() {
@@ -469,11 +547,7 @@ select { max-width: 240px; }
         throw new Error("The database library did not load.");
       }
 
-      const client = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-      );
-
+      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
       const { data, error } = await client
         .from("story_samples")
         .select("title, sample_content")
@@ -489,8 +563,7 @@ select { max-width: 240px; }
       showBook(data);
     } catch (error) {
       console.error("Aarya preview error:", error);
-      status.textContent =
-        "We couldn't load the preview. Please refresh and try again.";
+      status.textContent = "We couldn't load the preview. Please refresh and try again.";
       counter.textContent = "Preview unavailable";
       prev.disabled = true;
       next.disabled = true;
