@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101010">
+
   <title>Sovereign Pictures | Stories Beyond Worlds</title>
   <meta name="description" content="Discover original stories and cinematic worlds from Sovereign Pictures.">
 
@@ -23,7 +24,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       padding: 20px 6%;
       background: #151515;
       border-bottom: 1px solid #40321e;
@@ -37,16 +38,29 @@
       text-decoration: none;
     }
 
-    .account-button {
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav-button {
       display: inline-block;
-      padding: 12px 17px;
+      padding: 11px 15px;
+      border: 1px solid #d6b36a;
       border-radius: 6px;
+      color: #d6b36a;
+      text-decoration: none;
+      text-align: center;
+      font: bold 13px Arial, sans-serif;
+      white-space: nowrap;
+    }
+
+    .account-button {
       background: #d6b36a;
       color: #17130c;
-      font: bold 14px Arial, sans-serif;
-      text-align: center;
-      text-decoration: none;
-      white-space: nowrap;
     }
 
     .hero {
@@ -125,19 +139,23 @@
       font: 12px/1.8 Arial, sans-serif;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 600px) {
       header {
-        padding: 16px 4%;
-        gap: 10px;
+        flex-direction: column;
+        padding: 18px 4%;
       }
 
       .brand {
-        font-size: 16px;
+        font-size: 18px;
         letter-spacing: 1px;
       }
 
-      .account-button {
-        padding: 10px;
+      .nav-buttons {
+        justify-content: center;
+      }
+
+      .nav-button {
+        padding: 10px 12px;
         font-size: 12px;
       }
 
@@ -154,19 +172,33 @@
 
 <body>
   <header>
-    <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
+    <a class="brand" href="./index.html">
+      SOVEREIGN PICTURES
+    </a>
 
-    <a
-      class="account-button"
-      id="accountButton"
-      href="./login.html"
-      style="visibility:hidden"
-    >Log In / Create Account</a>
+    <nav class="nav-buttons" aria-label="Main navigation">
+      <a class="nav-button" href="./library.html?v=3">
+        Stories
+      </a>
+
+      <a class="nav-button" href="./membership.html">
+        Membership
+      </a>
+
+      <a
+        class="nav-button account-button"
+        id="accountButton"
+        href="./login.html"
+        style="visibility:hidden"
+      >Log In / Create Account</a>
+    </nav>
   </header>
 
   <main>
     <section class="hero">
-      <div class="eyebrow">An independent storytelling studio</div>
+      <div class="eyebrow">
+        An independent storytelling studio
+      </div>
 
       <h1>Stories Beyond Worlds.</h1>
 
