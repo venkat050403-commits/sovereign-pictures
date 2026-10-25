@@ -6,1413 +6,1331 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-  <meta name="theme-color" content="#0b0b0b">
+<meta name="theme-color" content="#080808">
 
-  <title>Aarya — Sovereign Pictures</title>
+<title>AARYA | Sovereign Pictures</title>
 
-  <style>
+<style>
 
-    :root {
+:root {
 
-      --bg: #0b0b0b;
+  --gold: #d8b568;
 
-      --gold: #d4af37;
+  --paper: #f4ead4;
 
-      --gold-light: #f0d98a;
+  --ink: #302719;
 
-      --paper: #f5efdf;
+  --reader-font: 16px;
 
-      --ink: #272116;
+}
 
-      --muted: #b7b0a0;
+* { box-sizing: border-box; }
 
-    }
+html, body {
 
-    * {
+  margin: 0;
 
-      box-sizing: border-box;
+  min-height: 100%;
 
-    }
+  background: radial-gradient(ellipse at top, #40331f, #080808 75%);
 
-    html,
+  color: #f7f0e2;
 
-    body {
+  font-family: Georgia, serif;
 
-      margin: 0;
+}
 
-      min-height: 100%;
+header {
 
-      background: var(--bg);
+  padding: 18px 16px;
 
-      color: #f5f1e8;
+  text-align: center;
 
-      font-family: Georgia, "Times New Roman", serif;
+  border-bottom: 1px solid #6e572b;
 
-    }
+}
 
-    body {
+.brand {
 
-      min-height: 100vh;
+  color: var(--gold);
 
-    }
+  letter-spacing: 4px;
 
-    button,
+  font-size: 12px;
 
-    select {
+}
 
-      font: inherit;
+header a {
 
-    }
+  display: inline-block;
 
-    button {
+  margin-top: 12px;
 
-      cursor: pointer;
+  color: #e7d5a8;
 
-    }
+  font-size: 13px;
 
-    .topbar {
+  text-decoration: none;
 
-      display: flex;
+}
 
-      align-items: center;
+main {
 
-      justify-content: space-between;
+  width: min(1000px, 96%);
 
-      gap: 12px;
+  margin: 18px auto;
 
-      padding: 14px 18px;
+}
 
-      border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+button, select {
 
-    }
+  border: 1px solid var(--gold);
 
-    .brand {
+  color: var(--gold);
 
-      color: var(--gold);
+  background: #17140f;
 
-      font-size: 18px;
+  border-radius: 4px;
 
-      letter-spacing: 2px;
+  padding: 10px 13px;
 
-      text-decoration: none;
+  font-family: inherit;
 
-      font-weight: bold;
+  font-size: 14px;
 
-    }
+}
 
-    .back-link {
+button { cursor: pointer; }
 
-      color: #e7dfcd;
+button:disabled { opacity: .35; cursor: default; }
 
-      text-decoration: none;
+select { max-width: 240px; }
 
-      font-size: 14px;
+.reader-actions, .toolbar, .controls {
 
-    }
+  display: flex;
 
-    main {
+  justify-content: center;
 
-      width: 100%;
+  align-items: center;
 
-      max-width: 1200px;
+  flex-wrap: wrap;
 
-      margin: 0 auto;
+  gap: 10px;
 
-      padding: 18px;
+}
 
-    }
+.reader-actions {
 
-    .heading {
+  justify-content: space-between;
 
-      text-align: center;
+  margin-bottom: 12px;
 
-      margin: 8px 0 16px;
+}
 
-    }
+.reader-actions .brand { margin-right: auto; }
 
-    .heading h1 {
+.toolbar { margin-bottom: 12px; }
 
-      color: var(--gold);
+.book-shell {
 
-      font-size: clamp(24px, 4vw, 36px);
+  width: 100%;
 
-      margin: 0 0 8px;
+  display: flex;
 
-      font-weight: normal;
+  justify-content: center;
 
-    }
+  align-items: center;
 
-    .heading p {
+  padding: 6px 0;
 
-      color: var(--muted);
+  overflow: hidden;
 
-      margin: 0;
+}
 
-      font-size: 14px;
+#book { margin: 0 auto; }
 
-    }
+.page {
 
-    .book-shell {
+  background: var(--paper);
 
-      position: relative;
+  color: var(--ink);
 
-      isolation: isolate;
+  overflow: hidden;
 
-      width: 100%;
+  border: 1px solid #c6b38c;
 
-      height: min(68vh, 620px);
+}
 
-      min-height: 360px;
+.page-inner {
 
-      display: flex;
+  position: relative;
 
-      justify-content: center;
+  height: 100%;
 
-      align-items: center;
+  overflow: hidden;
 
-      padding: 6px 0;
+  padding: 38px 30px 48px;
 
-      overflow: hidden;
+  background: linear-gradient(
 
-    }
+    90deg,
 
-    #book {
+    #d2c09d 0%,
 
-      width: 100%;
+    #f4ead4 7%,
 
-      height: 100%;
+    #f8f0df 50%,
 
-      margin: 0 auto;
+    #f1e4c9 100%
 
-    }
+  );
 
-    .page {
+}
 
-      background: var(--paper);
+.page h2 {
 
-      color: var(--ink);
+  font-size: 23px;
 
-      overflow: hidden;
+  font-weight: normal;
 
-      border: 1px solid #c6b38c;
+  text-align: center;
 
-    }
+  line-height: 1.4;
 
-    .page-inner {
+  margin: 12px 0 28px;
 
-      position: relative;
+}
 
-      width: 100%;
+.chapter {
 
-      height: 100%;
+  text-align: center;
 
-      overflow: hidden;
+  color: #80672f;
 
-      padding: 30px 27px;
+  font-size: 10px;
 
-      background:
+  letter-spacing: 2.5px;
 
-        linear-gradient(
+  line-height: 1.8;
 
-          135deg,
+}
 
-          rgba(255, 255, 255, 0.25),
+.page p {
 
-          transparent 45%,
+  font-size: var(--reader-font);
 
-          rgba(116, 85, 37, 0.07)
+  line-height: 1.8;
 
-        ),
+  letter-spacing: .2px;
 
-        var(--paper);
+  white-space: pre-line;
 
-      box-shadow: inset 0 0 18px rgba(95, 69, 30, 0.08);
+  overflow-wrap: anywhere;
 
-    }
+  margin-bottom: 18px;
 
-    .page-number {
+}
 
-      position: absolute;
+.page-number {
 
-      left: 0;
+  position: absolute;
 
-      right: 0;
+  bottom: 17px;
 
-      bottom: 12px;
+  left: 0;
 
-      text-align: center;
+  right: 0;
 
-      color: #76684e;
+  text-align: center;
 
-      font-size: 12px;
+  font-size: 12px;
 
-    }
+  color: #80672f;
 
-    .cover-page .page-inner,
+}
 
-    .back-cover .page-inner {
+.cover, .back-cover {
 
-      display: flex;
+  background: radial-gradient(
 
-      flex-direction: column;
+    ellipse at center,
 
-      align-items: center;
+    #45351e 0%,
 
-      justify-content: center;
+    #20180e 60%,
 
-      text-align: center;
+    #0b0907 100%
 
-      background:
+  );
 
-        radial-gradient(
+  color: var(--gold);
 
-          ellipse at center,
+  text-align: center;
 
-          #29251a 0%,
+}
 
-          #15130f 58%,
+.cover .page-inner, .back-cover .page-inner {
 
-          #090909 100%
+  display: flex;
 
-        );
+  flex-direction: column;
 
-      color: var(--gold-light);
+  justify-content: center;
 
-      border: 7px double var(--gold);
+  align-items: center;
 
-      box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.12);
+  height: 100%;
 
-    }
+  padding: 32px 20px;
 
-    .cover-kicker {
+  background: radial-gradient(
 
-      text-transform: uppercase;
+    ellipse at center,
 
-      letter-spacing: 4px;
+    #45351e 0%,
 
-      font-size: 11px;
+    #20180e 60%,
 
-      margin-bottom: 28px;
+    #0b0907 100%
 
-      color: #d8c47f;
+  );
 
-    }
+  border: 5px double var(--gold);
 
-    .cover-title {
+  color: var(--gold);
 
-      font-size: clamp(38px, 7vw, 62px);
+}
 
-      letter-spacing: 5px;
+.cover .ornament, .back-cover .ornament {
 
-      margin: 0 0 16px;
+  font-size: 36px;
 
-      font-weight: normal;
+  margin-bottom: 22px;
 
-    }
+}
 
-    .cover-subtitle {
+.cover h1 {
 
-      font-size: 14px;
+  font-size: clamp(38px, 7vw, 58px);
 
-      letter-spacing: 1px;
+  letter-spacing: 6px;
 
-      line-height: 1.8;
+  font-weight: normal;
 
-      color: #e2d8bd;
+  margin: 14px 0;
 
-      max-width: 270px;
+}
 
-    }
+.cover p, .back-cover p {
 
-    .cover-rule {
+  font-size: 10px;
 
-      width: 65px;
+  letter-spacing: 2px;
 
-      border-top: 1px solid var(--gold);
+  line-height: 1.9;
 
-      margin: 24px auto;
+}
 
-    }
+.back-cover .page-inner { text-align: center; }
 
-    .cover-footer {
+.back-cover h2 { letter-spacing: 4px; }
 
-      position: absolute;
+.progress-area {
 
-      bottom: 32px;
+  width: min(420px, 95%);
 
-      left: 12px;
+  margin: 12px auto 8px;
 
-      right: 12px;
+}
 
-      font-size: 10px;
+.progress-label {
 
-      letter-spacing: 3px;
+  display: flex;
 
-      text-transform: uppercase;
+  justify-content: space-between;
 
-    }
+  gap: 10px;
 
-    .chapter-label {
+  color: #c5b895;
 
-      text-transform: uppercase;
+  font: 12px Arial, sans-serif;
 
-      letter-spacing: 2px;
+  margin-bottom: 8px;
 
-      font-size: 10px;
+}
 
-      color: #88754d;
+.progress-track {
 
-      margin: 0 0 14px;
+  height: 5px;
 
-    }
+  background: #383024;
 
-    .chapter-title {
+  border-radius: 5px;
 
-      font-size: 23px;
+  overflow: hidden;
 
-      line-height: 1.25;
+}
 
-      margin: 0 0 20px;
+#progress-bar {
 
-      color: #332817;
+  width: 0%;
 
-      font-weight: normal;
+  height: 100%;
 
-    }
+  background: var(--gold);
 
-    .story-text {
+  transition: width .2s ease;
 
-      font-size: 16px;
+}
 
-      line-height: 1.85;
+.controls { margin: 14px auto 8px; }
 
-      white-space: pre-wrap;
+#counter {
 
-      overflow-wrap: anywhere;
+  color: #c5b895;
 
-      color: var(--ink);
+  font-size: 13px;
 
-    }
+  min-width: 115px;
 
-    .story-text p {
+  text-align: center;
 
-      margin: 0 0 15px;
+}
 
-    }
+#status {
 
-    .preview-notice {
+  text-align: center;
 
-      border-top: 1px solid #c7b68f;
+  color: #e7d5a8;
 
-      margin-top: 18px;
+  font: 13px Arial, sans-serif;
 
-      padding-top: 12px;
+  line-height: 1.7;
 
-      font-size: 12px;
+  margin: 10px auto;
 
-      line-height: 1.7;
+}
 
-      color: #665538;
+.hint {
 
-      font-style: italic;
+  text-align: center;
 
-    }
+  color: #a99c80;
 
-    .empty-state {
+  font: 12px Arial, sans-serif;
 
-      color: #665538;
+  line-height: 1.7;
 
-      font-size: 15px;
+  margin: 14px 10px 24px;
 
-      line-height: 1.7;
+}
 
-    }
+/* Immersive reader */
 
-    .controls {
+body.reader-mode {
 
-      display: flex;
+  overflow: hidden;
 
-      flex-wrap: wrap;
+  height: 100vh;
 
-      align-items: center;
+  height: 100dvh;
 
-      justify-content: center;
+}
 
-      gap: 10px;
+body.reader-mode header { display: none; }
 
-      margin: 18px auto 10px;
+body.reader-mode main {
 
-    }
+  position: fixed;
 
-    .control-btn,
+  inset: 0;
 
-    .chapter-select {
+  z-index: 1000;
 
-      background: #171510;
+  width: 100%;
 
-      border: 1px solid rgba(212, 175, 55, 0.7);
+  height: 100vh;
 
-      color: #f5edda;
+  height: 100dvh;
 
-      border-radius: 4px;
+  max-width: none;
 
-      padding: 10px 14px;
+  margin: 0;
 
-      min-height: 42px;
+  padding: max(10px, env(safe-area-inset-top)) 14px
 
-    }
+           max(8px, env(safe-area-inset-bottom));
 
-    .control-btn:disabled {
+  display: flex;
 
-      opacity: 0.4;
+  flex-direction: column;
 
-      cursor: not-allowed;
+  overflow: hidden;
 
-    }
+  background: radial-gradient(ellipse at top, #40331f, #080808 75%);
 
-    .control-btn.primary {
+}
 
-      background: var(--gold);
+body.reader-mode .reader-actions,
 
-      color: #17130a;
+body.reader-mode .toolbar,
 
-      font-weight: bold;
+body.reader-mode .progress-area,
 
-    }
+body.reader-mode .controls,
 
-    .chapter-select {
+body.reader-mode .hint,
 
-      max-width: 190px;
+body.reader-mode #status {
 
-    }
+  flex-shrink: 0;
 
-    .page-status {
+}
 
-      text-align: center;
+body.reader-mode .book-shell {
 
-      color: var(--muted);
+  flex: 1 1 0;
 
-      font-size: 12px;
+  min-height: 0;
 
-      margin: 8px 0 20px;
+  padding: 0;
 
-    }
+  overflow: hidden;
 
-    .membership-note {
+}
 
-      max-width: 650px;
+body.reader-mode #book {
 
-      margin: 20px auto;
+  max-width: 100%;
 
-      padding: 18px;
+}
 
-      text-align: center;
+body.reader-mode .hint { margin: 8px 4px 0; }
 
-      border: 1px solid rgba(212, 175, 55, 0.35);
+@media (max-width: 500px) {
 
-      background: rgba(212, 175, 55, 0.035);
+  main { width: 98%; margin-top: 12px; }
 
-      line-height: 1.7;
+  .page-inner { padding: 30px 22px 45px; }
 
-    }
+  .page h2 { font-size: 21px; }
 
-    .membership-note h2 {
+  .reader-actions { gap: 7px; }
 
-      color: var(--gold);
+  .reader-actions button { padding: 9px; }
 
-      font-size: 20px;
+  .toolbar { gap: 7px; }
 
-      font-weight: normal;
+  button, select { padding: 10px; }
 
-      margin: 0 0 8px;
+  body.reader-mode main {
 
-    }
+    padding-left: 8px;
 
-    .membership-note p {
+    padding-right: 8px;
 
-      color: #d3cabb;
+  }
 
-      font-size: 14px;
+}
 
-      margin: 0 0 14px;
+/* Landscape: keep the book area stable */
 
-    }
+@media (orientation: landscape) and (max-height: 600px) {
 
-    .membership-link {
+  body.reader-mode main {
 
-      display: inline-block;
+    padding-top: max(6px, env(safe-area-inset-top));
 
-      background: var(--gold);
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
 
-      color: #17130a;
+  }
 
-      text-decoration: none;
+  body.reader-mode .reader-actions,
 
-      padding: 10px 16px;
+  body.reader-mode .toolbar {
 
-      border-radius: 4px;
+    margin-bottom: 6px;
 
-      font-weight: bold;
+    gap: 7px;
 
-    }
+  }
 
-    .loading {
+  body.reader-mode .book-shell {
 
-      color: #e7d6a1;
+    min-height: 0;
 
-      text-align: center;
+  }
 
-      font-size: 14px;
+  body.reader-mode .progress-area {
 
-      padding: 14px;
+    margin-top: 6px;
 
-    }
+    margin-bottom: 4px;
 
-    .error {
+  }
 
-      color: #ffc6bd;
+  body.reader-mode .controls {
 
-    }
+    margin-top: 6px;
 
-    footer {
+    margin-bottom: 2px;
 
-      text-align: center;
+  }
 
-      color: #817968;
+  body.reader-mode .hint { display: none; }
 
-      font-size: 12px;
+  .page-inner { padding: 20px 22px 38px; }
 
-      padding: 20px 12px 30px;
+  .page p { line-height: 1.6; }
 
-    }
+}
 
-    /* Immersive reading mode */
-
-    body.reader-mode {
-
-      position: fixed;
-
-      inset: 0;
-
-      width: 100%;
-
-      height: 100%;
-
-      overflow: hidden;
-
-      z-index: 9999;
-
-    }
-
-    body.reader-mode .topbar,
-
-    body.reader-mode .heading,
-
-    body.reader-mode .membership-note,
-
-    body.reader-mode footer {
-
-      display: none;
-
-    }
-
-    body.reader-mode main {
-
-      position: absolute;
-
-      inset: 0;
-
-      width: 100%;
-
-      max-width: none;
-
-      height: 100%;
-
-      margin: 0;
-
-      padding: 8px 12px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      overflow: hidden;
-
-    }
-
-    body.reader-mode .book-shell {
-
-      flex: 1 1 0;
-
-      height: auto;
-
-      min-height: 0;
-
-      width: 100%;
-
-      padding: 0;
-
-      overflow: hidden;
-
-    }
-
-    body.reader-mode #book {
-
-      height: 100%;
-
-    }
-
-    body.reader-mode .controls {
-
-      flex: 0 0 auto;
-
-      margin: 8px auto 4px;
-
-      gap: 6px;
-
-    }
-
-    body.reader-mode .control-btn,
-
-    body.reader-mode .chapter-select {
-
-      min-height: 36px;
-
-      padding: 7px 10px;
-
-      font-size: 13px;
-
-    }
-
-    body.reader-mode .page-status {
-
-      flex: 0 0 auto;
-
-      margin: 4px 0;
-
-    }
-
-    @media (max-width: 600px) {
-
-      main {
-
-        padding: 12px 8px;
-
-      }
-
-      .topbar {
-
-        padding: 12px;
-
-      }
-
-      .book-shell {
-
-        height: min(66vh, 600px);
-
-        min-height: 340px;
-
-      }
-
-      .page-inner {
-
-        padding: 22px 18px;
-
-      }
-
-      .story-text {
-
-        font-size: 15px;
-
-        line-height: 1.7;
-
-      }
-
-      .chapter-title {
-
-        font-size: 20px;
-
-      }
-
-      .controls {
-
-        gap: 7px;
-
-      }
-
-      .control-btn,
-
-      .chapter-select {
-
-        padding: 9px 10px;
-
-        font-size: 13px;
-
-      }
-
-    }
-
-    @media (orientation: landscape) and (max-height: 600px) {
-
-      .heading {
-
-        margin: 0 0 4px;
-
-      }
-
-      .heading h1 {
-
-        font-size: 23px;
-
-        margin-bottom: 4px;
-
-      }
-
-      .heading p {
-
-        font-size: 12px;
-
-      }
-
-      .book-shell {
-
-        height: 62vh;
-
-        min-height: 250px;
-
-      }
-
-      .page-inner {
-
-        padding: 16px 18px;
-
-      }
-
-      .story-text {
-
-        font-size: 14px;
-
-        line-height: 1.55;
-
-      }
-
-      .chapter-title {
-
-        font-size: 19px;
-
-        margin-bottom: 12px;
-
-      }
-
-      .controls {
-
-        margin-top: 8px;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
-<body>
+<body class="reader-mode">
 
-  <header class="topbar">
+<header>
 
-    <a class="brand" href="index.html">SOVEREIGN</a>
+  <div class="brand">SOVEREIGN PICTURES</div>
 
-    <a class="back-link" href="library.html">← Story Library</a>
+  <a href="library.html">← BACK TO STORY LIBRARY</a>
 
-  </header>
+</header>
 
-  <main>
+<main>
 
-    <section class="heading">
+  <div class="reader-actions">
 
-      <h1>Aarya</h1>
+    <div class="brand">SOVEREIGN PICTURES</div>
 
-      <p>A Sovereign Pictures original story</p>
+    <button id="minimise" type="button">Minimise −</button>
 
-    </section>
+    <button id="expand" type="button" hidden>Expand ⛶</button>
 
-    <div id="loading" class="loading">Preparing your book…</div>
+    <button id="fullscreen" type="button">Fullscreen ⛶</button>
 
-    <section class="book-shell" aria-label="Aarya digital book">
+  </div>
 
-      <div id="book">
+  <div class="toolbar">
 
-        <div class="page cover-page">
+    <button id="font-down" type="button" aria-label="Decrease text size">A−</button>
 
-          <div class="page-inner">
+    <span id="font-label" style="color:#c5b895;font-size:13px">Text 16px</span>
 
-            <div class="cover-kicker">A Sovereign Original</div>
+    <button id="font-up" type="button" aria-label="Increase text size">A+</button>
 
-            <h2 class="cover-title">AARYA</h2>
+    <select id="chapter-select" aria-label="Go to chapter">
 
-            <div class="cover-rule"></div>
+      <option value="0">Go to a chapter…</option>
 
-            <div class="cover-subtitle">
+      <option value="1">Free Preview</option>
 
-              A tale of kingdoms, secrets and destiny
+    </select>
 
-            </div>
+  </div>
 
-            <div class="cover-footer">Sovereign Pictures</div>
+  <div id="status" role="status">Loading Aarya's free preview…</div>
 
-          </div>
+  <div class="book-shell">
 
-        </div>
+    <div id="book"></div>
 
-        <div class="page">
+  </div>
 
-          <div class="page-inner">
+  <div class="progress-area">
 
-            <div class="chapter-label">Preview</div>
+    <div class="progress-label">
 
-            <h2 class="chapter-title">The Story Begins</h2>
+      <span>Reading progress</span>
 
-            <div id="preview-content" class="story-text">
-
-              Loading the story preview…
-
-            </div>
-
-            <div class="page-number">1</div>
-
-          </div>
-
-        </div>
-
-        <div class="page">
-
-          <div class="page-inner">
-
-            <div class="chapter-label">Continue the journey</div>
-
-            <h2 class="chapter-title">The rest of Aarya</h2>
-
-            <div class="story-text">
-
-              The preview ends here.
-
-              Discover the complete story and continue Aarya's journey with an active membership.
-
-            </div>
-
-            <div class="preview-notice">
-
-              Membership is required for the full story. Access is subject to account and subscription verification.
-
-            </div>
-
-            <div class="page-number">2</div>
-
-          </div>
-
-        </div>
-
-        <div class="page back-cover">
-
-          <div class="page-inner">
-
-            <div class="cover-kicker">Sovereign Pictures</div>
-
-            <h2 class="cover-title" style="font-size:32px;">THE END?</h2>
-
-            <div class="cover-rule"></div>
-
-            <div class="cover-subtitle">
-
-              Every kingdom hides a story.
-
-              Every story has a beginning.
-
-            </div>
-
-            <div class="cover-footer">Discover your next world</div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <div class="controls">
-
-      <button class="control-btn" id="prev-btn" type="button">
-
-        ← Previous
-
-      </button>
-
-      <select class="chapter-select" id="chapter-select" aria-label="Go to page">
-
-        <option value="0">Cover</option>
-
-        <option value="1">Story preview</option>
-
-        <option value="2">Continue reading</option>
-
-        <option value="3">Back cover</option>
-
-      </select>
-
-      <button class="control-btn primary" id="next-btn" type="button">
-
-        Next →
-
-      </button>
-
-      <button class="control-btn" id="font-minus" type="button" aria-label="Decrease font size">
-
-        A−
-
-      </button>
-
-      <button class="control-btn" id="font-plus" type="button" aria-label="Increase font size">
-
-        A+
-
-      </button>
-
-      <button class="control-btn" id="reader-mode-btn" type="button">
-
-        Full screen
-
-      </button>
+      <span id="progress-text">0%</span>
 
     </div>
 
-    <div class="page-status" id="page-status">Page 1 of 4</div>
+    <div class="progress-track">
 
-    <section class="membership-note">
+      <div id="progress-bar"></div>
 
-      <h2>Continue with Sovereign</h2>
+    </div>
 
-      <p>
+  </div>
 
-        Enjoy the free preview. The complete story is reserved for
+  <div class="controls">
 
-        verified active subscribers.
+    <button id="prev" type="button" disabled>← Previous</button>
 
-      </p>
+    <span id="counter">Loading…</span>
 
-      <a class="membership-link" href="membership.html">Explore Membership</a>
+    <button id="next" type="button" disabled>Open Book →</button>
 
-    </section>
+  </div>
 
-  </main>
+  <p class="hint">
 
-  <footer>
+    Drag a page corner or swipe to turn pages.
 
-    © <span id="year"></span> Sovereign Pictures. All rights reserved.
+    <br>Use A− and A+ to adjust text size.
 
-  </footer>
+  </p>
 
-  <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
+</main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
+<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
 
-    "use strict";
+<script>
 
-    const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
+(function () {
 
-    const SUPABASE_KEY = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
+  "use strict";
 
-    const supabaseClient = window.supabase.createClient(
+  const SUPABASE_URL =
 
-      SUPABASE_URL,
+    "https://ffxmmzxknnrmglqvxwbc.supabase.co";
 
-      SUPABASE_KEY
+  const SUPABASE_KEY =
 
-    );
+    "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
 
-    const bookElement = document.getElementById("book");
+  const $ = id => document.getElementById(id);
 
-    const loadingElement = document.getElementById("loading");
+  const bookElement = $("book");
 
-    const previewElement = document.getElementById("preview-content");
+  const status = $("status");
 
-    const previousButton = document.getElementById("prev-btn");
+  const prev = $("prev");
 
-    const nextButton = document.getElementById("next-btn");
+  const next = $("next");
 
-    const chapterSelect = document.getElementById("chapter-select");
+  const counter = $("counter");
 
-    const statusElement = document.getElementById("page-status");
+  const progressBar = $("progress-bar");
 
-    const readerModeButton = document.getElementById("reader-mode-btn");
+  const progressText = $("progress-text");
 
-    let pageFlip = null;
+  const fontLabel = $("font-label");
 
-    let resizeTimer = null;
+  const fontDown = $("font-down");
 
-    let fontSize = 16;
+  const fontUp = $("font-up");
 
-    let resizeFrame = null;
+  const chapterSelect = $("chapter-select");
 
-    document.getElementById("year").textContent =
+  const minimise = $("minimise");
 
-      new Date().getFullYear();
+  const expand = $("expand");
 
-    function updateControls() {
+  const fullscreen = $("fullscreen");
 
-      if (!pageFlip) return;
+  let fontSize = 16;
 
-      const currentPage = pageFlip.getCurrentPageIndex();
+  let pageFlip = null;
 
-      const totalPages = pageFlip.getPageCount();
+  let resizeTimer = null;
 
-      previousButton.disabled = currentPage <= 0;
+  let resizeFrame = null;
 
-      nextButton.disabled = currentPage >= totalPages - 1;
+  let flipping = false;
 
-      chapterSelect.value = String(currentPage);
+  function getState() {
 
-      statusElement.textContent =
+    if (!pageFlip || typeof pageFlip.getState !== "function") {
 
-        "Page " + (currentPage + 1) + " of " + totalPages;
+      return "read";
 
     }
 
-    /*
+    return pageFlip.getState();
 
-      Resize safely: do not dispatch another resize event from
+  }
 
-      inside the resize handler. That avoids an endless resize loop.
+  function updateControls() {
 
-    */
+    if (!pageFlip) return;
 
-    function refreshLayout() {
+    const index = pageFlip.getCurrentPageIndex();
 
-      if (resizeFrame !== null) {
+    const total = pageFlip.getPageCount();
 
-        cancelAnimationFrame(resizeFrame);
+    prev.disabled = index <= 0;
 
-      }
+    next.disabled = index >= total - 1;
 
-      resizeFrame = requestAnimationFrame(function () {
+    if (index === 0) {
 
-        resizeFrame = null;
+      counter.textContent = "Cover";
 
-        if (pageFlip && typeof pageFlip.update === "function") {
+      next.textContent = "Open Book →";
 
-          try {
+    } else if (index === total - 1) {
 
-            pageFlip.update();
+      counter.textContent = "Back Cover";
 
-          } catch (error) {
+      next.textContent = "The End";
 
-            console.debug("Page layout update skipped.");
+    } else {
 
-          }
+      counter.textContent = "Page " + index + " of " + (total - 2);
 
-        }
-
-        updateControls();
-
-      });
+      next.textContent = "Next Page →";
 
     }
 
-    function scheduleResize() {
+    const percent = total > 1
 
-      clearTimeout(resizeTimer);
+      ? Math.round(index / (total - 1) * 100)
 
-      resizeTimer = setTimeout(function () {
+      : 0;
 
-        refreshLayout();
+    progressBar.style.width = percent + "%";
 
-      }, 180);
+    progressText.textContent = percent + "%";
 
-    }
+    chapterSelect.value = index === 1 ? "1" : "0";
 
-    function setReaderMode(enabled) {
+  }
 
-      document.body.classList.toggle("reader-mode", enabled);
+  /*
 
-      readerModeButton.textContent = enabled
+    Resize only after the page-turn animation has finished.
 
-        ? "Minimise"
+    Never dispatch a resize event from inside a resize handler.
 
-        : "Full screen";
+  */
 
-      scheduleResize();
+  function refreshLayout() {
 
-      setTimeout(function () {
+    clearTimeout(resizeTimer);
 
-        refreshLayout();
+    if (!pageFlip) return;
 
-      }, 250);
+    if (flipping || getState() !== "read") {
 
-    }
+      resizeTimer = setTimeout(refreshLayout, 250);
 
-    function applyFontSize() {
-
-      document.querySelectorAll(".story-text").forEach(function (element) {
-
-        element.style.fontSize = fontSize + "px";
-
-      });
+      return;
 
     }
 
-    function showError(message) {
+    if (resizeFrame !== null) {
 
-      loadingElement.textContent = message;
-
-      loadingElement.classList.add("error");
-
-      loadingElement.style.display = "block";
+      cancelAnimationFrame(resizeFrame);
 
     }
 
-    async function loadStoryPreview() {
+    resizeFrame = requestAnimationFrame(function () {
+
+      resizeFrame = null;
+
+      if (!pageFlip || flipping || getState() !== "read") return;
 
       try {
 
-        const { data, error } = await supabaseClient
+        if (typeof pageFlip.update === "function") {
 
-          .from("story_samples")
-
-          .select("title, sample_content")
-
-          .eq("slug", "aarya")
-
-          .eq("is_published", true)
-
-          .single();
-
-        if (error) {
-
-          console.error("Could not load Aarya preview:", error);
-
-          previewElement.textContent =
-
-            "The preview could not be loaded right now. Please try again later.";
-
-          return;
+          pageFlip.update();
 
         }
-
-        if (!data) {
-
-          previewElement.textContent =
-
-            "The Aarya preview is not available at the moment.";
-
-          return;
-
-        }
-
-        const chapterTitle = document.querySelector(
-
-          "#book .page:nth-child(2) .chapter-title"
-
-        );
-
-        if (chapterTitle && data.title) {
-
-          chapterTitle.textContent = data.title;
-
-        }
-
-        previewElement.textContent =
-
-          data.sample_content || "The preview is coming soon.";
-
-        applyFontSize();
 
       } catch (error) {
 
-        console.error("Preview loading error:", error);
-
-        previewElement.textContent =
-
-          "Unable to load the preview. Please refresh and try again.";
-
-      } finally {
-
-        loadingElement.style.display = "none";
+        console.debug("Reader layout update skipped.");
 
       }
 
-    }
-
-    function initialiseBook() {
-
-      if (!window.St || !window.St.PageFlip) {
-
-        showError(
-
-          "The book viewer could not load. Check your internet connection and refresh."
-
-        );
-
-        return;
-
-      }
-
-      try {
-
-        pageFlip = new St.PageFlip(bookElement, {
-
-          width: 420,
-
-          height: 600,
-
-          size: "stretch",
-
-          minWidth: 260,
-
-          maxWidth: 1000,
-
-          minHeight: 320,
-
-          maxHeight: 1400,
-
-          drawShadow: true,
-
-          flippingTime: 850,
-
-          usePortrait: true,
-
-          startPage: 0,
-
-          autoSize: true,
-
-          maxShadowOpacity: 0.55,
-
-          showCover: true,
-
-          mobileScrollSupport: false,
-
-          clickEventForward: true,
-
-          useMouseEvents: true,
-
-          swipeDistance: 25,
-
-          showPageCorners: true,
-
-          disableFlipByClick: false
-
-        });
-
-        pageFlip.loadFromHTML(
-
-          document.querySelectorAll("#book .page")
-
-        );
-
-        pageFlip.on("flip", updateControls);
-
-        pageFlip.on("changeState", updateControls);
-
-        updateControls();
-
-      } catch (error) {
-
-        console.error("Book viewer initialisation failed:", error);
-
-        showError(
-
-          "The book could not be opened. Please refresh the page."
-
-        );
-
-      }
-
-    }
-
-    previousButton.addEventListener("click", function () {
-
-      if (pageFlip) pageFlip.flipPrev();
+      updateControls();
 
     });
 
-    nextButton.addEventListener("click", function () {
+  }
 
-      if (pageFlip) pageFlip.flipNext();
+  function scheduleResize() {
+
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(refreshLayout, 250);
+
+  }
+
+  function setReaderMode(enabled) {
+
+    document.body.classList.toggle("reader-mode", enabled);
+
+    minimise.hidden = !enabled;
+
+    expand.hidden = enabled;
+
+    if (!enabled && document.fullscreenElement) {
+
+      document.exitFullscreen().catch(() => {});
+
+    }
+
+    scheduleResize();
+
+  }
+
+  minimise.addEventListener("click", function () {
+
+    setReaderMode(false);
+
+  });
+
+  expand.addEventListener("click", function () {
+
+    setReaderMode(true);
+
+  });
+
+  fullscreen.addEventListener("click", async function () {
+
+    setReaderMode(true);
+
+    try {
+
+      if (
+
+        !document.fullscreenElement &&
+
+        document.documentElement.requestFullscreen
+
+      ) {
+
+        await document.documentElement.requestFullscreen();
+
+      }
+
+    } catch (error) {
+
+      status.textContent =
+
+        "Immersive reader is open. Your browser may not allow system fullscreen here.";
+
+    }
+
+  });
+
+  document.addEventListener("fullscreenchange", function () {
+
+    fullscreen.textContent = document.fullscreenElement
+
+      ? "Exit Fullscreen"
+
+      : "Fullscreen ⛶";
+
+  });
+
+  fullscreen.addEventListener("dblclick", function () {
+
+    if (document.fullscreenElement) {
+
+      document.exitFullscreen().catch(() => {});
+
+    }
+
+  });
+
+  function updateFontSize() {
+
+    document.documentElement.style.setProperty(
+
+      "--reader-font",
+
+      fontSize + "px"
+
+    );
+
+    fontLabel.textContent = "Text " + fontSize + "px";
+
+    fontDown.disabled = fontSize <= 12;
+
+    fontUp.disabled = fontSize >= 24;
+
+  }
+
+  fontDown.addEventListener("click", function () {
+
+    fontSize = Math.max(12, fontSize - 1);
+
+    updateFontSize();
+
+  });
+
+  fontUp.addEventListener("click", function () {
+
+    fontSize = Math.min(24, fontSize + 1);
+
+    updateFontSize();
+
+  });
+
+  updateFontSize();
+
+  function makePage(kind, chapterName, heading, text, number) {
+
+    const page = document.createElement("div");
+
+    page.className = "page" + (kind ? " " + kind : "");
+
+    if (kind === "cover" || kind === "back-cover") {
+
+      page.dataset.density = "hard";
+
+    }
+
+    const inner = document.createElement("div");
+
+    inner.className = "page-inner";
+
+    if (kind === "cover") {
+
+      const ornament = document.createElement("div");
+
+      ornament.className = "ornament";
+
+      ornament.textContent = "✧ ❖ ✧";
+
+      const brand = document.createElement("p");
+
+      brand.textContent = "A SOVEREIGN PICTURES ORIGINAL";
+
+      const title = document.createElement("h1");
+
+      title.textContent = "AARYA";
+
+      const subtitle = document.createElement("p");
+
+      subtitle.innerHTML = "A LEGEND BEGINS<br><br>DRAG THE PAGE TO OPEN";
+
+      inner.append(ornament, brand, title, subtitle);
+
+    } else if (kind === "back-cover") {
+
+      const ornament = document.createElement("div");
+
+      ornament.className = "ornament";
+
+      ornament.textContent = "✧";
+
+      const title = document.createElement("h2");
+
+      title.textContent = "AARYA";
+
+      const brand = document.createElement("p");
+
+      brand.textContent = "A SOVEREIGN PICTURES ORIGINAL";
+
+      const ending = document.createElement("p");
+
+      ending.textContent = "THE LEGEND CONTINUES";
+
+      inner.append(ornament, title, brand, ending);
+
+    } else {
+
+      const chapter = document.createElement("div");
+
+      chapter.className = "chapter";
+
+      chapter.textContent = chapterName;
+
+      const title = document.createElement("h2");
+
+      title.textContent = heading;
+
+      const paragraph = document.createElement("p");
+
+      paragraph.textContent = text || "";
+
+      const pageNumber = document.createElement("div");
+
+      pageNumber.className = "page-number";
+
+      pageNumber.textContent = String(number);
+
+      inner.append(chapter, title, paragraph, pageNumber);
+
+    }
+
+    page.appendChild(inner);
+
+    return page;
+
+  }
+
+  function showBook(sample) {
+
+    bookElement.replaceChildren();
+
+    bookElement.appendChild(
+
+      makePage("cover", "", "", "", 0)
+
+    );
+
+    bookElement.appendChild(
+
+      makePage(
+
+        "",
+
+        "FREE PREVIEW",
+
+        sample.title || "Aarya",
+
+        sample.sample_content,
+
+        1
+
+      )
+
+    );
+
+    bookElement.appendChild(
+
+      makePage(
+
+        "",
+
+        "CONTINUE THE JOURNEY",
+
+        "The Story Continues",
+
+        "You've reached the end of the free preview.\n\nThe complete Aarya story will be available to active subscribers once premium reading is connected.",
+
+        2
+
+      )
+
+    );
+
+    bookElement.appendChild(
+
+      makePage("back-cover", "", "", "", 0)
+
+    );
+
+    if (!window.St || !window.St.PageFlip) {
+
+      status.textContent =
+
+        "The page-turn library did not load. Refresh and try again.";
+
+      counter.textContent = "Reader unavailable";
+
+      return;
+
+    }
+
+    pageFlip = new St.PageFlip(bookElement, {
+
+      width: 420,
+
+      height: 600,
+
+      size: "stretch",
+
+      minWidth: 260,
+
+      maxWidth: 1000,
+
+      minHeight: 320,
+
+      maxHeight: 1400,
+
+      drawShadow: true,
+
+      flippingTime: 850,
+
+      usePortrait: true,
+
+      startPage: 0,
+
+      autoSize: true,
+
+      maxShadowOpacity: 0.55,
+
+      showCover: true,
+
+      mobileScrollSupport: false,
+
+      clickEventForward: true,
+
+      useMouseEvents: true,
+
+      swipeDistance: 25,
+
+      showPageCorners: true,
+
+      disableFlipByClick: false
+
+    });
+
+    pageFlip.loadFromHTML(
+
+      document.querySelectorAll("#book .page")
+
+    );
+
+    pageFlip.on("flip", function () {
+
+      flipping = false;
+
+      updateControls();
+
+    });
+
+    pageFlip.on("changeState", function (event) {
+
+      const state = event && event.data;
+
+      flipping = state !== "read";
+
+      if (!flipping) {
+
+        updateControls();
+
+        scheduleResize();
+
+      }
+
+    });
+
+    prev.addEventListener("click", function () {
+
+      if (pageFlip && !flipping) pageFlip.flipPrev();
+
+    });
+
+    next.addEventListener("click", function () {
+
+      if (pageFlip && !flipping) pageFlip.flipNext();
 
     });
 
     chapterSelect.addEventListener("change", function () {
 
-      if (pageFlip) {
+      if (
 
-        pageFlip.turnToPage(Number(chapterSelect.value));
+        pageFlip &&
 
-      }
+        !flipping &&
 
-    });
+        chapterSelect.value === "1"
 
-    document.getElementById("font-minus").addEventListener("click", function () {
+      ) {
 
-      fontSize = Math.max(12, fontSize - 1);
-
-      applyFontSize();
-
-    });
-
-    document.getElementById("font-plus").addEventListener("click", function () {
-
-      fontSize = Math.min(24, fontSize + 1);
-
-      applyFontSize();
-
-    });
-
-    readerModeButton.addEventListener("click", function () {
-
-      setReaderMode(!document.body.classList.contains("reader-mode"));
-
-    });
-
-    document.addEventListener("keydown", function (event) {
-
-      if (!pageFlip) return;
-
-      if (event.key === "ArrowRight") {
-
-        pageFlip.flipNext();
-
-      } else if (event.key === "ArrowLeft") {
-
-        pageFlip.flipPrev();
-
-      } else if (event.key === "Escape") {
-
-        setReaderMode(false);
+        pageFlip.turnToPage(1);
 
       }
 
     });
 
-    window.addEventListener("resize", scheduleResize);
+    updateControls();
 
-    window.addEventListener("orientationchange", scheduleResize);
+    status.textContent =
 
-    if (window.visualViewport) {
+      "Aarya's cover is ready. Turn the cover to read the free preview.";
 
-      window.visualViewport.addEventListener("resize", scheduleResize);
+  }
+
+  async function loadPreview() {
+
+    try {
+
+      if (!window.supabase) {
+
+        throw new Error("The database library did not load.");
+
+      }
+
+      const client = window.supabase.createClient(
+
+        SUPABASE_URL,
+
+        SUPABASE_KEY
+
+      );
+
+      const { data, error } = await client
+
+        .from("story_samples")
+
+        .select("title, sample_content")
+
+        .eq("slug", "aarya")
+
+        .eq("is_published", true)
+
+        .single();
+
+      if (error) throw error;
+
+      if (!data || !data.sample_content) {
+
+        throw new Error("No published preview was found.");
+
+      }
+
+      showBook(data);
+
+    } catch (error) {
+
+      console.error("Aarya preview error:", error);
+
+      status.textContent =
+
+        "We couldn't load the preview. Please refresh and try again.";
+
+      counter.textContent = "Preview unavailable";
+
+      prev.disabled = true;
+
+      next.disabled = true;
 
     }
 
-    initialiseBook();
+  }
 
-    loadStoryPreview();
+  window.addEventListener("resize", scheduleResize);
 
-  </script>
+  window.addEventListener("orientationchange", scheduleResize);
+
+  if (window.visualViewport) {
+
+    window.visualViewport.addEventListener("resize", scheduleResize);
+
+  }
+
+  document.addEventListener("keydown", function (event) {
+
+    if (!pageFlip || flipping) return;
+
+    if (event.key === "ArrowRight") pageFlip.flipNext();
+
+    if (event.key === "ArrowLeft") pageFlip.flipPrev();
+
+    if (event.key === "Escape") {
+
+      setReaderMode(false);
+
+    }
+
+  });
+
+  loadPreview();
+
+})();
+
+</script>
 
 </body>
 
