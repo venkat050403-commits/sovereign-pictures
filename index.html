@@ -14,13 +14,15 @@
 
 <title>Sovereign Pictures | Stories Beyond Worlds</title>
 
+<meta name="description" content="Discover exclusive original stories, forgotten kingdoms, and extraordinary worlds at Sovereign Pictures.">
+
 <style>
 
 *{box-sizing:border-box}
 
-:root{--bg:#100d0a;--gold:#d6b36a;--cream:#f2e4c6;--muted:#bcb3a3}
+:root{--bg:#100d0a;--panel:#20180f;--gold:#d6b36a;--cream:#f2e4c6;--muted:#bcb3a3;--border:#d6b36a35}
 
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
 
 body{margin:0;background:var(--bg);color:#f8f1e5;font-family:Georgia,"Times New Roman",serif}
 
@@ -32,71 +34,17 @@ button{cursor:pointer}
 
 [hidden]{display:none!important}
 
-/* ANCIENT MAGIC BOOK INTRO */
+#intro{position:fixed;inset:0;z-index:9999;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#493119 0%,#1c120a 42%,#080604 100%);animation:fadeAway .7s ease 3.3s forwards}
 
-#intro{
+.intro-glow{position:absolute;width:65vw;height:65vw;max-width:520px;max-height:520px;border-radius:50%;background:#e2ae4b15;filter:blur(35px);animation:glowPulse 3.5s ease-in-out infinite}
 
- position:fixed;inset:0;z-index:9999;overflow:hidden;
+.book-scene{position:relative;width:min(76vw,380px);height:min(58vw,285px);perspective:1000px;animation:bookReveal 3.6s ease-in-out forwards}
 
- display:flex;align-items:center;justify-content:center;
+.book{position:absolute;inset:0;display:flex;filter:drop-shadow(0 22px 30px #000c);transform-style:preserve-3d}
 
- background:radial-gradient(ellipse at center,#493119 0%,#1c120a 42%,#080604 100%);
+.book-back{position:absolute;inset:0;border:3px solid #a77a36;border-radius:5px 10px 10px 5px;background:linear-gradient(120deg,#241207,#69431e 48%,#1b0d06);box-shadow:inset 0 0 0 7px #281609,inset 0 0 0 9px #c59b4d}
 
- animation:fadeAway .7s ease 3.3s forwards;
-
-}
-
-.intro-glow{
-
- position:absolute;width:65vw;height:65vw;max-width:520px;max-height:520px;
-
- border-radius:50%;background:#e2ae4b15;filter:blur(35px);
-
- animation:glowPulse 3.5s ease-in-out infinite;
-
-}
-
-.book-scene{
-
- position:relative;width:min(76vw,380px);height:min(58vw,285px);
-
- perspective:1000px;animation:bookReveal 3.6s ease-in-out forwards;
-
-}
-
-.book{
-
- position:absolute;inset:0;display:flex;
-
- filter:drop-shadow(0 22px 30px #000c);
-
- transform-style:preserve-3d;
-
-}
-
-.book-back{
-
- position:absolute;inset:0;border:3px solid #a77a36;
-
- border-radius:5px 10px 10px 5px;
-
- background:linear-gradient(120deg,#241207,#69431e 48%,#1b0d06);
-
- box-shadow:inset 0 0 0 7px #281609,inset 0 0 0 9px #c59b4d;
-
-}
-
-.book-page{
-
- position:absolute;top:5px;bottom:5px;left:50%;width:47%;
-
- background:repeating-linear-gradient(0deg,#ddc89c 0 2px,#c9ae7b 2px 3px);
-
- border:1px solid #9e7a42;transform-origin:left center;
-
- box-shadow:inset 0 0 20px #68451b55;
-
-}
+.book-page{position:absolute;top:5px;bottom:5px;left:50%;width:47%;background:repeating-linear-gradient(0deg,#ddc89c 0 2px,#c9ae7b 2px 3px);border:1px solid #9e7a42;transform-origin:left center;box-shadow:inset 0 0 20px #68451b55}
 
 .book-page:nth-child(2){animation:turnPage 1.2s ease-in-out .45s forwards}
 
@@ -104,29 +52,9 @@ button{cursor:pointer}
 
 .book-page:nth-child(4){animation:turnPage 1.2s ease-in-out 1.15s forwards}
 
-.book-spine{
+.book-spine{position:absolute;left:48%;top:0;bottom:0;width:4%;background:linear-gradient(90deg,#170b04,#d2a251,#241207);box-shadow:0 0 12px #000}
 
- position:absolute;left:48%;top:0;bottom:0;width:4%;
-
- background:linear-gradient(90deg,#170b04,#d2a251,#241207);
-
- box-shadow:0 0 12px #000;
-
-}
-
-.book-emblem{
-
- position:absolute;inset:13% 10%;border:1px solid #d6b36a;
-
- display:flex;flex-direction:column;align-items:center;justify-content:center;
-
- text-align:center;padding:12px;
-
- background:linear-gradient(140deg,#35200e,#120b06);
-
- color:var(--gold);box-shadow:inset 0 0 0 5px #281609;
-
-}
+.book-emblem{position:absolute;inset:13% 10%;border:1px solid #d6b36a;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:12px;background:linear-gradient(140deg,#35200e,#120b06);color:var(--gold);box-shadow:inset 0 0 0 5px #281609}
 
 .book-emblem:before{content:"✦";font-size:22px;margin-bottom:10px}
 
@@ -134,53 +62,13 @@ button{cursor:pointer}
 
 .book-emblem span{font:8px Arial,sans-serif;letter-spacing:2px;margin-top:9px;color:var(--cream)}
 
-.magic{
+.magic{position:absolute;inset:-20%;pointer-events:none;background:radial-gradient(circle at 30% 30%,#ffe7a5 0 1px,transparent 3px),radial-gradient(circle at 75% 40%,#d6b36a 0 2px,transparent 4px),radial-gradient(circle at 65% 80%,#ffe7a5 0 1px,transparent 3px),radial-gradient(circle at 22% 75%,#d6b36a 0 2px,transparent 4px),radial-gradient(circle at 50% 18%,#fff0bd 0 1px,transparent 3px);opacity:0;animation:sparkle 2.8s ease-in-out .3s forwards}
 
- position:absolute;inset:-20%;pointer-events:none;
+.intro-name{position:absolute;bottom:12%;left:0;right:0;text-align:center;color:var(--gold);letter-spacing:4px;font-size:clamp(17px,4vw,32px);text-shadow:0 0 22px #e2ae4b88;opacity:0;animation:nameReveal .9s ease 2.3s forwards}
 
- background:
+@keyframes turnPage{to{transform:rotateY(-155deg)}}
 
- radial-gradient(circle at 30% 30%,#ffe7a5 0 1px,transparent 3px),
-
- radial-gradient(circle at 75% 40%,#d6b36a 0 2px,transparent 4px),
-
- radial-gradient(circle at 65% 80%,#ffe7a5 0 1px,transparent 3px),
-
- radial-gradient(circle at 22% 75%,#d6b36a 0 2px,transparent 4px),
-
- radial-gradient(circle at 50% 18%,#fff0bd 0 1px,transparent 3px);
-
- opacity:0;animation:sparkle 2.8s ease-in-out .3s forwards;
-
-}
-
-.intro-name{
-
- position:absolute;bottom:12%;left:0;right:0;text-align:center;
-
- color:var(--gold);letter-spacing:4px;font-size:clamp(17px,4vw,32px);
-
- text-shadow:0 0 22px #e2ae4b88;opacity:0;
-
- animation:nameReveal .9s ease 2.3s forwards;
-
-}
-
-@keyframes turnPage{0%{transform:rotateY(0deg)}100%{transform:rotateY(-155deg)}}
-
-@keyframes bookReveal{
-
- 0%{transform:scale(.55) rotateX(18deg);opacity:0}
-
- 20%{transform:scale(.8) rotateX(8deg);opacity:1}
-
- 55%{transform:scale(1) rotateX(0deg);opacity:1}
-
- 80%{transform:scale(1.05);opacity:1}
-
- 100%{transform:scale(1.1);opacity:0}
-
-}
+@keyframes bookReveal{0%{transform:scale(.55) rotateX(18deg);opacity:0}20%{transform:scale(.8) rotateX(8deg);opacity:1}55%{transform:scale(1) rotateX(0);opacity:1}80%{transform:scale(1.05);opacity:1}100%{transform:scale(1.1);opacity:0}}
 
 @keyframes sparkle{0%{opacity:0;transform:scale(.7)}35%{opacity:1;transform:scale(1)}75%{opacity:.7}100%{opacity:0}}
 
@@ -190,17 +78,7 @@ button{cursor:pointer}
 
 @keyframes fadeAway{to{opacity:0;visibility:hidden;pointer-events:none}}
 
-/* NAVIGATION */
-
-header{
-
- position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:22px;
-
- padding:17px 4%;background:#100d0af2;border-bottom:1px solid #d6b36a35;
-
- backdrop-filter:blur(14px);
-
-}
+header{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:22px;padding:17px 4%;background:#100d0af2;border-bottom:1px solid var(--border);backdrop-filter:blur(14px)}
 
 .brand{font-size:18px;letter-spacing:2px;font-weight:bold;color:var(--gold);white-space:nowrap}
 
@@ -214,13 +92,11 @@ nav>a:hover{color:var(--gold)}
 
 .search-toggle,.menu-toggle{border:0;background:transparent;color:var(--cream);font-size:23px;padding:5px}
 
-.account{display:inline-block;background:var(--gold);color:#171109;border-radius:4px;padding:11px 13px;font:bold 12px Arial,sans-serif;white-space:nowrap}
+.account,.gold-button{display:inline-block;background:var(--gold);color:#171109;border:1px solid var(--gold);border-radius:4px;padding:11px 13px;font:bold 12px Arial,sans-serif;white-space:nowrap;text-align:center}
 
 .menu-toggle{display:none}
 
-/* SEARCH */
-
-.search-panel{padding:18px 4%;background:#19130e;border-bottom:1px solid #d6b36a33}
+.search-panel{padding:18px 4%;background:#19130e;border-bottom:1px solid var(--border)}
 
 .search-inner{display:flex;gap:10px;max-width:700px;margin:auto}
 
@@ -230,15 +106,7 @@ nav>a:hover{color:var(--gold)}
 
 #searchStatus{font:12px Arial,sans-serif;color:var(--muted);margin:12px auto 0;max-width:700px}
 
-/* HOMEPAGE */
-
-.hero{
-
- min-height:400px;display:flex;align-items:center;padding:60px 5%;
-
- background:linear-gradient(90deg,#100d0af5 0%,#100d0ab8 48%,#100d0a15 100%),linear-gradient(0deg,#100d0a,transparent 45%),url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center/cover;
-
-}
+.hero{min-height:420px;display:flex;align-items:center;padding:60px 5%;background:linear-gradient(90deg,#100d0af5 0%,#100d0ab8 48%,#100d0a15 100%),linear-gradient(0deg,#100d0a,transparent 45%),url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center/cover}
 
 .hero-content{max-width:600px}
 
@@ -248,7 +116,13 @@ nav>a:hover{color:var(--gold)}
 
 .hero p{max-width:480px;color:#d1c5b2;font:15px/1.8 Arial,sans-serif}
 
-.shelf{padding:12px 4% 20px;scroll-margin-top:90px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+
+.gold-button{font-size:13px;padding:13px 18px}
+
+.outline-button{display:inline-block;border:1px solid #d6b36a88;border-radius:4px;padding:13px 18px;font:13px Arial,sans-serif;color:var(--cream)}
+
+.shelf{padding:12px 4% 20px}
 
 .shelf h2{font-size:23px;font-weight:normal;margin:18px 0 13px;color:var(--cream)}
 
@@ -256,13 +130,13 @@ nav>a:hover{color:var(--gold)}
 
 .poster-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(145px,17%);gap:14px;overflow-x:auto;padding:4px 2px 16px;scrollbar-width:thin;scrollbar-color:#765c33 transparent}
 
-.poster{display:block;position:relative;overflow:hidden;aspect-ratio:2/3;border-radius:4px;background:#20180f;border:1px solid #d6b36a25;transition:transform .2s,border-color .2s}
+.poster{display:block;position:relative;overflow:hidden;aspect-ratio:2/3;border-radius:4px;background:#20180f;border:1px solid #d6b36a25;transition:transform .2s,border-color .2s;min-width:0}
 
-.poster:hover{transform:scale(1.035);border-color:#d6b36a;z-index:2}
+.poster:hover{transform:scale(1.025);border-color:var(--gold);z-index:2}
 
 .poster img{display:block;width:100%;height:100%;object-fit:cover}
 
-.poster:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#0c0908ee)}
+.poster:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#0c0908ee);pointer-events:none}
 
 .poster-label{position:absolute;z-index:1;bottom:13px;left:10px;right:8px}
 
@@ -276,41 +150,43 @@ nav>a:hover{color:var(--gold)}
 
 .empty-results{padding:25px 4%;color:var(--muted);font:14px Arial,sans-serif}
 
-footer{padding:28px 15px;border-top:1px solid #d6b36a30;text-align:center;color:#918779;font:12px/1.8 Arial,sans-serif}
+.notice{margin:12px 4% 25px;padding:14px 16px;border:1px solid var(--border);border-radius:5px;color:var(--muted);font:13px/1.7 Arial,sans-serif}
+
+footer{padding:28px 15px;border-top:1px solid var(--border);text-align:center;color:#918779;font:12px/1.8 Arial,sans-serif}
 
 @media(max-width:760px){
 
- header{gap:12px;flex-wrap:wrap;padding:14px 4%}
+header{gap:12px;flex-wrap:wrap;padding:14px 4%}
 
- .brand{font-size:14px;letter-spacing:1px}
+.brand{font-size:14px;letter-spacing:1px}
 
- .menu-toggle{display:block}
+.menu-toggle{display:block}
 
- nav{display:none;order:4;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:17px;padding:12px 0}
+nav{display:none;order:4;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:17px;padding:12px 0}
 
- nav.open{display:flex}
+nav.open{display:flex}
 
- .nav-right{margin-left:auto}
+.nav-right{margin-left:auto}
 
- .account{font-size:11px;padding:10px}
+.account{font-size:11px;padding:10px}
 
- .hero{min-height:350px;padding:45px 5%}
+.hero{min-height:350px;padding:45px 5%}
 
- .hero h1{font-size:43px}
+.hero h1{font-size:43px}
 
- .poster-row{grid-auto-columns:39%}
+.poster-row{grid-auto-columns:39%}
 
- .shelf h2{font-size:20px}
+.shelf h2{font-size:20px}
 
 }
 
 @media(prefers-reduced-motion:reduce){
 
- html{scroll-behavior:auto}
+html{scroll-behavior:auto}
 
- #intro{animation:none;display:none}
+#intro{animation:none;display:none}
 
- .book-scene,.book-page,.intro-name,.magic,.intro-glow{animation:none}
+.book-scene,.book-page,.intro-name,.magic,.intro-glow{animation:none}
 
 }
 
@@ -322,249 +198,277 @@ footer{padding:28px 15px;border-top:1px solid #d6b36a30;text-align:center;color:
 
 <div id="intro" aria-label="Sovereign Pictures opening">
 
- <div class="intro-glow"></div>
+  <div class="intro-glow"></div>
 
- <div class="book-scene">
+  <div class="book-scene">
 
-  <div class="book">
+    <div class="book">
 
-   <div class="book-back"></div>
+      <div class="book-back"></div>
 
-   <div class="book-page"></div>
+      <div class="book-page"></div>
 
-   <div class="book-page"></div>
+      <div class="book-page"></div>
 
-   <div class="book-page"></div>
+      <div class="book-page"></div>
 
-   <div class="book-spine"></div>
+      <div class="book-spine"></div>
 
-   <div class="book-emblem">
+      <div class="book-emblem">
 
-    <strong>SOVEREIGN<br>PICTURES</strong>
+        <strong>SOVEREIGN<br>PICTURES</strong>
 
-    <span>STORIES BEYOND WORLDS</span>
+        <span>STORIES BEYOND WORLDS</span>
 
-   </div>
+      </div>
+
+    </div>
+
+    <div class="magic"></div>
 
   </div>
 
-  <div class="magic"></div>
-
- </div>
-
- <div class="intro-name">SOVEREIGN PICTURES</div>
+  <div class="intro-name">SOVEREIGN PICTURES</div>
 
 </div>
 
 <header>
 
- <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
+  <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
 
- <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
 
- <nav id="navigation">
+  <nav id="navigation">
 
-  <a href="./index.html">Home</a>
+    <a href="./index.html">Home</a>
 
-  <a href="#fantasy">Fantasy</a>
+    <a href="#featured">Featured</a>
 
-  <a href="#horror">Horror</a>
+    <a href="#fantasy">Fantasy</a>
 
-  <a href="#sports">Sports</a>
+    <a href="#horror">Horror</a>
 
-  <a href="#romance">Romance</a>
+    <a href="#sports">Sports</a>
 
-  <a href="./membership.html">Membership</a>
+    <a href="#romance">Romance</a>
 
- </nav>
+    <a href="./membership.html">Membership</a>
 
- <div class="nav-right">
+  </nav>
 
-  <button class="search-toggle" id="searchToggle" aria-label="Search stories" title="Search">⌕</button>
+  <div class="nav-right">
 
-  <a class="account" id="accountButton" href="./login.html" style="visibility:hidden">Log In / Create Account</a>
+    <button class="search-toggle" id="searchToggle" aria-label="Search stories" title="Search">⌕</button>
 
- </div>
+    <a class="account" id="accountButton" href="./login.html">Log In / Create Account</a>
+
+  </div>
 
 </header>
 
 <div class="search-panel" id="searchPanel" hidden>
 
- <div class="search-inner">
+  <div class="search-inner">
 
-  <input id="searchInput" type="search" placeholder="Search stories or genres..." aria-label="Search stories or genres">
+    <input id="searchInput" type="search" placeholder="Search stories or genres..." aria-label="Search stories or genres">
 
-  <button id="clearSearch" type="button">Clear</button>
+    <button id="clearSearch" type="button">Clear</button>
 
- </div>
+  </div>
 
- <div id="searchStatus" aria-live="polite"></div>
+  <div id="searchStatus" aria-live="polite"></div>
 
 </div>
 
 <main>
 
- <section class="hero">
+  <section class="hero">
 
-  <div class="hero-content">
+    <div class="hero-content">
 
-   <div class="eyebrow">An independent storytelling studio</div>
+      <div class="eyebrow">An independent storytelling studio</div>
 
-   <h1>Every world holds a story.</h1>
+      <h1>Every world holds a story.</h1>
 
-   <p>Enter forgotten kingdoms, discover hidden secrets, and explore extraordinary worlds through original stories created for Sovereign Pictures.</p>
+      <p>Enter forgotten kingdoms, discover hidden secrets, and explore extraordinary worlds through original stories created for Sovereign Pictures.</p>
+
+      <div class="hero-actions">
+
+        <a class="gold-button" href="#featured">Discover Stories</a>
+
+        <a class="outline-button" href="./membership.html">Membership Plans</a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <div id="storyRows">
+
+    <section class="shelf" id="featured">
+
+      <h2><span class="symbol">✦</span>Featured Stories</h2>
+
+      <div class="poster-row">
+
+        <a class="poster" data-search="aarya fantasy kingdom princess the fall featured" href="./aarya-book.html">
+
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape" onerror="this.outerHTML='<div class=&quot;poster-fallback&quot;>AARYA</div>'">
+
+          <span class="tag">FEATURED</span>
+
+          <div class="poster-label"><strong>AARYA</strong><span>Fantasy · The Fall</span></div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="shelf" id="fantasy">
+
+      <h2><span class="symbol">♜</span>Fantasy &amp; Kingdoms</h2>
+
+      <div class="poster-row">
+
+        <a class="poster" data-search="aarya fantasy kingdom princess the fall" href="./aarya-book.html">
+
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape">
+
+          <div class="poster-label"><strong>AARYA</strong><span>Part One: The Fall</span></div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="shelf" id="horror">
+
+      <h2><span class="symbol">☾</span>Horror &amp; Dark Secrets</h2>
+
+      <div class="poster-row">
+
+        <a class="poster placeholder" data-search="horror dark secrets mystery coming soon" href="#horror">
+
+          <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=650&q=80" alt="Dark atmosphere">
+
+          <div class="poster-label"><strong>Dark Secrets</strong><span>Stories coming soon</span></div>
+
+          <span class="tag">COMING SOON</span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="shelf" id="action">
+
+      <h2><span class="symbol">⚔</span>Action &amp; Adventure</h2>
+
+      <div class="poster-row">
+
+        <a class="poster placeholder" data-search="action adventure epic quest coming soon" href="#action">
+
+          <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=650&q=80" alt="Mysterious forest">
+
+          <div class="poster-label"><strong>Epic Adventures</strong><span>Stories coming soon</span></div>
+
+          <span class="tag">COMING SOON</span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="shelf" id="romance">
+
+      <h2><span class="symbol">♡</span>Romance &amp; Relationships</h2>
+
+      <div class="poster-row">
+
+        <a class="poster placeholder" data-search="romance relationships love coming soon" href="#romance">
+
+          <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=650&q=80" alt="Sunset">
+
+          <div class="poster-label"><strong>Stories of the Heart</strong><span>Stories coming soon</span></div>
+
+          <span class="tag">COMING SOON</span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="shelf" id="sports">
+
+      <h2><span class="symbol">♜</span>Sports &amp; Competition</h2>
+
+      <div class="poster-row">
+
+        <a class="poster placeholder" data-search="sports competition victory cricket coming soon" href="#sports">
+
+          <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=650&q=80" alt="Athlete running">
+
+          <div class="poster-label"><strong>Beyond the Limit</strong><span>Stories coming soon</span></div>
+
+          <span class="tag">COMING SOON</span>
+
+        </a>
+
+      </div>
+
+    </section>
+
+    <section class="shelf" id="scifi">
+
+      <h2><span class="symbol">✧</span>Sci-Fi &amp; Other Worlds</h2>
+
+      <div class="poster-row">
+
+        <a class="poster placeholder" data-search="science fiction space planets other worlds coming soon" href="#scifi">
+
+          <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=650&q=80" alt="Earth from space">
+
+          <div class="poster-label"><strong>Beyond the Stars</strong><span>Stories coming soon</span></div>
+
+          <span class="tag">COMING SOON</span>
+
+        </a>
+
+      </div>
+
+    </section>
 
   </div>
 
- </section>
+  <div class="empty-results" id="emptyResults" hidden>No matching stories or genres found. Try another search.</div>
 
- <div id="storyRows">
+  <div class="notice">
 
-  <section class="shelf" id="featured">
+    <strong>More worlds are coming.</strong> New stories will appear here as they are published.
 
-   <h2><span class="symbol">✦</span>Featured Stories</h2>
+    <a href="./membership.html" style="color:var(--gold);text-decoration:underline">View membership plans</a>
 
-   <div class="poster-row">
-
-    <a class="poster" data-search="aarya fantasy kingdom princess the fall featured" href="./aarya-book.html">
-
-     <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape" onerror="this.outerHTML='<div class=&quot;poster-fallback&quot;>AARYA</div>'">
-
-     <span class="tag">FEATURED</span>
-
-     <div class="poster-label"><strong>AARYA</strong><span>Fantasy · The Fall</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
-  <section class="shelf" id="fantasy">
-
-   <h2><span class="symbol">♜</span>Fantasy & Kingdoms</h2>
-
-   <div class="poster-row">
-
-    <a class="poster" data-search="aarya fantasy kingdom princess the fall" href="./aarya-book.html">
-
-     <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape">
-
-     <div class="poster-label"><strong>AARYA</strong><span>Part One: The Fall</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
-  <section class="shelf" id="horror">
-
-   <h2><span class="symbol">☾</span>Horror & Dark Secrets</h2>
-
-   <div class="poster-row">
-
-    <a class="poster placeholder" data-search="horror dark secrets mystery coming soon" href="#horror">
-
-     <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=650&q=80" alt="Dark atmosphere">
-
-     <div class="poster-label"><strong>Dark Secrets</strong><span>Stories coming soon</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
-  <section class="shelf" id="action">
-
-   <h2><span class="symbol">⚔</span>Action & Adventure</h2>
-
-   <div class="poster-row">
-
-    <a class="poster placeholder" data-search="action adventure epic quest coming soon" href="#action">
-
-     <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=650&q=80" alt="Mysterious forest">
-
-     <div class="poster-label"><strong>Epic Adventures</strong><span>Stories coming soon</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
-  <section class="shelf" id="romance">
-
-   <h2><span class="symbol">♡</span>Romance & Relationships</h2>
-
-   <div class="poster-row">
-
-    <a class="poster placeholder" data-search="romance relationships love coming soon" href="#romance">
-
-     <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=650&q=80" alt="Sunset">
-
-     <div class="poster-label"><strong>Stories of the Heart</strong><span>Stories coming soon</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
-  <section class="shelf" id="sports">
-
-   <h2><span class="symbol">♜</span>Sports & Competition</h2>
-
-   <div class="poster-row">
-
-    <a class="poster placeholder" data-search="sports competition victory cricket coming soon" href="#sports">
-
-     <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=650&q=80" alt="Athlete running">
-
-     <div class="poster-label"><strong>Beyond the Limit</strong><span>Stories coming soon</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
-  <section class="shelf" id="scifi">
-
-   <h2><span class="symbol">✧</span>Sci-Fi & Other Worlds</h2>
-
-   <div class="poster-row">
-
-    <a class="poster placeholder" data-search="science fiction space planets other worlds coming soon" href="#scifi">
-
-     <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=650&q=80" alt="Earth from space">
-
-     <div class="poster-label"><strong>Beyond the Stars</strong><span>Stories coming soon</span></div>
-
-    </a>
-
-   </div>
-
-  </section>
-
- </div>
-
- <div class="empty-results" id="emptyResults" hidden>No matching stories or genres found. Try another search.</div>
+  </div>
 
 </main>
 
 <footer>
 
- © 2026 Sovereign Pictures.<br>
+  © 2026 Sovereign Pictures.<br>
 
- Original worlds. Exclusive stories.
+  Original worlds. Exclusive stories.
 
 </footer>
 
 <script>
 
-/* INTRO: PLAY ONCE PER BROWSER */
+/* OPENING ANIMATION */
 
 const intro = document.getElementById("intro");
 
@@ -576,51 +480,47 @@ try {
 
   introAlreadyPlayed = localStorage.getItem(introKey) === "yes";
 
-} catch (error) {
+} catch (error) {}
 
-  introAlreadyPlayed = false;
-
-}
-
-if (
-
-  introAlreadyPlayed ||
-
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-) {
+if (introAlreadyPlayed || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
 
   if (intro) intro.remove();
 
 } else {
 
-  try {
+  try { localStorage.setItem(introKey, "yes"); } catch (error) {}
 
-    localStorage.setItem(introKey, "yes");
-
-  } catch (error) {
-
-    /* The animation can still run if browser storage is unavailable. */
-
-  }
-
-  window.setTimeout(() => {
-
-    if (intro) intro.remove();
-
-  }, 4000);
+  window.setTimeout(() => { if (intro) intro.remove(); }, 4000);
 
 }
 
 /* MOBILE NAVIGATION */
 
-document.getElementById("menuToggle").addEventListener("click", () => {
+const menuToggle = document.getElementById("menuToggle");
 
-  document.getElementById("navigation").classList.toggle("open");
+const navigation = document.getElementById("navigation");
+
+menuToggle.addEventListener("click", () => {
+
+  const open = navigation.classList.toggle("open");
+
+  menuToggle.setAttribute("aria-expanded", String(open));
 
 });
 
-/* STORY SEARCH */
+navigation.querySelectorAll("a").forEach(link => {
+
+  link.addEventListener("click", () => {
+
+    navigation.classList.remove("open");
+
+    menuToggle.setAttribute("aria-expanded", "false");
+
+  });
+
+});
+
+/* SEARCH */
 
 const searchToggle = document.getElementById("searchToggle");
 
@@ -634,10 +534,6 @@ const searchStatus = document.getElementById("searchStatus");
 
 const emptyResults = document.getElementById("emptyResults");
 
-const shelves = [...document.querySelectorAll(".shelf")];
-
-const posters = [...document.querySelectorAll(".poster")];
-
 searchToggle.addEventListener("click", () => {
 
   searchPanel.hidden = !searchPanel.hidden;
@@ -650,33 +546,47 @@ function runSearch() {
 
   const term = searchInput.value.trim().toLowerCase();
 
+  const posters = [...document.querySelectorAll(".poster")];
+
+  const shelves = [...document.querySelectorAll(".shelf")];
+
   let visible = 0;
 
-  posters.forEach(p => {
+  posters.forEach(poster => {
 
-    const match = !term || (p.dataset.search || "").toLowerCase().includes(term);
+    const text = (
 
-    p.hidden = !match;
+      (poster.dataset.search || "") + " " +
+
+      (poster.textContent || "")
+
+    ).toLowerCase();
+
+    const match = !term || text.includes(term);
+
+    poster.hidden = !match;
 
     if (match) visible++;
 
   });
 
-  shelves.forEach(s => {
+  shelves.forEach(shelf => {
 
-    const hasPoster = [...s.querySelectorAll(".poster")].some(p => !p.hidden);
+    const hasVisiblePoster = [...shelf.querySelectorAll(".poster")]
 
-    const titleMatches = s.querySelector("h2").textContent.toLowerCase().includes(term);
+      .some(poster => !poster.hidden);
 
-    s.hidden = !!term && !hasPoster && !titleMatches;
+    shelf.hidden = !!term && !hasVisiblePoster;
 
   });
 
   emptyResults.hidden = !term || visible > 0;
 
-  searchStatus.textContent =
+  searchStatus.textContent = term && visible
 
-    term && visible > 0 ? visible + " matching poster(s) found." : "";
+    ? visible + " matching poster(s) found."
+
+    : "";
 
 }
 
@@ -692,13 +602,13 @@ clearSearch.addEventListener("click", () => {
 
 });
 
-/* COMING-SOON STORIES */
+/* COMING SOON CARDS */
 
-document.querySelectorAll(".poster.placeholder").forEach(p => {
+document.querySelectorAll(".poster.placeholder").forEach(poster => {
 
-  p.addEventListener("click", e => {
+  poster.addEventListener("click", event => {
 
-    e.preventDefault();
+    event.preventDefault();
 
     alert("This story is coming soon to Sovereign Pictures.");
 
@@ -720,25 +630,25 @@ const supabase = createClient(
 
 );
 
-const button = document.getElementById("accountButton");
+const accountButton = document.getElementById("accountButton");
 
 function showAccountButton(session) {
 
   if (session) {
 
-    button.textContent = "My Account";
+    accountButton.textContent = "My Account";
 
-    button.href = "./dashboard.html";
+    accountButton.href = "./dashboard.html";
 
   } else {
 
-    button.textContent = "Log In / Create Account";
+    accountButton.textContent = "Log In / Create Account";
 
-    button.href = "./login.html";
+    accountButton.href = "./login.html";
 
   }
 
-  button.style.visibility = "visible";
+  accountButton.style.visibility = "visible";
 
 }
 
@@ -757,6 +667,130 @@ try {
 } catch (error) {
 
   showAccountButton(null);
+
+}
+
+/*
+
+  Load published stories if the public stories table is readable.
+
+  Expected columns: title, slug, description, is_premium, is_published.
+
+  The existing AARYA poster stays visible if this query fails.
+
+*/
+
+try {
+
+  const { data: stories, error } = await supabase
+
+    .from("stories")
+
+    .select("id,title,slug,description,is_premium,is_published")
+
+    .eq("is_published", true)
+
+    .order("created_at", { ascending: false });
+
+  if (!error && Array.isArray(stories) && stories.length) {
+
+    const featuredRow = document.querySelector("#featured .poster-row");
+
+    const fantasyRow = document.querySelector("#fantasy .poster-row");
+
+    stories.forEach(story => {
+
+      const slug = story.slug;
+
+      if (!slug) return;
+
+      /* AARYA already has a manually designed featured poster. */
+
+      const isAarya = slug.toLowerCase().includes("aarya");
+
+      if (isAarya) return;
+
+      const card = document.createElement("a");
+
+      card.className = "poster";
+
+      card.dataset.search = [
+
+        story.title || "",
+
+        story.description || "",
+
+        story.slug || ""
+
+      ].join(" ").toLowerCase();
+
+      /* Story pages must exist at this address to open successfully. */
+
+      card.href = "./story.html?slug=" + encodeURIComponent(slug);
+
+      const fallback = document.createElement("div");
+
+      fallback.className = "poster-fallback";
+
+      fallback.textContent = story.title || "Story";
+
+      const label = document.createElement("div");
+
+      label.className = "poster-label";
+
+      const title = document.createElement("strong");
+
+      title.textContent = story.title || "Untitled Story";
+
+      const description = document.createElement("span");
+
+      description.textContent = story.description || "Original story";
+
+      label.append(title, description);
+
+      card.append(fallback, label);
+
+      if (story.is_premium) {
+
+        const tag = document.createElement("span");
+
+        tag.className = "tag";
+
+        tag.textContent = "PREMIUM";
+
+        card.append(tag);
+
+      }
+
+      featuredRow.appendChild(card);
+
+      fantasyRow.appendChild(card.cloneNode(true));
+
+    });
+
+    /* Rebind search to include dynamically loaded story cards. */
+
+    document.querySelectorAll(".poster").forEach(card => {
+
+      card.addEventListener("click", event => {
+
+        if (card.classList.contains("placeholder")) {
+
+          event.preventDefault();
+
+          alert("This story is coming soon to Sovereign Pictures.");
+
+        }
+
+      });
+
+    });
+
+  }
+
+} catch (error) {
+
+  console.warn("Published stories could not be loaded:", error);
 
 }
 
