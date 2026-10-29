@@ -1,467 +1,729 @@
 
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#100d0a">
+
+<meta name="theme-color" content="#100b07">
+
 <title>Sovereign Pictures | Stories Beyond Worlds</title>
 
 <style>
+
 *{box-sizing:border-box}
+
 :root{--bg:#100d0a;--gold:#d6b36a;--cream:#f2e4c6;--muted:#bcb3a3}
+
 html{scroll-behavior:smooth}
+
 body{margin:0;background:var(--bg);color:#f8f1e5;font-family:Georgia,"Times New Roman",serif}
+
 a{color:inherit;text-decoration:none}
+
 button,input{font:inherit}
+
 button{cursor:pointer}
+
 [hidden]{display:none!important}
 
-/* ANCIENT NOVEL OPENING */
+/* ANCIENT MAGIC BOOK INTRO */
+
 #intro{
+
  position:fixed;inset:0;z-index:9999;overflow:hidden;
+
  display:flex;align-items:center;justify-content:center;
- background:#100b07;
- animation:leaveIntro .65s ease 3.35s forwards;
-}
-.intro-paper{
- position:absolute;inset:0;
- background:
- radial-gradient(ellipse at center,#60432155,transparent 65%),
- repeating-linear-gradient(0deg,#d4b47b05 0 1px,transparent 1px 4px),
- #100b07;
-}
-.book-bundle{
- position:absolute;width:min(70vw,560px);aspect-ratio:1.2;
- transform-style:preserve-3d;
- animation:bundleJourney 3.6s cubic-bezier(.2,.7,.2,1) forwards;
-}
-.cover{
- position:absolute;inset:8%;
- border:2px solid #d6b36a99;
- box-shadow:0 15px 45px #000a;
- background-size:cover;background-position:center;
- overflow:hidden;
-}
-.cover::after{
- content:"";position:absolute;inset:0;
- background:linear-gradient(135deg,#100b0766,#100b0733 45%,#100b07bb);
-}
-.cover.one{
- background-image:url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80");
- transform:rotate(-9deg) translate(-5%,1%);
-}
-.cover.two{
- background-image:url("https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=1000&q=80");
- transform:rotate(7deg) translate(4%,-2%);
-}
-.cover.three{
- background-image:url("https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1000&q=80");
- transform:rotate(-3deg) translateY(2%);
-}
-.cover.four{
- background-image:url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1000&q=80");
- transform:rotate(3deg) translate(1%,-1%);
-}
-.cover.five{
- background:linear-gradient(145deg,#65451f,#21160d 65%,#090706);
- transform:rotate(0deg);
- display:flex;align-items:center;justify-content:center;
-}
-.cover-five-title{
- position:relative;z-index:1;text-align:center;
- padding:20px;color:var(--gold);
- border:1px solid #d6b36a99;inset:12px;
- outline:1px solid #d6b36a55;outline-offset:-8px;
- width:85%;height:85%;display:flex;flex-direction:column;
- align-items:center;justify-content:center;
-}
-.cover-five-title strong{
- font-size:clamp(16px,3.5vw,32px);
- letter-spacing:3px;line-height:1.35;
-}
-.cover-five-title span{font-size:10px;letter-spacing:4px;margin-top:14px;color:var(--cream)}
-.intro-title{
- position:absolute;z-index:2;text-align:center;padding:20px;
- opacity:0;animation:revealTitle .9s ease 2.35s forwards;
- text-shadow:0 4px 20px #000;
-}
-.intro-title strong{
- display:block;color:var(--gold);
- font-size:clamp(24px,5vw,48px);letter-spacing:4px;
-}
-.intro-title span{
- display:block;margin-top:12px;color:var(--cream);
- font-size:10px;letter-spacing:5px;
-}
-@keyframes bundleJourney{
- 0%{transform:scale(1.15) rotate(-5deg);opacity:0}
- 12%{opacity:1}
- 48%{transform:scale(.64) rotate(2deg);opacity:1}
- 73%{transform:scale(.8) rotate(0deg);opacity:1}
- 100%{transform:scale(1.35) rotate(0deg);opacity:0}
-}
-@keyframes revealTitle{
- 0%{opacity:0;transform:scale(.85)}
- 100%{opacity:1;transform:scale(1)}
-}
-@keyframes leaveIntro{
- to{opacity:0;visibility:hidden;pointer-events:none}
+
+ background:radial-gradient(ellipse at center,#493119 0%,#1c120a 42%,#080604 100%);
+
+ animation:fadeAway .7s ease 3.3s forwards;
+
 }
 
-/* TOP NAVIGATION */
+.intro-glow{
+
+ position:absolute;width:65vw;height:65vw;max-width:520px;max-height:520px;
+
+ border-radius:50%;background:#e2ae4b15;filter:blur(35px);
+
+ animation:glowPulse 3.5s ease-in-out infinite;
+
+}
+
+.book-scene{
+
+ position:relative;width:min(76vw,380px);height:min(58vw,285px);
+
+ perspective:1000px;animation:bookReveal 3.6s ease-in-out forwards;
+
+}
+
+.book{
+
+ position:absolute;inset:0;display:flex;
+
+ filter:drop-shadow(0 22px 30px #000c);
+
+ transform-style:preserve-3d;
+
+}
+
+.book-back{
+
+ position:absolute;inset:0;border:3px solid #a77a36;
+
+ border-radius:5px 10px 10px 5px;
+
+ background:linear-gradient(120deg,#241207,#69431e 48%,#1b0d06);
+
+ box-shadow:inset 0 0 0 7px #281609,inset 0 0 0 9px #c59b4d;
+
+}
+
+.book-page{
+
+ position:absolute;top:5px;bottom:5px;left:50%;width:47%;
+
+ background:repeating-linear-gradient(0deg,#ddc89c 0 2px,#c9ae7b 2px 3px);
+
+ border:1px solid #9e7a42;transform-origin:left center;
+
+ box-shadow:inset 0 0 20px #68451b55;
+
+}
+
+.book-page:nth-child(2){animation:turnPage 1.2s ease-in-out .45s forwards}
+
+.book-page:nth-child(3){animation:turnPage 1.2s ease-in-out .8s forwards}
+
+.book-page:nth-child(4){animation:turnPage 1.2s ease-in-out 1.15s forwards}
+
+.book-spine{
+
+ position:absolute;left:48%;top:0;bottom:0;width:4%;
+
+ background:linear-gradient(90deg,#170b04,#d2a251,#241207);
+
+ box-shadow:0 0 12px #000;
+
+}
+
+.book-emblem{
+
+ position:absolute;inset:13% 10%;border:1px solid #d6b36a;
+
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+
+ text-align:center;padding:12px;
+
+ background:linear-gradient(140deg,#35200e,#120b06);
+
+ color:var(--gold);box-shadow:inset 0 0 0 5px #281609;
+
+}
+
+.book-emblem:before{
+
+ content:"✦";font-size:22px;margin-bottom:10px;
+
+}
+
+.book-emblem strong{font-size:clamp(12px,2.7vw,22px);letter-spacing:2px;line-height:1.5}
+
+.book-emblem span{font:8px Arial,sans-serif;letter-spacing:2px;margin-top:9px;color:var(--cream)}
+
+.magic{
+
+ position:absolute;inset:-20%;pointer-events:none;
+
+ background:
+
+ radial-gradient(circle at 30% 30%,#ffe7a5 0 1px,transparent 3px),
+
+ radial-gradient(circle at 75% 40%,#d6b36a 0 2px,transparent 4px),
+
+ radial-gradient(circle at 65% 80%,#ffe7a5 0 1px,transparent 3px),
+
+ radial-gradient(circle at 22% 75%,#d6b36a 0 2px,transparent 4px),
+
+ radial-gradient(circle at 50% 18%,#fff0bd 0 1px,transparent 3px);
+
+ opacity:0;animation:sparkle 2.8s ease-in-out .3s forwards;
+
+}
+
+.intro-name{
+
+ position:absolute;bottom:12%;left:0;right:0;text-align:center;
+
+ color:var(--gold);letter-spacing:4px;font-size:clamp(17px,4vw,32px);
+
+ text-shadow:0 0 22px #e2ae4b88;opacity:0;
+
+ animation:nameReveal .9s ease 2.3s forwards;
+
+}
+
+@keyframes turnPage{
+
+ 0%{transform:rotateY(0deg)}
+
+ 100%{transform:rotateY(-155deg)}
+
+}
+
+@keyframes bookReveal{
+
+ 0%{transform:scale(.55) rotateX(18deg);opacity:0}
+
+ 20%{transform:scale(.8) rotateX(8deg);opacity:1}
+
+ 55%{transform:scale(1) rotateX(0deg);opacity:1}
+
+ 80%{transform:scale(1.05);opacity:1}
+
+ 100%{transform:scale(1.1);opacity:0}
+
+}
+
+@keyframes sparkle{0%{opacity:0;transform:scale(.7)}35%{opacity:1;transform:scale(1)}75%{opacity:.7}100%{opacity:0}}
+
+@keyframes glowPulse{0%,100%{transform:scale(.8);opacity:.5}50%{transform:scale(1.15);opacity:1}}
+
+@keyframes nameReveal{to{opacity:1}}
+
+@keyframes fadeAway{to{opacity:0;visibility:hidden;pointer-events:none}}
+
+/* NAVIGATION */
+
 header{
- position:sticky;top:0;z-index:50;
- display:flex;align-items:center;gap:24px;
- padding:17px 4%;
- background:#100d0af2;border-bottom:1px solid #d6b36a35;
+
+ position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:22px;
+
+ padding:17px 4%;background:#100d0af2;border-bottom:1px solid #d6b36a35;
+
  backdrop-filter:blur(14px);
+
 }
+
 .brand{font-size:18px;letter-spacing:2px;font-weight:bold;color:var(--gold);white-space:nowrap}
+
 nav{display:flex;align-items:center;gap:22px;flex:1}
+
 nav>a{font:13px Arial,sans-serif;color:#eee3d1}
+
 nav>a:hover{color:var(--gold)}
+
 .nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.search-toggle,.menu-toggle{
- border:0;background:transparent;color:var(--cream);
- font-size:23px;padding:5px;
-}
-.account{
- display:inline-block;background:var(--gold);color:#171109;
- border-radius:4px;padding:11px 13px;
- font:bold 12px Arial,sans-serif;white-space:nowrap;
-}
+
+.search-toggle,.menu-toggle{border:0;background:transparent;color:var(--cream);font-size:23px;padding:5px}
+
+.account{display:inline-block;background:var(--gold);color:#171109;border-radius:4px;padding:11px 13px;font:bold 12px Arial,sans-serif;white-space:nowrap}
+
 .menu-toggle{display:none}
 
 /* SEARCH */
+
 .search-panel{padding:18px 4%;background:#19130e;border-bottom:1px solid #d6b36a33}
+
 .search-inner{display:flex;gap:10px;max-width:700px;margin:auto}
-.search-inner input{
- width:100%;padding:13px 15px;border:1px solid #79613b;
- border-radius:4px;background:#0e0c09;color:white;outline:none;
-}
-.search-inner button{
- background:var(--gold);color:#171109;border:0;border-radius:4px;padding:0 17px;
-}
+
+.search-inner input{width:100%;padding:13px 15px;border:1px solid #79613b;border-radius:4px;background:#0e0c09;color:white;outline:none}
+
+.search-inner button{background:var(--gold);color:#171109;border:0;border-radius:4px;padding:0 17px}
+
 #searchStatus{font:12px Arial,sans-serif;color:var(--muted);margin:12px auto 0;max-width:700px}
 
-/* HERO */
-.hero{
- min-height:440px;display:flex;align-items:center;padding:60px 5%;
- background:
- linear-gradient(90deg,#100d0af5 0%,#100d0ab8 48%,#100d0a15 100%),
- linear-gradient(0deg,#100d0a 0%,transparent 45%),
- url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center/cover;
-}
-.hero-content{max-width:600px}
-.eyebrow{font:11px Arial,sans-serif;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
-.hero h1{font-size:clamp(40px,7vw,70px);font-weight:normal;line-height:1.05;margin:20px 0}
-.hero p{max-width:480px;color:#d1c5b2;font:15px/1.8 Arial,sans-serif}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.btn{display:inline-block;padding:13px 18px;border-radius:4px;font:bold 13px Arial,sans-serif}
-.btn-gold{background:var(--gold);color:#171109}
-.btn-outline{border:1px solid #d6b36a99;color:var(--cream)}
+/* HOMEPAGE */
 
-/* STORY ROWS */
+.hero{
+
+ min-height:400px;display:flex;align-items:center;padding:60px 5%;
+
+ background:linear-gradient(90deg,#100d0af5 0%,#100d0ab8 48%,#100d0a15 100%),linear-gradient(0deg,#100d0a,transparent 45%),url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center/cover;
+
+}
+
+.hero-content{max-width:600px}
+
+.eyebrow{font:11px Arial,sans-serif;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
+
+.hero h1{font-size:clamp(40px,7vw,70px);font-weight:normal;line-height:1.05;margin:20px 0}
+
+.hero p{max-width:480px;color:#d1c5b2;font:15px/1.8 Arial,sans-serif}
+
 .shelf{padding:12px 4% 20px;scroll-margin-top:90px}
+
 .shelf h2{font-size:23px;font-weight:normal;margin:18px 0 13px;color:var(--cream)}
+
 .shelf h2 .symbol{color:var(--gold);margin-right:7px}
-.poster-row{
- display:grid;grid-auto-flow:column;
- grid-auto-columns:minmax(145px,17%);
- gap:14px;overflow-x:auto;padding:4px 2px 16px;
- scrollbar-width:thin;scrollbar-color:#765c33 transparent;
-}
-.poster{
- display:block;position:relative;overflow:hidden;
- aspect-ratio:2/3;border-radius:4px;background:#20180f;
- border:1px solid #d6b36a25;transition:transform .2s,border-color .2s;
-}
+
+.poster-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(145px,17%);gap:14px;overflow-x:auto;padding:4px 2px 16px;scrollbar-width:thin;scrollbar-color:#765c33 transparent}
+
+.poster{display:block;position:relative;overflow:hidden;aspect-ratio:2/3;border-radius:4px;background:#20180f;border:1px solid #d6b36a25;transition:transform .2s,border-color .2s}
+
 .poster:hover{transform:scale(1.035);border-color:#d6b36a;z-index:2}
+
 .poster img{display:block;width:100%;height:100%;object-fit:cover}
-.poster::after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#0c0908ee)}
+
+.poster:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,#0c0908ee)}
+
 .poster-label{position:absolute;z-index:1;bottom:13px;left:10px;right:8px}
+
 .poster-label strong{display:block;font-size:15px;line-height:1.35}
+
 .poster-label span{display:block;color:#dfd2bd;font:10px Arial,sans-serif;margin-top:5px}
-.poster .tag{
- position:absolute;z-index:2;top:9px;left:8px;
- background:var(--gold);color:#171109;padding:5px 7px;
- font:bold 9px Arial,sans-serif;letter-spacing:1px;
-}
-.poster-fallback{
- width:100%;height:100%;display:flex;align-items:center;
- justify-content:center;text-align:center;padding:15px;
- background:radial-gradient(ellipse at top,#5a4020,#130f0b 72%);
- color:var(--gold);font-size:23px;
-}
+
+.poster .tag{position:absolute;z-index:2;top:9px;left:8px;background:var(--gold);color:#171109;padding:5px 7px;font:bold 9px Arial,sans-serif;letter-spacing:1px}
+
+.poster-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;background:radial-gradient(ellipse at top,#5a4020,#130f0b 72%);color:var(--gold);font-size:23px}
+
 .empty-results{padding:25px 4%;color:var(--muted);font:14px Arial,sans-serif}
+
 footer{padding:28px 15px;border-top:1px solid #d6b36a30;text-align:center;color:#918779;font:12px/1.8 Arial,sans-serif}
 
 @media(max-width:760px){
+
  header{gap:12px;flex-wrap:wrap;padding:14px 4%}
+
  .brand{font-size:14px;letter-spacing:1px}
+
  .menu-toggle{display:block}
+
  nav{display:none;order:4;flex-basis:100%;flex-direction:column;align-items:flex-start;gap:17px;padding:12px 0}
+
  nav.open{display:flex}
+
  .nav-right{margin-left:auto}
+
  .account{font-size:11px;padding:10px}
- .hero{min-height:380px;padding:45px 5%}
+
+ .hero{min-height:350px;padding:45px 5%}
+
  .hero h1{font-size:43px}
+
  .poster-row{grid-auto-columns:39%}
+
  .shelf h2{font-size:20px}
+
 }
+
 @media(prefers-reduced-motion:reduce){
+
  html{scroll-behavior:auto}
+
  #intro{animation:none;display:none}
- .book-bundle,.intro-title{animation:none}
+
+ .book-scene,.book-page,.intro-name,.magic,.intro-glow{animation:none}
+
 }
+
 </style>
+
 </head>
 
 <body>
 
-<!-- Antique story-bundle opening; no slideshow controls -->
 <div id="intro" aria-label="Sovereign Pictures opening">
- <div class="intro-paper"></div>
- <div class="book-bundle" aria-hidden="true">
-  <div class="cover one"></div>
-  <div class="cover two"></div>
-  <div class="cover three"></div>
-  <div class="cover four"></div>
-  <div class="cover five">
-   <div class="cover-five-title">
+
+ <div class="intro-glow"></div>
+
+ <div class="book-scene">
+
+  <div class="book">
+
+   <div class="book-back"></div>
+
+   <div class="book-page"></div>
+
+   <div class="book-page"></div>
+
+   <div class="book-page"></div>
+
+   <div class="book-spine"></div>
+
+   <div class="book-emblem">
+
     <strong>SOVEREIGN<br>PICTURES</strong>
+
     <span>STORIES BEYOND WORLDS</span>
+
    </div>
+
   </div>
+
+  <div class="magic"></div>
+
  </div>
- <div class="intro-title">
-  <strong>SOVEREIGN PICTURES</strong>
-  <span>STORIES BEYOND WORLDS</span>
- </div>
+
+ <div class="intro-name">SOVEREIGN PICTURES</div>
+
 </div>
 
 <header>
+
  <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
+
  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
 
  <nav id="navigation">
+
   <a href="./index.html">Home</a>
+
   <a href="#fantasy">Fantasy</a>
+
   <a href="#horror">Horror</a>
+
   <a href="#sports">Sports</a>
+
   <a href="#romance">Romance</a>
+
   <a href="./membership.html">Membership</a>
+
  </nav>
 
  <div class="nav-right">
+
   <button class="search-toggle" id="searchToggle" aria-label="Search stories" title="Search">⌕</button>
+
   <a class="account" id="accountButton" href="./login.html" style="visibility:hidden">Log In / Create Account</a>
+
  </div>
+
 </header>
 
 <div class="search-panel" id="searchPanel" hidden>
+
  <div class="search-inner">
+
   <input id="searchInput" type="search" placeholder="Search stories or genres..." aria-label="Search stories or genres">
+
   <button id="clearSearch" type="button">Clear</button>
+
  </div>
+
  <div id="searchStatus" aria-live="polite"></div>
+
 </div>
 
-<main id="homepage">
+<main>
+
  <section class="hero">
+
   <div class="hero-content">
+
    <div class="eyebrow">An independent storytelling studio</div>
+
    <h1>Every world holds a story.</h1>
+
    <p>Enter forgotten kingdoms, discover hidden secrets, and explore extraordinary worlds through original stories created for Sovereign Pictures.</p>
-   <div class="actions">
-    <a class="btn btn-gold" href="#fantasy">Discover Stories</a>
-    <a class="btn btn-outline" href="./membership.html">Explore Membership</a>
-   </div>
+
   </div>
+
  </section>
 
  <div id="storyRows">
 
   <section class="shelf" id="featured">
+
    <h2><span class="symbol">✦</span>Featured Stories</h2>
+
    <div class="poster-row">
+
     <a class="poster" data-search="aarya fantasy kingdom princess the fall featured" href="./aarya-book.html">
-     <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="A mysterious fantasy landscape" onerror="this.outerHTML='<div class=&quot;poster-fallback&quot;>AARYA</div>'">
+
+     <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape" onerror="this.outerHTML='<div class=&quot;poster-fallback&quot;>AARYA</div>'">
+
      <span class="tag">FEATURED</span>
+
      <div class="poster-label"><strong>AARYA</strong><span>Fantasy · The Fall</span></div>
+
     </a>
+
    </div>
+
   </section>
 
-  <section class="shelf" id="fantasy" data-genre="fantasy">
+  <section class="shelf" id="fantasy">
+
    <h2><span class="symbol">♜</span>Fantasy & Kingdoms</h2>
+
    <div class="poster-row">
+
     <a class="poster" data-search="aarya fantasy kingdom princess the fall" href="./aarya-book.html">
+
      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape">
+
      <div class="poster-label"><strong>AARYA</strong><span>Part One: The Fall</span></div>
+
     </a>
+
    </div>
+
   </section>
 
-  <section class="shelf" id="horror" data-genre="horror">
+  <section class="shelf" id="horror">
+
    <h2><span class="symbol">☾</span>Horror & Dark Secrets</h2>
+
    <div class="poster-row">
+
     <a class="poster placeholder" data-search="horror dark secrets mystery coming soon" href="#horror">
-     <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=650&q=80" alt="Dark atmospheric scene">
+
+     <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=650&q=80" alt="Dark atmosphere">
+
      <div class="poster-label"><strong>Dark Secrets</strong><span>Stories coming soon</span></div>
+
     </a>
+
    </div>
+
   </section>
 
-  <section class="shelf" id="action" data-genre="action">
+  <section class="shelf" id="action">
+
    <h2><span class="symbol">⚔</span>Action & Adventure</h2>
+
    <div class="poster-row">
+
     <a class="poster placeholder" data-search="action adventure epic quest coming soon" href="#action">
+
      <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=650&q=80" alt="Mysterious forest">
+
      <div class="poster-label"><strong>Epic Adventures</strong><span>Stories coming soon</span></div>
+
     </a>
+
    </div>
+
   </section>
 
-  <section class="shelf" id="romance" data-genre="romance">
+  <section class="shelf" id="romance">
+
    <h2><span class="symbol">♡</span>Romance & Relationships</h2>
+
    <div class="poster-row">
+
     <a class="poster placeholder" data-search="romance relationships love coming soon" href="#romance">
-     <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=650&q=80" alt="Warm sunset">
+
+     <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=650&q=80" alt="Sunset">
+
      <div class="poster-label"><strong>Stories of the Heart</strong><span>Stories coming soon</span></div>
+
     </a>
+
    </div>
+
   </section>
 
-  <section class="shelf" id="sports" data-genre="sports">
+  <section class="shelf" id="sports">
+
    <h2><span class="symbol">♜</span>Sports & Competition</h2>
+
    <div class="poster-row">
+
     <a class="poster placeholder" data-search="sports competition victory cricket coming soon" href="#sports">
+
      <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=650&q=80" alt="Athlete running">
+
      <div class="poster-label"><strong>Beyond the Limit</strong><span>Stories coming soon</span></div>
+
     </a>
+
    </div>
+
   </section>
 
-  <section class="shelf" id="scifi" data-genre="sci-fi">
+  <section class="shelf" id="scifi">
+
    <h2><span class="symbol">✧</span>Sci-Fi & Other Worlds</h2>
+
    <div class="poster-row">
+
     <a class="poster placeholder" data-search="science fiction space planets other worlds coming soon" href="#scifi">
+
      <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=650&q=80" alt="Earth from space">
+
      <div class="poster-label"><strong>Beyond the Stars</strong><span>Stories coming soon</span></div>
+
     </a>
+
    </div>
+
   </section>
 
  </div>
+
  <div class="empty-results" id="emptyResults" hidden>No matching stories or genres found. Try another search.</div>
+
 </main>
 
 <footer>
+
  © 2026 Sovereign Pictures.<br>
+
  Original worlds. Exclusive stories.
+
 </footer>
 
 <script>
-/* Close the opening after four seconds */
-const intro = document.getElementById("intro");
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+const intro=document.getElementById("intro");
+
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+
  intro.remove();
-} else {
- window.setTimeout(() => intro && intro.remove(), 4000);
+
+}else{
+
+ window.setTimeout(()=>{if(intro)intro.remove()},4000);
+
 }
 
-/* Mobile navigation */
-document.getElementById("menuToggle").addEventListener("click", () => {
+document.getElementById("menuToggle").addEventListener("click",()=>{
+
  document.getElementById("navigation").classList.toggle("open");
+
 });
 
-/* Search stories and genre names on this homepage */
-const searchToggle = document.getElementById("searchToggle");
-const searchPanel = document.getElementById("searchPanel");
-const searchInput = document.getElementById("searchInput");
-const clearSearch = document.getElementById("clearSearch");
-const searchStatus = document.getElementById("searchStatus");
-const emptyResults = document.getElementById("emptyResults");
-const shelves = [...document.querySelectorAll(".shelf")];
-const posters = [...document.querySelectorAll(".poster")];
+const searchToggle=document.getElementById("searchToggle");
 
-searchToggle.addEventListener("click", () => {
- searchPanel.hidden = !searchPanel.hidden;
- if (!searchPanel.hidden) searchInput.focus();
+const searchPanel=document.getElementById("searchPanel");
+
+const searchInput=document.getElementById("searchInput");
+
+const clearSearch=document.getElementById("clearSearch");
+
+const searchStatus=document.getElementById("searchStatus");
+
+const emptyResults=document.getElementById("emptyResults");
+
+const shelves=[...document.querySelectorAll(".shelf")];
+
+const posters=[...document.querySelectorAll(".poster")];
+
+searchToggle.addEventListener("click",()=>{
+
+ searchPanel.hidden=!searchPanel.hidden;
+
+ if(!searchPanel.hidden)searchInput.focus();
+
 });
 
-function runSearch() {
- const term = searchInput.value.trim().toLowerCase();
- let visiblePosters = 0;
+function runSearch(){
 
- posters.forEach(poster => {
-  const match = !term || (poster.dataset.search || "").toLowerCase().includes(term);
-  poster.hidden = !match;
-  if (match) visiblePosters++;
+ const term=searchInput.value.trim().toLowerCase();
+
+ let visible=0;
+
+ posters.forEach(p=>{
+
+  const match=!term||(p.dataset.search||"").toLowerCase().includes(term);
+
+  p.hidden=!match;
+
+  if(match)visible++;
+
  });
 
- shelves.forEach(shelf => {
-  const shelfHasPoster = [...shelf.querySelectorAll(".poster")].some(p => !p.hidden);
-  const titleMatches = shelf.querySelector("h2").textContent.toLowerCase().includes(term);
-  shelf.hidden = !!term && !shelfHasPoster && !titleMatches;
+ shelves.forEach(s=>{
+
+  const hasPoster=[...s.querySelectorAll(".poster")].some(p=>!p.hidden);
+
+  const titleMatches=s.querySelector("h2").textContent.toLowerCase().includes(term);
+
+  s.hidden=!!term&&!hasPoster&&!titleMatches;
+
  });
 
- emptyResults.hidden = !term || visiblePosters > 0;
- searchStatus.textContent = term && visiblePosters > 0
-  ? visiblePosters + " matching poster(s) found."
-  : "";
+ emptyResults.hidden=!term||visible>0;
+
+ searchStatus.textContent=term&&visible>0?visible+" matching poster(s) found.":"";
+
 }
-searchInput.addEventListener("input", runSearch);
-clearSearch.addEventListener("click", () => {
- searchInput.value = "";
+
+searchInput.addEventListener("input",runSearch);
+
+clearSearch.addEventListener("click",()=>{
+
+ searchInput.value="";
+
  runSearch();
+
  searchInput.focus();
+
 });
 
-/* Placeholder posters are not published stories yet */
-document.querySelectorAll(".poster.placeholder").forEach(poster => {
- poster.addEventListener("click", event => {
-  event.preventDefault();
+document.querySelectorAll(".poster.placeholder").forEach(p=>{
+
+ p.addEventListener("click",e=>{
+
+  e.preventDefault();
+
   alert("This story is coming soon to Sovereign Pictures.");
+
  });
+
 });
+
 </script>
 
 <script type="module">
-import { createClient } from
- "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const supabase = createClient(
+import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+const supabase=createClient(
+
  "https://ffxmmzxknnrmglqvxwbc.supabase.co",
+
  "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
+
 );
 
-const button = document.getElementById("accountButton");
+const button=document.getElementById("accountButton");
 
-function showAccountButton(session) {
- if (session) {
-  button.textContent = "My Account";
-  button.href = "./dashboard.html";
- } else {
-  button.textContent = "Log In / Create Account";
-  button.href = "./login.html";
+function showAccountButton(session){
+
+ if(session){
+
+  button.textContent="My Account";
+
+  button.href="./dashboard.html";
+
+ }else{
+
+  button.textContent="Log In / Create Account";
+
+  button.href="./login.html";
+
  }
- button.style.visibility = "visible";
+
+ button.style.visibility="visible";
+
 }
 
-try {
- const { data, error } = await supabase.auth.getSession();
- showAccountButton(error ? null : data.session);
+try{
 
- supabase.auth.onAuthStateChange((_event, session) => {
-  showAccountButton(session);
- });
-} catch (error) {
+ const {data,error}=await supabase.auth.getSession();
+
+ showAccountButton(error?null:data.session);
+
+ supabase.auth.onAuthStateChange((_event,session)=>showAccountButton(session));
+
+}catch(error){
+
  showAccountButton(null);
+
 }
+
 </script>
 
 </body>
+
 </html>
