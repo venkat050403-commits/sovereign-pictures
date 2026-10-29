@@ -128,11 +128,7 @@ button{cursor:pointer}
 
 }
 
-.book-emblem:before{
-
- content:"✦";font-size:22px;margin-bottom:10px;
-
-}
+.book-emblem:before{content:"✦";font-size:22px;margin-bottom:10px}
 
 .book-emblem strong{font-size:clamp(12px,2.7vw,22px);letter-spacing:2px;line-height:1.5}
 
@@ -170,13 +166,7 @@ button{cursor:pointer}
 
 }
 
-@keyframes turnPage{
-
- 0%{transform:rotateY(0deg)}
-
- 100%{transform:rotateY(-155deg)}
-
-}
+@keyframes turnPage{0%{transform:rotateY(0deg)}100%{transform:rotateY(-155deg)}}
 
 @keyframes bookReveal{
 
@@ -574,101 +564,145 @@ footer{padding:28px 15px;border-top:1px solid #d6b36a30;text-align:center;color:
 
 <script>
 
-const intro=document.getElementById("intro");
+/* INTRO: PLAY ONCE PER BROWSER */
 
-if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+const intro = document.getElementById("intro");
 
- intro.remove();
+const introKey = "sovereignIntroPlayed";
 
-}else{
+let introAlreadyPlayed = false;
 
- window.setTimeout(()=>{if(intro)intro.remove()},4000);
+try {
 
-}
+  introAlreadyPlayed = localStorage.getItem(introKey) === "yes";
 
-document.getElementById("menuToggle").addEventListener("click",()=>{
+} catch (error) {
 
- document.getElementById("navigation").classList.toggle("open");
-
-});
-
-const searchToggle=document.getElementById("searchToggle");
-
-const searchPanel=document.getElementById("searchPanel");
-
-const searchInput=document.getElementById("searchInput");
-
-const clearSearch=document.getElementById("clearSearch");
-
-const searchStatus=document.getElementById("searchStatus");
-
-const emptyResults=document.getElementById("emptyResults");
-
-const shelves=[...document.querySelectorAll(".shelf")];
-
-const posters=[...document.querySelectorAll(".poster")];
-
-searchToggle.addEventListener("click",()=>{
-
- searchPanel.hidden=!searchPanel.hidden;
-
- if(!searchPanel.hidden)searchInput.focus();
-
-});
-
-function runSearch(){
-
- const term=searchInput.value.trim().toLowerCase();
-
- let visible=0;
-
- posters.forEach(p=>{
-
-  const match=!term||(p.dataset.search||"").toLowerCase().includes(term);
-
-  p.hidden=!match;
-
-  if(match)visible++;
-
- });
-
- shelves.forEach(s=>{
-
-  const hasPoster=[...s.querySelectorAll(".poster")].some(p=>!p.hidden);
-
-  const titleMatches=s.querySelector("h2").textContent.toLowerCase().includes(term);
-
-  s.hidden=!!term&&!hasPoster&&!titleMatches;
-
- });
-
- emptyResults.hidden=!term||visible>0;
-
- searchStatus.textContent=term&&visible>0?visible+" matching poster(s) found.":"";
+  introAlreadyPlayed = false;
 
 }
 
-searchInput.addEventListener("input",runSearch);
+if (
 
-clearSearch.addEventListener("click",()=>{
+  introAlreadyPlayed ||
 
- searchInput.value="";
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
- runSearch();
+) {
 
- searchInput.focus();
+  if (intro) intro.remove();
+
+} else {
+
+  try {
+
+    localStorage.setItem(introKey, "yes");
+
+  } catch (error) {
+
+    /* The animation can still run if browser storage is unavailable. */
+
+  }
+
+  window.setTimeout(() => {
+
+    if (intro) intro.remove();
+
+  }, 4000);
+
+}
+
+/* MOBILE NAVIGATION */
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+
+  document.getElementById("navigation").classList.toggle("open");
 
 });
 
-document.querySelectorAll(".poster.placeholder").forEach(p=>{
+/* STORY SEARCH */
 
- p.addEventListener("click",e=>{
+const searchToggle = document.getElementById("searchToggle");
 
-  e.preventDefault();
+const searchPanel = document.getElementById("searchPanel");
 
-  alert("This story is coming soon to Sovereign Pictures.");
+const searchInput = document.getElementById("searchInput");
 
- });
+const clearSearch = document.getElementById("clearSearch");
+
+const searchStatus = document.getElementById("searchStatus");
+
+const emptyResults = document.getElementById("emptyResults");
+
+const shelves = [...document.querySelectorAll(".shelf")];
+
+const posters = [...document.querySelectorAll(".poster")];
+
+searchToggle.addEventListener("click", () => {
+
+  searchPanel.hidden = !searchPanel.hidden;
+
+  if (!searchPanel.hidden) searchInput.focus();
+
+});
+
+function runSearch() {
+
+  const term = searchInput.value.trim().toLowerCase();
+
+  let visible = 0;
+
+  posters.forEach(p => {
+
+    const match = !term || (p.dataset.search || "").toLowerCase().includes(term);
+
+    p.hidden = !match;
+
+    if (match) visible++;
+
+  });
+
+  shelves.forEach(s => {
+
+    const hasPoster = [...s.querySelectorAll(".poster")].some(p => !p.hidden);
+
+    const titleMatches = s.querySelector("h2").textContent.toLowerCase().includes(term);
+
+    s.hidden = !!term && !hasPoster && !titleMatches;
+
+  });
+
+  emptyResults.hidden = !term || visible > 0;
+
+  searchStatus.textContent =
+
+    term && visible > 0 ? visible + " matching poster(s) found." : "";
+
+}
+
+searchInput.addEventListener("input", runSearch);
+
+clearSearch.addEventListener("click", () => {
+
+  searchInput.value = "";
+
+  runSearch();
+
+  searchInput.focus();
+
+});
+
+/* COMING-SOON STORIES */
+
+document.querySelectorAll(".poster.placeholder").forEach(p => {
+
+  p.addEventListener("click", e => {
+
+    e.preventDefault();
+
+    alert("This story is coming soon to Sovereign Pictures.");
+
+  });
 
 });
 
@@ -676,49 +710,53 @@ document.querySelectorAll(".poster.placeholder").forEach(p=>{
 
 <script type="module">
 
-import {createClient} from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const supabase=createClient(
+const supabase = createClient(
 
- "https://ffxmmzxknnrmglqvxwbc.supabase.co",
+  "https://ffxmmzxknnrmglqvxwbc.supabase.co",
 
- "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
+  "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt"
 
 );
 
-const button=document.getElementById("accountButton");
+const button = document.getElementById("accountButton");
 
-function showAccountButton(session){
+function showAccountButton(session) {
 
- if(session){
+  if (session) {
 
-  button.textContent="My Account";
+    button.textContent = "My Account";
 
-  button.href="./dashboard.html";
+    button.href = "./dashboard.html";
 
- }else{
+  } else {
 
-  button.textContent="Log In / Create Account";
+    button.textContent = "Log In / Create Account";
 
-  button.href="./login.html";
+    button.href = "./login.html";
 
- }
+  }
 
- button.style.visibility="visible";
+  button.style.visibility = "visible";
 
 }
 
-try{
+try {
 
- const {data,error}=await supabase.auth.getSession();
+  const { data, error } = await supabase.auth.getSession();
 
- showAccountButton(error?null:data.session);
+  showAccountButton(error ? null : data.session);
 
- supabase.auth.onAuthStateChange((_event,session)=>showAccountButton(session));
+  supabase.auth.onAuthStateChange((_event, session) => {
 
-}catch(error){
+    showAccountButton(session);
 
- showAccountButton(null);
+  });
+
+} catch (error) {
+
+  showAccountButton(null);
 
 }
 
