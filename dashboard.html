@@ -1,445 +1,669 @@
 
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>My Account | Sovereign Pictures</title>
+
   <meta name="theme-color" content="#100d0a">
 
   <style>
+
     :root {
+
       --bg: #100d0a;
+
       --panel: #1c1711;
+
       --panel-light: #241d14;
+
       --gold: #d6b36a;
+
       --gold-light: #f1d99b;
+
       --text: #f7f0e3;
+
       --muted: #b9ad98;
+
       --border: rgba(214, 179, 106, 0.25);
+
       --green: #8fd3a7;
+
       --red: #f0a0a0;
+
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
+
       margin: 0;
-      background:
-        radial-gradient(ellipse at top, #2b2115 0%, var(--bg) 55%);
+
+      background: radial-gradient(ellipse at top, #2b2115 0%, var(--bg) 55%);
+
       color: var(--text);
+
       font-family: Georgia, "Times New Roman", serif;
+
       line-height: 1.6;
+
       min-height: 100vh;
+
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     .topbar {
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       gap: 16px;
+
       padding: 20px 6%;
+
       border-bottom: 1px solid var(--border);
+
       background: rgba(16, 13, 10, 0.85);
+
     }
 
     .brand {
+
       color: var(--gold-light);
+
       font-size: 1.15rem;
+
       font-weight: bold;
+
       letter-spacing: 2px;
+
     }
 
     .top-link {
+
       color: var(--gold-light);
+
       border: 1px solid var(--border);
+
       border-radius: 999px;
+
       padding: 8px 15px;
+
       font-family: Arial, sans-serif;
+
       font-size: 0.85rem;
+
     }
 
     main {
+
       width: min(1050px, 90%);
+
       margin: 0 auto;
+
       padding: 42px 0 60px;
+
     }
 
     .eyebrow {
+
       color: var(--gold);
+
       font-family: Arial, sans-serif;
+
       font-size: 0.76rem;
+
       letter-spacing: 3px;
+
       text-transform: uppercase;
+
     }
 
     h1 {
+
       color: var(--gold-light);
+
       font-size: clamp(2.2rem, 6vw, 3.5rem);
+
       line-height: 1.1;
+
       margin: 10px 0;
+
     }
 
     h2 {
+
       color: var(--gold-light);
+
       margin-top: 0;
+
       font-size: 1.35rem;
+
     }
 
-    .intro {
-      color: var(--muted);
-      margin-bottom: 32px;
-    }
+    .intro { color: var(--muted); margin-bottom: 32px; }
 
     .section-heading {
+
       margin: 34px 0 16px;
+
       font-size: 0.8rem;
+
       color: var(--gold);
+
       letter-spacing: 2px;
+
       font-family: Arial, sans-serif;
+
       text-transform: uppercase;
+
     }
 
     .grid {
+
       display: grid;
+
       grid-template-columns: repeat(2, minmax(0, 1fr));
+
       gap: 18px;
+
     }
+
+    .wide { grid-column: 1 / -1; }
 
     .card {
-      background: linear-gradient(145deg, var(--panel-light), var(--panel));
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      min-width: 0;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
-    }
 
-    .wide {
-      grid-column: 1 / -1;
+      background: linear-gradient(145deg, var(--panel-light), var(--panel));
+
+      border: 1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 24px;
+
+      min-width: 0;
+
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.16);
+
     }
 
     .muted {
+
       color: var(--muted);
+
       font-family: Arial, sans-serif;
+
       font-size: 0.92rem;
+
     }
 
-    .email {
-      overflow-wrap: anywhere;
-      color: var(--text);
-    }
+    .email { overflow-wrap: anywhere; color: var(--text); }
 
     .status {
+
       display: inline-block;
+
       border: 1px solid var(--border);
+
       border-radius: 999px;
+
       padding: 5px 11px;
+
       color: var(--gold-light);
+
       font-family: Arial, sans-serif;
+
       font-size: 0.78rem;
+
       margin: 5px 0 10px;
+
     }
 
     .status.active {
+
       color: var(--green);
+
       border-color: rgba(143, 211, 167, 0.45);
+
     }
 
-    .status.inactive {
-      color: var(--muted);
-    }
+    .status.inactive { color: var(--muted); }
 
     .status.error {
+
       color: var(--red);
+
       border-color: rgba(240, 160, 160, 0.45);
+
     }
 
     .button-link,
+
     button {
+
       display: inline-block;
+
       border: 1px solid var(--gold);
+
       border-radius: 999px;
+
       background: var(--gold);
+
       color: #171109;
+
       padding: 11px 16px;
+
       font-family: Arial, sans-serif;
+
       font-size: 0.88rem;
+
       font-weight: bold;
+
       text-align: center;
+
       cursor: pointer;
+
       margin: 8px 7px 0 0;
+
     }
 
     .button-link.secondary,
+
     button.secondary {
+
       background: transparent;
+
       color: var(--gold-light);
+
     }
 
     .button-link:hover,
+
     button:hover {
+
       background: var(--gold-light);
+
       color: #171109;
+
     }
 
     .price {
+
       font-size: 1.5rem;
+
       color: var(--gold-light);
+
       margin: 8px 0;
+
     }
 
     .plan-label {
+
       color: var(--gold);
+
       font-family: Arial, sans-serif;
+
       font-size: 0.74rem;
+
       letter-spacing: 1.5px;
+
       text-transform: uppercase;
+
     }
 
     .plan-card {
+
       display: flex;
+
       flex-direction: column;
+
       align-items: flex-start;
+
     }
 
-    .plan-card .button-link {
-      margin-top: auto;
+    .plan-card .button-link { margin-top: auto; }
+
+    .coming-soon {
+
+      display: inline-block;
+
+      border: 1px solid var(--border);
+
+      border-radius: 999px;
+
+      color: var(--gold-light);
+
+      padding: 7px 12px;
+
+      margin-top: 8px;
+
+      font: bold 0.75rem Arial, sans-serif;
+
+      letter-spacing: 1px;
+
     }
 
     .footer {
+
       text-align: center;
+
       color: var(--muted);
+
       border-top: 1px solid var(--border);
+
       padding: 24px 10px;
+
       font-family: Arial, sans-serif;
+
       font-size: 0.82rem;
+
     }
 
     @media (max-width: 650px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
 
-      .wide {
-        grid-column: auto;
-      }
+      .grid { grid-template-columns: 1fr; }
 
-      .topbar {
-        padding: 16px 5%;
-      }
+      .wide { grid-column: auto; }
 
-      .brand {
-        font-size: 0.95rem;
-        letter-spacing: 1px;
-      }
+      .topbar { padding: 16px 5%; }
 
-      main {
-        padding-top: 30px;
-      }
+      .brand { font-size: 0.95rem; letter-spacing: 1px; }
 
-      .card {
-        padding: 20px;
-      }
+      main { padding-top: 30px; }
 
-      .button-link,
-      button {
-        max-width: 100%;
-      }
+      .card { padding: 20px; }
+
+      .button-link, button { max-width: 100%; }
+
     }
+
   </style>
+
 </head>
 
 <body>
+
   <header class="topbar">
+
     <a class="brand" href="./index.html">SOVEREIGN PICTURES</a>
-    <a class="top-link" href="./library.html">Explore</a>
+
+    <a class="top-link" href="./index.html">Go to Homepage</a>
+
   </header>
 
   <main>
+
     <div class="eyebrow">Your Personal Space</div>
+
     <h1>My Account</h1>
+
     <p class="intro">
+
       Welcome back. Your stories, your worlds, your universe.
+
     </p>
 
     <div id="pageMessage" class="muted" aria-live="polite">
+
       Checking your account...
+
     </div>
 
     <h2 class="section-heading">Account Overview</h2>
 
     <div class="grid">
+
       <section class="card">
+
         <h2>Your Profile</h2>
+
         <span class="status" id="accountStatus">Checking...</span>
 
         <p class="muted">Email address</p>
+
         <p class="email" id="accountEmail">Loading...</p>
 
         <p class="muted">Overall membership</p>
+
         <span class="status" id="membershipStatus">Checking...</span>
+
         <p class="muted" id="membershipMessage" aria-live="polite">
+
           Checking your membership.
+
         </p>
+
       </section>
 
       <section class="card">
+
         <h2>Account Security</h2>
+
         <p class="muted">
+
           Keep your account secure. Sign out when you have finished using
+
           a shared device.
+
         </p>
+
         <button id="logoutButton" type="button">Log Out</button>
+
         <p id="logoutMessage" class="muted" aria-live="polite"></p>
+
       </section>
+
     </div>
 
     <h2 class="section-heading">Your Access</h2>
 
     <div class="grid">
+
       <section class="card">
+
         <h2>Story Library</h2>
+
         <p class="muted">
+
           Access premium written stories and reading experiences.
+
         </p>
+
         <span class="status" id="storyStatus">Checking...</span>
+
         <p class="muted" id="storyMessage" aria-live="polite">
+
           Checking your story subscription.
+
         </p>
+
         <a class="button-link" href="./membership.html">
+
           Story Reader · ₹99/month
+
         </a>
-        <a class="button-link secondary" href="./library.html">
-          Explore Stories
-        </a>
+
       </section>
 
       <section class="card">
+
         <h2>Cinema</h2>
+
         <p class="muted">
+
           Access premium videos and cinematic experiences.
+
         </p>
+
         <span class="status" id="videoStatus">Checking...</span>
+
         <p class="muted" id="videoMessage" aria-live="polite">
+
           Checking your video subscription.
+
         </p>
-        <a class="button-link" href="./membership.html">
-          Stories + Videos · ₹199/month
-        </a>
-        <a class="button-link secondary" href="./membership.html">
-          Annual All-Access · ₹799/year
-        </a>
+
+        <p class="muted">
+
+          Stories + Videos subscription
+
+        </p>
+
+        <span class="coming-soon">COMING SOON</span>
+
+        <p class="muted" style="margin-top:20px">
+
+          Annual All-Access subscription
+
+        </p>
+
+        <span class="coming-soon">COMING SOON</span>
+
       </section>
+
     </div>
 
     <h2 class="section-heading">Membership Plans</h2>
 
     <div class="grid">
+
       <section class="card plan-card">
+
         <span class="plan-label">For Readers</span>
+
         <h2>Story Reader</h2>
+
         <p class="price">₹99 <span class="muted">/ month</span></p>
+
         <p class="muted">
+
           Read exclusive written stories and premium chapters.
+
         </p>
+
         <a class="button-link" href="./membership.html">
+
           View Story Reader
+
         </a>
+
       </section>
 
       <section class="card plan-card">
+
         <span class="plan-label">Stories + Cinema</span>
+
         <h2>Stories + Videos</h2>
-        <p class="price">₹199 <span class="muted">/ month</span></p>
+
         <p class="muted">
+
           Read exclusive stories and watch cinematic experiences.
+
         </p>
-        <a class="button-link" href="./membership.html">
-          View Stories + Videos
-        </a>
+
+        <span class="coming-soon">COMING SOON</span>
+
       </section>
 
       <section class="card plan-card wide">
+
         <span class="plan-label">Annual All-Access</span>
+
         <h2>A Full Year in Our Universe</h2>
-        <p class="price">₹799 <span class="muted">/ year</span></p>
+
         <p class="muted">
+
           Explore exclusive written stories and cinematic videos for
+
           a full year.
+
         </p>
-        <a class="button-link" href="./membership.html">
-          View Annual All-Access
-        </a>
+
+        <span class="coming-soon">COMING SOON</span>
+
       </section>
+
     </div>
 
-    <h2 class="section-heading">Discover More</h2>
+    <p class="muted" style="margin-top:25px">
 
-    <section class="card">
-      <h2>Explore the Sovereign Universe</h2>
-      <p class="muted">
-        Discover stories, characters, and worlds created for Sovereign
-        Pictures.
-      </p>
-      <a class="button-link" href="./library.html">Explore Library</a>
-      <a class="button-link secondary" href="./index.html">
-        Back to Homepage
-      </a>
-    </section>
+      Membership checkout is not active yet. Selecting Story Reader opens
 
-    <p class="muted" style="margin-top: 25px;">
-      Membership checkout is not active yet. Selecting a plan opens the
-      membership page; it does not charge you or activate a subscription.
+      the membership page; it does not charge you or activate a subscription.
+
     </p>
+
   </main>
 
   <footer class="footer">
+
     © Sovereign Pictures · Every world has a story.
+
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
+
     const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
+
     const SUPABASE_ANON_KEY =
+
       "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
 
     const supabaseClient = window.supabase.createClient(
+
       SUPABASE_URL,
+
       SUPABASE_ANON_KEY
+
     );
 
     const pageMessage = document.getElementById("pageMessage");
 
     function setStatus(id, text, kind = "") {
+
       const element = document.getElementById(id);
+
       element.textContent = text;
+
       element.className = "status" + (kind ? " " + kind : "");
+
     }
 
     function setText(id, text) {
+
       document.getElementById(id).textContent = text;
+
     }
 
     function isCurrentSubscription(subscription) {
+
       if (subscription.status !== "active") return false;
 
       if (!subscription.current_period_end) return true;
 
       return new Date(subscription.current_period_end).getTime() > Date.now();
+
     }
 
     async function loadAccount() {
+
       try {
+
         const { data: sessionData, error: sessionError } =
+
           await supabaseClient.auth.getSession();
 
         if (sessionError) throw sessionError;
@@ -447,134 +671,221 @@
         const session = sessionData.session;
 
         if (!session) {
+
           window.location.replace("./login.html");
+
           return;
+
         }
 
         const user = session.user;
 
         setText("accountEmail", user.email || "Email unavailable");
+
         setStatus("accountStatus", "Account Active", "active");
+
         pageMessage.textContent = "Your account is ready.";
 
         const { data: profile, error: profileError } =
+
           await supabaseClient
+
             .from("profiles")
+
             .select("membership_tier")
+
             .eq("id", user.id)
+
             .maybeSingle();
 
         if (profileError) throw profileError;
 
         const tier = profile?.membership_tier || "free";
+
         const tierLabels = {
+
           free: "Free",
+
           stories: "Story Reader",
+
           cinema: "Stories + Videos",
+
           all_access: "Annual All-Access"
+
         };
 
         setStatus(
+
           "membershipStatus",
+
           tierLabels[tier] || "Free",
+
           tier === "free" ? "inactive" : "active"
+
         );
 
         setText(
+
           "membershipMessage",
+
           tier === "free"
+
             ? "You currently have a free membership."
+
             : "Your profile membership is listed as " +
-                (tierLabels[tier] || tier) +
-                ". Your individual subscription status is shown below."
+
+              (tierLabels[tier] || tier) +
+
+              ". Your individual subscription status is shown below."
+
         );
 
         const { data: subscriptions, error: subscriptionError } =
+
           await supabaseClient
+
             .from("subscriptions")
+
             .select("subscription_type, status, current_period_end")
+
             .eq("user_id", user.id);
 
         if (subscriptionError) throw subscriptionError;
 
         const activeSubscriptions = (subscriptions || [])
+
           .filter(isCurrentSubscription);
 
         const hasStoryAccess = activeSubscriptions.some(
+
           item =>
+
             item.subscription_type === "stories" ||
+
             item.subscription_type === "all_access"
+
         );
 
         const hasCinemaAccess = activeSubscriptions.some(
+
           item =>
+
             item.subscription_type === "cinema" ||
+
             item.subscription_type === "all_access"
+
         );
 
         setStatus(
+
           "storyStatus",
+
           hasStoryAccess ? "Active Subscription" : "No Active Subscription",
+
           hasStoryAccess ? "active" : "inactive"
+
         );
 
         setText(
+
           "storyMessage",
+
           hasStoryAccess
+
             ? "An active subscription for written stories was found."
+
             : "No active paid story subscription was found for this account."
+
         );
 
         setStatus(
+
           "videoStatus",
+
           hasCinemaAccess ? "Active Subscription" : "No Active Subscription",
+
           hasCinemaAccess ? "active" : "inactive"
+
         );
 
         setText(
+
           "videoMessage",
+
           hasCinemaAccess
+
             ? "An active subscription for cinema was found."
+
             : "No active paid cinema subscription was found for this account."
+
         );
+
       } catch (error) {
+
         console.error("Account loading error:", error);
+
         pageMessage.textContent =
+
           "We could not load all account details. Please refresh the page.";
 
         setStatus("accountStatus", "Account Details Unavailable", "error");
+
         setText("accountEmail", "Please refresh to try again.");
+
         setStatus("membershipStatus", "Unavailable", "error");
+
         setText("membershipMessage", "Membership details could not be loaded.");
+
         setStatus("storyStatus", "Unable to Check", "error");
+
         setText("storyMessage", "Please refresh to check story access.");
+
         setStatus("videoStatus", "Unable to Check", "error");
+
         setText("videoMessage", "Please refresh to check cinema access.");
+
       }
+
     }
 
     document.getElementById("logoutButton").addEventListener("click", async () => {
+
       const button = document.getElementById("logoutButton");
+
       const message = document.getElementById("logoutMessage");
 
       button.disabled = true;
+
       button.textContent = "Signing Out...";
+
       message.textContent = "";
 
       try {
+
         const { error } = await supabaseClient.auth.signOut();
+
         if (error) throw error;
 
         window.location.replace("./login.html");
+
       } catch (error) {
+
         console.error("Logout error:", error);
+
         message.textContent = "Could not sign out. Please try again.";
+
         button.disabled = false;
+
         button.textContent = "Log Out";
+
       }
+
     });
 
     loadAccount();
+
   </script>
+
 </body>
+
 </html>
