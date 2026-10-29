@@ -56,6 +56,68 @@ nav>a:hover{color:var(--gold)}
 .search-inner button{background:var(--gold);color:#171109;border:0;border-radius:4px;padding:0 17px}
 #searchStatus{font:12px Arial,sans-serif;color:var(--muted);margin:12px auto 0;max-width:700px}
 
+#searchSuggestions {
+  max-width: 700px;
+  margin: 10px auto 0;
+  background: #211910;
+  border: 1px solid #79613b;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 14px 35px #0009;
+  position: relative;
+  z-index: 100;
+}
+
+.search-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 13px;
+  border-bottom: 1px solid var(--border);
+  transition: background .2s;
+}
+
+.search-suggestion:last-child {
+  border-bottom: 0;
+}
+
+.search-suggestion:hover,
+.search-suggestion:focus {
+  background: #382819;
+  outline: none;
+}
+
+.search-suggestion img {
+  width: 48px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.suggestion-details {
+  min-width: 0;
+}
+
+.suggestion-details strong {
+  display: block;
+  color: var(--cream);
+  font-size: 15px;
+}
+
+.suggestion-details span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font: 12px Arial, sans-serif;
+}
+
+.suggestion-empty {
+  padding: 15px;
+  color: var(--muted);
+  font: 13px/1.5 Arial, sans-serif;
+}
+
 .hero{min-height:420px;display:flex;align-items:center;padding:60px 5%;background:linear-gradient(90deg,#100d0af5 0%,#100d0ab8 48%,#100d0a15 100%),linear-gradient(0deg,#100d0a,transparent 45%),url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center/cover}
 .hero-content{max-width:600px}
 .eyebrow{font:11px Arial,sans-serif;color:var(--gold);letter-spacing:4px;text-transform:uppercase}
