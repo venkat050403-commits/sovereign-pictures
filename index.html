@@ -50,73 +50,23 @@ nav>a:hover{color:var(--gold)}
 .search-toggle,.menu-toggle{border:0;background:transparent;color:var(--cream);font-size:23px;padding:5px}
 .account{display:inline-block;background:var(--gold);color:#171109;border:1px solid var(--gold);border-radius:4px;padding:11px 13px;font:bold 12px Arial,sans-serif;white-space:nowrap;text-align:center}
 .menu-toggle{display:none}
+
 .search-panel{padding:18px 4%;background:#19130e;border-bottom:1px solid var(--border)}
 .search-inner{display:flex;gap:10px;max-width:700px;margin:auto}
-.search-inner input{width:100%;padding:13px 15px;border:1px solid #79613b;border-radius:4px;background:#0e0c09;color:white;outline:none}
+.search-inner input{width:100%;min-width:0;padding:13px 15px;border:1px solid #79613b;border-radius:4px;background:#0e0c09;color:white;outline:none}
+.search-inner input:focus{border-color:var(--gold);box-shadow:0 0 0 2px #d6b36a20}
 .search-inner button{background:var(--gold);color:#171109;border:0;border-radius:4px;padding:0 17px}
 #searchStatus{font:12px Arial,sans-serif;color:var(--muted);margin:12px auto 0;max-width:700px}
 
-#searchSuggestions {
-  max-width: 700px;
-  margin: 10px auto 0;
-  background: #211910;
-  border: 1px solid #79613b;
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 14px 35px #0009;
-  position: relative;
-  z-index: 100;
-}
-
-.search-suggestion {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 10px 13px;
-  border-bottom: 1px solid var(--border);
-  transition: background .2s;
-}
-
-.search-suggestion:last-child {
-  border-bottom: 0;
-}
-
-.search-suggestion:hover,
-.search-suggestion:focus {
-  background: #382819;
-  outline: none;
-}
-
-.search-suggestion img {
-  width: 48px;
-  height: 68px;
-  object-fit: cover;
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-
-.suggestion-details {
-  min-width: 0;
-}
-
-.suggestion-details strong {
-  display: block;
-  color: var(--cream);
-  font-size: 15px;
-}
-
-.suggestion-details span {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font: 12px Arial, sans-serif;
-}
-
-.suggestion-empty {
-  padding: 15px;
-  color: var(--muted);
-  font: 13px/1.5 Arial, sans-serif;
-}
+#searchSuggestions{max-width:700px;margin:10px auto 0;background:#211910;border:1px solid #79613b;border-radius:6px;overflow:hidden;box-shadow:0 14px 35px #0009;position:relative;z-index:100}
+.search-suggestion{display:flex;align-items:center;gap:13px;padding:10px 13px;border-bottom:1px solid var(--border);transition:background .2s}
+.search-suggestion:last-child{border-bottom:0}
+.search-suggestion:hover,.search-suggestion:focus{background:#382819;outline:none}
+.search-suggestion img{width:48px;height:68px;object-fit:cover;border-radius:3px;flex-shrink:0;background:#130f0b}
+.suggestion-details{min-width:0}
+.suggestion-details strong{display:block;color:var(--cream);font-size:15px}
+.suggestion-details span{display:block;margin-top:4px;color:var(--muted);font:12px Arial,sans-serif}
+.suggestion-empty{padding:15px;color:var(--muted);font:13px/1.5 Arial,sans-serif}
 
 .hero{min-height:420px;display:flex;align-items:center;padding:60px 5%;background:linear-gradient(90deg,#100d0af5 0%,#100d0ab8 48%,#100d0a15 100%),linear-gradient(0deg,#100d0a,transparent 45%),url("https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1800&q=85") center/cover}
 .hero-content{max-width:600px}
@@ -135,7 +85,6 @@ nav>a:hover{color:var(--gold)}
 .poster-label strong{display:block;font-size:15px;line-height:1.35}
 .poster-label span{display:block;color:#dfd2bd;font:10px Arial,sans-serif;margin-top:5px}
 .poster .tag{position:absolute;z-index:2;top:9px;left:8px;background:var(--gold);color:#171109;padding:5px 7px;font:bold 9px Arial,sans-serif;letter-spacing:1px}
-.poster-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;background:radial-gradient(ellipse at top,#5a4020,#130f0b 72%);color:var(--gold);font-size:23px}
 .empty-results{padding:25px 4%;color:var(--muted);font:14px Arial,sans-serif}
 .notice{margin:12px 4% 25px;padding:14px 16px;border:1px solid var(--border);border-radius:5px;color:var(--muted);font:13px/1.7 Arial,sans-serif}
 footer{padding:28px 15px;border-top:1px solid var(--border);text-align:center;color:#918779;font:12px/1.8 Arial,sans-serif}
@@ -152,6 +101,8 @@ nav.open{display:flex}
 .hero h1{font-size:43px}
 .poster-row{grid-auto-columns:39%}
 .shelf h2{font-size:20px}
+.search-inner{gap:7px}
+.search-inner button{padding:0 12px}
 }
 @media(prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}
@@ -201,10 +152,11 @@ html{scroll-behavior:auto}
 
 <div class="search-panel" id="searchPanel" hidden>
   <div class="search-inner">
-    <input id="searchInput" type="search" placeholder="Search stories or genres..." aria-label="Search stories or genres">
+    <input id="searchInput" type="search" placeholder="Search stories or genres..." aria-label="Search stories or genres" autocomplete="off">
     <button id="clearSearch" type="button">Clear</button>
   </div>
   <div id="searchStatus" aria-live="polite"></div>
+  <div id="searchSuggestions" role="listbox" aria-label="Search suggestions" hidden></div>
 </div>
 
 <main>
@@ -220,7 +172,7 @@ html{scroll-behavior:auto}
     <section class="shelf" id="featured">
       <h2><span class="symbol">✦</span>Featured Stories</h2>
       <div class="poster-row">
-        <a class="poster" data-search="aarya fantasy kingdom princess the fall featured" href="./aarya-book.html">
+        <a class="poster" data-search="aarya aria arya fantasy kingdom princess the fall featured" href="./aarya-book.html">
           <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape">
           <span class="tag">FEATURED</span>
           <div class="poster-label"><strong>AARYA</strong><span>Fantasy · The Fall</span></div>
@@ -231,7 +183,7 @@ html{scroll-behavior:auto}
     <section class="shelf" id="fantasy">
       <h2><span class="symbol">♜</span>Fantasy &amp; Kingdoms</h2>
       <div class="poster-row">
-        <a class="poster" data-search="aarya fantasy kingdom princess the fall" href="./aarya-book.html">
+        <a class="poster" data-search="aarya aria arya fantasy kingdom princess the fall" href="./aarya-book.html">
           <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=650&q=80" alt="Fantasy landscape">
           <div class="poster-label"><strong>AARYA</strong><span>Part One: The Fall</span></div>
         </a>
@@ -307,17 +259,27 @@ html{scroll-behavior:auto}
 </footer>
 
 <script>
+/* Opening book animation */
 const intro = document.getElementById("intro");
 let introAlreadyPlayed = false;
-try { introAlreadyPlayed = localStorage.getItem("sovereignIntroPlayed") === "yes"; } catch (error) {}
+
+try {
+  introAlreadyPlayed = localStorage.getItem("sovereignIntroPlayed") === "yes";
+} catch (error) {}
 
 if (introAlreadyPlayed || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   if (intro) intro.remove();
 } else {
-  try { localStorage.setItem("sovereignIntroPlayed", "yes"); } catch (error) {}
-  window.setTimeout(() => { if (intro) intro.remove(); }, 4000);
+  try {
+    localStorage.setItem("sovereignIntroPlayed", "yes");
+  } catch (error) {}
+
+  window.setTimeout(() => {
+    if (intro) intro.remove();
+  }, 4000);
 }
 
+/* Mobile navigation */
 const menuToggle = document.getElementById("menuToggle");
 const navigation = document.getElementById("navigation");
 
@@ -333,51 +295,160 @@ navigation.querySelectorAll("a").forEach(link => {
   });
 });
 
+/* Search elements */
 const searchToggle = document.getElementById("searchToggle");
 const searchPanel = document.getElementById("searchPanel");
 const searchInput = document.getElementById("searchInput");
 const clearSearch = document.getElementById("clearSearch");
 const searchStatus = document.getElementById("searchStatus");
+const searchSuggestions = document.getElementById("searchSuggestions");
 const emptyResults = document.getElementById("emptyResults");
 
 searchToggle.addEventListener("click", () => {
   searchPanel.hidden = !searchPanel.hidden;
-  if (!searchPanel.hidden) searchInput.focus();
+
+  if (!searchPanel.hidden) {
+    searchInput.focus();
+  } else {
+    searchSuggestions.hidden = true;
+  }
 });
 
+/* Create live Netflix-style search suggestions */
 function runSearch() {
   const term = searchInput.value.trim().toLowerCase();
+  const posters = [...document.querySelectorAll(".poster")];
   let visible = 0;
 
-  document.querySelectorAll(".poster").forEach(poster => {
-    const searchable = ((poster.dataset.search || "") + " " + poster.textContent).toLowerCase();
+  /* Preserve the existing homepage filtering */
+  posters.forEach(poster => {
+    const searchable =
+      ((poster.dataset.search || "") + " " + poster.textContent).toLowerCase();
+
     const match = !term || searchable.includes(term);
     poster.hidden = !match;
+
     if (match) visible++;
   });
 
   document.querySelectorAll(".shelf").forEach(shelf => {
-    const hasVisible = [...shelf.querySelectorAll(".poster")].some(poster => !poster.hidden);
+    const hasVisible = [...shelf.querySelectorAll(".poster")]
+      .some(poster => !poster.hidden);
+
     shelf.hidden = !!term && !hasVisible;
   });
 
   emptyResults.hidden = !term || visible > 0;
-  searchStatus.textContent = term && visible ? visible + " matching poster(s) found." : "";
+
+  /* Clear old dropdown results */
+  searchSuggestions.replaceChildren();
+  searchSuggestions.hidden = true;
+
+  if (!term) {
+    searchStatus.textContent = "";
+    return;
+  }
+
+  /* Find matching titles and keywords */
+  const matches = posters.filter(poster => {
+    const searchable =
+      ((poster.dataset.search || "") + " " + poster.textContent).toLowerCase();
+
+    return searchable.includes(term);
+  });
+
+  /* Avoid duplicate results for the same story in different shelves */
+  const uniqueMatches = [];
+  const seen = new Set();
+
+  matches.forEach(poster => {
+    const title =
+      poster.querySelector(".poster-label strong")?.textContent.trim()
+      || poster.textContent.trim();
+
+    const href = poster.getAttribute("href") || "#";
+    const key = title.toLowerCase() + "|" + href;
+
+    if (!seen.has(key)) {
+      seen.add(key);
+      uniqueMatches.push({ poster, title, href });
+    }
+  });
+
+  if (uniqueMatches.length === 0) {
+    const message = document.createElement("div");
+    message.className = "suggestion-empty";
+    message.textContent = "No matching stories found. Try another title or genre.";
+
+    searchSuggestions.appendChild(message);
+    searchSuggestions.hidden = false;
+    searchStatus.textContent = "";
+    return;
+  }
+
+  /* Display up to eight suggestions */
+  uniqueMatches.slice(0, 8).forEach(({ poster, title, href }) => {
+    const link = document.createElement("a");
+    link.className = "search-suggestion";
+    link.href = href;
+    link.setAttribute("role", "option");
+
+    const originalImage = poster.querySelector("img");
+    const image = document.createElement("img");
+
+    if (originalImage) {
+      image.src = originalImage.src;
+      image.alt = originalImage.alt || title;
+      image.loading = "lazy";
+    }
+
+    const details = document.createElement("div");
+    details.className = "suggestion-details";
+
+    const name = document.createElement("strong");
+    name.textContent = title;
+
+    const subtitle = document.createElement("span");
+    subtitle.textContent =
+      poster.querySelector(".poster-label span")?.textContent.trim()
+      || "Sovereign Pictures";
+
+    details.append(name, subtitle);
+    link.append(image, details);
+    searchSuggestions.appendChild(link);
+  });
+
+  searchSuggestions.hidden = false;
+
+  searchStatus.textContent =
+    uniqueMatches.length + " matching " +
+    (uniqueMatches.length === 1 ? "result" : "results") + ".";
 }
 
+/* Suggestions update immediately as the user types */
 searchInput.addEventListener("input", runSearch);
 
+/* Clear the query and restore all homepage posters */
 clearSearch.addEventListener("click", () => {
   searchInput.value = "";
   runSearch();
   searchInput.focus();
 });
 
+/* Coming-soon posters do not navigate to unfinished pages */
 document.querySelectorAll(".poster.placeholder").forEach(poster => {
   poster.addEventListener("click", event => {
     event.preventDefault();
     alert("This story is coming soon to Sovereign Pictures.");
   });
+});
+
+/* Escape closes the suggestions */
+searchInput.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    searchSuggestions.hidden = true;
+    searchInput.blur();
+  }
 });
 </script>
 
@@ -399,13 +470,18 @@ function showAccountButton(session) {
     accountButton.textContent = "Log In / Create Account";
     accountButton.href = "./login.html";
   }
+
   accountButton.style.visibility = "visible";
 }
 
 try {
   const { data, error } = await supabase.auth.getSession();
+
   showAccountButton(error ? null : data.session);
-  supabase.auth.onAuthStateChange((_event, session) => showAccountButton(session));
+
+  supabase.auth.onAuthStateChange((_event, session) => {
+    showAccountButton(session);
+  });
 } catch (error) {
   showAccountButton(null);
 }
