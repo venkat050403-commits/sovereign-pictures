@@ -10,23 +10,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<meta name="theme-color" content="#080808">
+<meta name="theme-color" content="#100d0a">
 
 <title>AARYA | Sovereign Pictures</title>
 
 <style>
-
-:root {
-
-  --gold: #d8b568;
-
-  --paper: #f4ead4;
-
-  --ink: #302719;
-
-  --reader-font: 16px;
-
-}
 
 * { box-sizing: border-box; }
 
@@ -34,205 +22,177 @@ html, body {
 
   margin: 0;
 
-  min-height: 100%;
-
-  background: radial-gradient(ellipse at top, #40331f, #080808 75%);
-
-  color: #f7f0e2;
-
-  font-family: Georgia, serif;
-
-}
-
-header {
-
-  padding: 18px 16px;
-
-  text-align: center;
-
-  border-bottom: 1px solid #6e572b;
-
-}
-
-.brand {
-
-  color: var(--gold);
-
-  letter-spacing: 4px;
-
-  font-size: 12px;
-
-}
-
-header a {
-
-  display: inline-block;
-
-  margin-top: 12px;
-
-  color: #e7d5a8;
-
-  font-size: 13px;
-
-  text-decoration: none;
-
-}
-
-main {
-
-  width: min(1000px, 96%);
-
-  margin: 18px auto;
-
-}
-
-button, select {
-
-  border: 1px solid var(--gold);
-
-  color: var(--gold);
-
-  background: #17140f;
-
-  border-radius: 4px;
-
-  padding: 10px 13px;
-
-  font-family: inherit;
-
-  font-size: 14px;
-
-}
-
-button { cursor: pointer; }
-
-button:disabled { opacity: .35; cursor: default; }
-
-select { max-width: 240px; }
-
-.reader-actions, .toolbar, .controls {
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  flex-wrap: wrap;
-
-  gap: 10px;
-
-}
-
-.reader-actions {
-
-  justify-content: space-between;
-
-  margin-bottom: 12px;
-
-}
-
-.reader-actions .brand { margin-right: auto; }
-
-.toolbar { margin-bottom: 12px; }
-
-.book-shell {
-
   width: 100%;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  padding: 6px 0;
-
-  overflow: hidden;
-
-}
-
-#book { margin: 0 auto; }
-
-.page {
-
-  background: var(--paper);
-
-  color: var(--ink);
-
-  overflow: hidden;
-
-  border: 1px solid #c6b38c;
-
-}
-
-.page-inner {
-
-  position: relative;
 
   height: 100%;
 
   overflow: hidden;
 
-  padding: 38px 30px 48px;
+}
 
-  background: linear-gradient(
+body {
 
-    90deg,
+  font-family: Georgia, "Times New Roman", serif;
 
-    #d2c09d 0%,
+  background: #100d0a;
 
-    #f4ead4 7%,
+  color: #302419;
 
-    #f8f0df 50%,
+  -webkit-user-select: none;
 
-    #f1e4c9 100%
-
-  );
+  user-select: none;
 
 }
 
-.page h2 {
+#reader {
 
-  font-size: 23px;
+  position: fixed;
 
-  font-weight: normal;
+  inset: 0;
 
-  text-align: center;
+  overflow: hidden;
 
-  line-height: 1.4;
+  background: #100d0a;
 
-  margin: 12px 0 28px;
-
-}
-
-.chapter {
-
-  text-align: center;
-
-  color: #80672f;
-
-  font-size: 10px;
-
-  letter-spacing: 2.5px;
-
-  line-height: 1.8;
+  touch-action: pan-y;
 
 }
 
-.page p {
+.page {
 
-  font-size: var(--reader-font);
+  position: absolute;
 
-  line-height: 1.8;
+  inset: 0;
 
-  letter-spacing: .2px;
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 55px 30px 60px;
+
+  padding-top: max(55px, env(safe-area-inset-top));
+
+  padding-bottom: max(60px, env(safe-area-inset-bottom));
+
+  background:
+
+    radial-gradient(ellipse at center, #fff9eb 0%, #f1e3c7 100%);
+
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
+
+  opacity: 1;
+
+  transform: translateX(0);
+
+  transition: opacity 220ms ease, transform 220ms ease;
+
+}
+
+.page.turn-next {
+
+  opacity: 0;
+
+  transform: translateX(-35px);
+
+}
+
+.page.turn-previous {
+
+  opacity: 0;
+
+  transform: translateX(35px);
+
+}
+
+.content {
+
+  width: 100%;
+
+  max-width: 650px;
+
+  margin: auto;
+
+  font-size: 19px;
+
+  line-height: 1.9;
 
   white-space: pre-line;
 
-  overflow-wrap: anywhere;
+}
 
-  margin-bottom: 18px;
+.cover {
+
+  text-align: center;
+
+}
+
+.brand {
+
+  color: #98723b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 5px;
+
+  font-size: 11px;
+
+}
+
+.cover h1 {
+
+  font-size: clamp(45px, 12vw, 82px);
+
+  letter-spacing: 7px;
+
+  font-weight: normal;
+
+  margin: 28px 0 12px;
+
+}
+
+.cover h2 {
+
+  font-weight: normal;
+
+  font-size: 15px;
+
+  color: #98723b;
+
+  letter-spacing: 4px;
+
+  text-transform: uppercase;
+
+}
+
+.gold-line {
+
+  width: 85px;
+
+  height: 1px;
+
+  background: #b38b4a;
+
+  margin: 30px auto;
+
+}
+
+.chapter-heading {
+
+  text-align: center;
+
+  color: #98723b;
+
+  text-transform: uppercase;
+
+  letter-spacing: 3px;
+
+  font-size: 12px;
+
+  margin-bottom: 28px;
 
 }
 
@@ -240,7 +200,7 @@ select { max-width: 240px; }
 
   position: absolute;
 
-  bottom: 17px;
+  bottom: max(17px, env(safe-area-inset-bottom));
 
   left: 0;
 
@@ -248,345 +208,77 @@ select { max-width: 240px; }
 
   text-align: center;
 
+  color: #9a825d;
+
   font-size: 12px;
-
-  color: #80672f;
-
-}
-
-.cover, .back-cover {
-
-  background: radial-gradient(
-
-    ellipse at center,
-
-    #45351e 0%,
-
-    #20180e 60%,
-
-    #0b0907 100%
-
-  );
-
-  color: var(--gold);
-
-  text-align: center;
-
-}
-
-.cover .page-inner, .back-cover .page-inner {
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  align-items: center;
-
-  height: 100%;
-
-  padding: 32px 20px;
-
-  background: radial-gradient(
-
-    ellipse at center,
-
-    #45351e 0%,
-
-    #20180e 60%,
-
-    #0b0907 100%
-
-  );
-
-  border: 5px double var(--gold);
-
-  color: var(--gold);
-
-}
-
-.cover .ornament, .back-cover .ornament {
-
-  font-size: 36px;
-
-  margin-bottom: 22px;
-
-}
-
-.cover h1 {
-
-  font-size: clamp(38px, 7vw, 58px);
-
-  letter-spacing: 6px;
-
-  font-weight: normal;
-
-  margin: 14px 0;
-
-}
-
-.cover p, .back-cover p {
-
-  font-size: 10px;
 
   letter-spacing: 2px;
 
-  line-height: 1.9;
+  pointer-events: none;
 
 }
 
-.back-cover .page-inner { text-align: center; }
-
-.back-cover h2 { letter-spacing: 4px; }
-
-.progress-area {
-
-  width: min(420px, 95%);
-
-  margin: 12px auto 8px;
-
-}
-
-.progress-label {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  gap: 10px;
-
-  color: #c5b895;
-
-  font: 12px Arial, sans-serif;
-
-  margin-bottom: 8px;
-
-}
-
-.progress-track {
-
-  height: 5px;
-
-  background: #383024;
-
-  border-radius: 5px;
-
-  overflow: hidden;
-
-}
-
-#progress-bar {
-
-  width: 0%;
-
-  height: 100%;
-
-  background: var(--gold);
-
-  transition: width .2s ease;
-
-}
-
-.controls { margin: 14px auto 8px; }
-
-#counter {
-
-  color: #c5b895;
-
-  font-size: 13px;
-
-  min-width: 115px;
-
-  text-align: center;
-
-}
-
-#status {
-
-  text-align: center;
-
-  color: #e7d5a8;
-
-  font: 13px Arial, sans-serif;
-
-  line-height: 1.7;
-
-  margin: 10px auto;
-
-}
-
-.hint {
-
-  text-align: center;
-
-  color: #a99c80;
-
-  font: 12px Arial, sans-serif;
-
-  line-height: 1.7;
-
-  margin: 14px 10px 24px;
-
-}
-
-/* Immersive reader */
-
-body.reader-mode {
-
-  overflow: hidden;
-
-  height: 100vh;
-
-  height: 100dvh;
-
-}
-
-body.reader-mode header { display: none; }
-
-body.reader-mode main {
+#backButton {
 
   position: fixed;
 
-  inset: 0;
+  z-index: 10;
 
-  z-index: 1000;
+  top: max(14px, env(safe-area-inset-top));
 
-  width: 100%;
+  left: max(14px, env(safe-area-inset-left));
 
-  height: 100vh;
+  width: 46px;
 
-  height: 100dvh;
+  height: 46px;
 
-  max-width: none;
+  border-radius: 50%;
 
-  margin: 0;
+  border: 1px solid rgba(183, 143, 72, 0.65);
 
-  padding: max(10px, env(safe-area-inset-top)) 14px
+  background: rgba(25, 19, 12, 0.9);
 
-           max(8px, env(safe-area-inset-bottom));
+  color: #f2d59a;
+
+  font-size: 27px;
 
   display: flex;
 
-  flex-direction: column;
+  align-items: center;
 
-  overflow: hidden;
+  justify-content: center;
 
-  background: radial-gradient(ellipse at top, #40331f, #080808 75%);
+  text-decoration: none;
 
-}
+  opacity: 0;
 
-body.reader-mode .reader-actions,
+  visibility: hidden;
 
-body.reader-mode .toolbar,
+  transition: opacity 180ms ease;
 
-body.reader-mode .progress-area,
-
-body.reader-mode .controls,
-
-body.reader-mode .hint,
-
-body.reader-mode #status {
-
-  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 
 }
 
-body.reader-mode .book-shell {
+#backButton.visible {
 
-  flex: 1 1 0;
+  opacity: 1;
 
-  min-height: 0;
-
-  padding: 0;
-
-  overflow: hidden;
+  visibility: visible;
 
 }
 
-body.reader-mode #book {
+@media (max-width: 480px) {
 
-  max-width: 100%;
+  .page { padding-left: 25px; padding-right: 25px; }
 
-}
-
-body.reader-mode .hint { margin: 8px 4px 0; }
-
-@media (max-width: 500px) {
-
-  main { width: 98%; margin-top: 12px; }
-
-  .page-inner { padding: 30px 22px 45px; }
-
-  .page h2 { font-size: 21px; }
-
-  .reader-actions { gap: 7px; }
-
-  .reader-actions button { padding: 9px; }
-
-  .toolbar { gap: 7px; }
-
-  button, select { padding: 10px; }
-
-  body.reader-mode main {
-
-    padding-left: 8px;
-
-    padding-right: 8px;
-
-  }
+  .content { font-size: 17px; line-height: 1.85; }
 
 }
 
-/* Landscape: keep the book area stable */
+@media (prefers-reduced-motion: reduce) {
 
-@media (orientation: landscape) and (max-height: 600px) {
-
-  body.reader-mode main {
-
-    padding-top: max(6px, env(safe-area-inset-top));
-
-    padding-bottom: max(6px, env(safe-area-inset-bottom));
-
-  }
-
-  body.reader-mode .reader-actions,
-
-  body.reader-mode .toolbar {
-
-    margin-bottom: 6px;
-
-    gap: 7px;
-
-  }
-
-  body.reader-mode .book-shell {
-
-    min-height: 0;
-
-  }
-
-  body.reader-mode .progress-area {
-
-    margin-top: 6px;
-
-    margin-bottom: 4px;
-
-  }
-
-  body.reader-mode .controls {
-
-    margin-top: 6px;
-
-    margin-bottom: 2px;
-
-  }
-
-  body.reader-mode .hint { display: none; }
-
-  .page-inner { padding: 20px 22px 38px; }
-
-  .page p { line-height: 1.6; }
+  .page, #backButton { transition: none; }
 
 }
 
@@ -594,741 +286,295 @@ body.reader-mode .hint { margin: 8px 4px 0; }
 
 </head>
 
-<body class="reader-mode">
+<body>
 
-<header>
+<div id="reader" aria-label="Full-screen story reader"></div>
 
-  <div class="brand">SOVEREIGN PICTURES</div>
-
-  <a href="library.html">← BACK TO STORY LIBRARY</a>
-
-</header>
-
-<main>
-
-  <div class="reader-actions">
-
-    <div class="brand">SOVEREIGN PICTURES</div>
-
-    <button id="minimise" type="button">Minimise −</button>
-
-    <button id="expand" type="button" hidden>Expand ⛶</button>
-
-    <button id="fullscreen" type="button">Fullscreen ⛶</button>
-
-  </div>
-
-  <div class="toolbar">
-
-    <button id="font-down" type="button" aria-label="Decrease text size">A−</button>
-
-    <span id="font-label" style="color:#c5b895;font-size:13px">Text 16px</span>
-
-    <button id="font-up" type="button" aria-label="Increase text size">A+</button>
-
-    <select id="chapter-select" aria-label="Go to chapter">
-
-      <option value="0">Go to a chapter…</option>
-
-      <option value="1">Free Preview</option>
-
-    </select>
-
-  </div>
-
-  <div id="status" role="status">Loading Aarya's free preview…</div>
-
-  <div class="book-shell">
-
-    <div id="book"></div>
-
-  </div>
-
-  <div class="progress-area">
-
-    <div class="progress-label">
-
-      <span>Reading progress</span>
-
-      <span id="progress-text">0%</span>
-
-    </div>
-
-    <div class="progress-track">
-
-      <div id="progress-bar"></div>
-
-    </div>
-
-  </div>
-
-  <div class="controls">
-
-    <button id="prev" type="button" disabled>← Previous</button>
-
-    <span id="counter">Loading…</span>
-
-    <button id="next" type="button" disabled>Open Book →</button>
-
-  </div>
-
-  <p class="hint">
-
-    Drag a page corner or swipe to turn pages.
-
-    <br>Use A− and A+ to adjust text size.
-
-  </p>
-
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
+<a id="backButton" href="./index.html" aria-label="Back to homepage">‹</a>
 
 <script>
 
-(function () {
+/*
 
-  "use strict";
+  UNIVERSAL SOVEREIGN PICTURES READER
 
-  const SUPABASE_URL =
+  To use this reader for another story later, change STORY.title,
 
-    "https://ffxmmzxknnrmglqvxwbc.supabase.co";
+  STORY.subtitle and STORY.pages below.
 
-  const SUPABASE_KEY =
+  The pages here are temporary demo content, not the final AARYA
 
-    "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
+  manuscript.
 
-  const $ = id => document.getElementById(id);
+*/
 
-  const bookElement = $("book");
+const STORY = {
 
-  const status = $("status");
+  title: "AARYA",
 
-  const prev = $("prev");
+  subtitle: "Part One: The Fall",
 
-  const next = $("next");
+  pages: [
 
-  const counter = $("counter");
+    {
 
-  const progressBar = $("progress-bar");
+      type: "cover",
 
-  const progressText = $("progress-text");
+      text: "SOVEREIGN PICTURES"
 
-  const fontLabel = $("font-label");
+    },
 
-  const fontDown = $("font-down");
+    {
 
-  const fontUp = $("font-up");
+      heading: "A Temporary Preview",
 
-  const chapterSelect = $("chapter-select");
+      text: "Beyond the boundaries of the known universe, worlds existed that no human eye had ever witnessed.\n\nThis is temporary sample text, included only to test the full-screen reader. Your original AARYA manuscript will replace it."
 
-  const minimise = $("minimise");
+    },
 
-  const expand = $("expand");
+    {
 
-  const fullscreen = $("fullscreen");
+      heading: "The Story Continues",
 
-  let fontSize = 16;
+      text: "Each page of the finished novel will appear here in a clean, comfortable reading layout.\n\nSwipe left to turn to the next page. Swipe right to return to the previous page."
 
-  let pageFlip = null;
+    },
 
-  let resizeTimer = null;
+    {
 
-  let resizeFrame = null;
+      type: "cover",
 
-  let flipping = false;
+      heading: "Preview Complete",
 
-  function getState() {
-
-    if (!pageFlip || typeof pageFlip.getState !== "function") {
-
-      return "read";
+      text: "The actual story will be added when we connect your manuscript."
 
     }
 
-    return pageFlip.getState();
+  ]
+
+};
+
+const reader = document.getElementById("reader");
+
+const backButton = document.getElementById("backButton");
+
+let currentPage = 0;
+
+let startX = 0;
+
+let startY = 0;
+
+let isSwiping = false;
+
+let hideBackTimer;
+
+function escapeHTML(value) {
+
+  return String(value).replace(/[&<>"']/g, char => ({
+
+    "&": "&amp;",
+
+    "<": "&lt;",
+
+    ">": "&gt;",
+
+    '"': "&quot;",
+
+    "'": "&#39;"
+
+  })[char]);
+
+}
+
+function renderPage(direction = "") {
+
+  const page = STORY.pages[currentPage];
+
+  const element = document.createElement("section");
+
+  element.className = "page";
+
+  if (direction === "next") element.classList.add("turn-next");
+
+  if (direction === "previous") element.classList.add("turn-previous");
+
+  let html = "";
+
+  if (page.type === "cover") {
+
+    html = `
+
+      <div class="content cover">
+
+        <div class="brand">${escapeHTML(page.text || "SOVEREIGN PICTURES")}</div>
+
+        <div class="gold-line"></div>
+
+        <h1>${escapeHTML(STORY.title)}</h1>
+
+        <h2>${escapeHTML(STORY.subtitle)}</h2>
+
+        <div class="gold-line"></div>
+
+      </div>`;
+
+  } else {
+
+    html = `
+
+      <div class="content">
+
+        ${page.heading ? `<div class="chapter-heading">${escapeHTML(page.heading)}</div>` : ""}
+
+        ${escapeHTML(page.text || "")}
+
+      </div>`;
 
   }
 
-  function updateControls() {
+  html += `<div class="page-number">${currentPage + 1}</div>`;
 
-    if (!pageFlip) return;
+  element.innerHTML = html;
 
-    const index = pageFlip.getCurrentPageIndex();
+  reader.replaceChildren(element);
 
-    const total = pageFlip.getPageCount();
+  if (direction) {
 
-    prev.disabled = index <= 0;
+    requestAnimationFrame(() => {
 
-    next.disabled = index >= total - 1;
+      requestAnimationFrame(() => {
 
-    if (index === 0) {
+        element.classList.remove("turn-next", "turn-previous");
 
-      counter.textContent = "Cover";
+      });
 
-      next.textContent = "Open Book →";
+    });
 
-    } else if (index === total - 1) {
+  }
 
-      counter.textContent = "Back Cover";
+}
 
-      next.textContent = "The End";
+function turnPage(direction) {
+
+  const next = currentPage + direction;
+
+  if (next < 0 || next >= STORY.pages.length) return;
+
+  currentPage = next;
+
+  renderPage(direction > 0 ? "next" : "previous");
+
+}
+
+function revealBackButton() {
+
+  backButton.classList.add("visible");
+
+  clearTimeout(hideBackTimer);
+
+  hideBackTimer = setTimeout(() => {
+
+    backButton.classList.remove("visible");
+
+  }, 2500);
+
+}
+
+reader.addEventListener("touchstart", event => {
+
+  if (event.touches.length !== 1) return;
+
+  startX = event.touches[0].clientX;
+
+  startY = event.touches[0].clientY;
+
+  isSwiping = false;
+
+}, { passive: true });
+
+reader.addEventListener("touchmove", event => {
+
+  if (!event.touches.length) return;
+
+  const dx = event.touches[0].clientX - startX;
+
+  const dy = event.touches[0].clientY - startY;
+
+  if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)) {
+
+    isSwiping = true;
+
+  }
+
+}, { passive: true });
+
+reader.addEventListener("touchend", event => {
+
+  if (!event.changedTouches.length) return;
+
+  const dx = event.changedTouches[0].clientX - startX;
+
+  const dy = event.changedTouches[0].clientY - startY;
+
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
+
+    isSwiping = true;
+
+    if (dx < 0) {
+
+      turnPage(1);
 
     } else {
 
-      counter.textContent = "Page " + index + " of " + (total - 2);
-
-      next.textContent = "Next Page →";
+      turnPage(-1);
 
     }
 
-    const percent = total > 1
+    // A swipe must never reveal the back arrow.
 
-      ? Math.round(index / (total - 1) * 100)
+    clearTimeout(hideBackTimer);
 
-      : 0;
+    backButton.classList.remove("visible");
 
-    progressBar.style.width = percent + "%";
+  } else if (!isSwiping) {
 
-    progressText.textContent = percent + "%";
-
-    chapterSelect.value = index === 1 ? "1" : "0";
+    revealBackButton();
 
   }
 
-  /*
+  setTimeout(() => { isSwiping = false; }, 50);
 
-    Resize only after the page-turn animation has finished.
+}, { passive: true });
 
-    Never dispatch a resize event from inside a resize handler.
+reader.addEventListener("click", event => {
 
-  */
+  if (isSwiping) return;
 
-  function refreshLayout() {
+  revealBackButton();
 
-    clearTimeout(resizeTimer);
+});
 
-    if (!pageFlip) return;
+backButton.addEventListener("click", () => {
 
-    if (flipping || getState() !== "read") {
+  clearTimeout(hideBackTimer);
 
-      resizeTimer = setTimeout(refreshLayout, 250);
+});
 
-      return;
+document.addEventListener("keydown", event => {
 
-    }
+  if (event.key === "ArrowLeft") turnPage(1);
 
-    if (resizeFrame !== null) {
+  if (event.key === "ArrowRight") turnPage(-1);
 
-      cancelAnimationFrame(resizeFrame);
+  if (event.key === "Escape") {
 
-    }
-
-    resizeFrame = requestAnimationFrame(function () {
-
-      resizeFrame = null;
-
-      if (!pageFlip || flipping || getState() !== "read") return;
-
-      try {
-
-        if (typeof pageFlip.update === "function") {
-
-          pageFlip.update();
-
-        }
-
-      } catch (error) {
-
-        console.debug("Reader layout update skipped.");
-
-      }
-
-      updateControls();
-
-    });
+    window.location.href = "./index.html";
 
   }
 
-  function scheduleResize() {
+});
 
-    clearTimeout(resizeTimer);
-
-    resizeTimer = setTimeout(refreshLayout, 250);
-
-  }
-
-  function setReaderMode(enabled) {
-
-    document.body.classList.toggle("reader-mode", enabled);
-
-    minimise.hidden = !enabled;
-
-    expand.hidden = enabled;
-
-    if (!enabled && document.fullscreenElement) {
-
-      document.exitFullscreen().catch(() => {});
-
-    }
-
-    scheduleResize();
-
-  }
-
-  minimise.addEventListener("click", function () {
-
-    setReaderMode(false);
-
-  });
-
-  expand.addEventListener("click", function () {
-
-    setReaderMode(true);
-
-  });
-
-  fullscreen.addEventListener("click", async function () {
-
-    setReaderMode(true);
-
-    try {
-
-      if (
-
-        !document.fullscreenElement &&
-
-        document.documentElement.requestFullscreen
-
-      ) {
-
-        await document.documentElement.requestFullscreen();
-
-      }
-
-    } catch (error) {
-
-      status.textContent =
-
-        "Immersive reader is open. Your browser may not allow system fullscreen here.";
-
-    }
-
-  });
-
-  document.addEventListener("fullscreenchange", function () {
-
-    fullscreen.textContent = document.fullscreenElement
-
-      ? "Exit Fullscreen"
-
-      : "Fullscreen ⛶";
-
-  });
-
-  fullscreen.addEventListener("dblclick", function () {
-
-    if (document.fullscreenElement) {
-
-      document.exitFullscreen().catch(() => {});
-
-    }
-
-  });
-
-  function updateFontSize() {
-
-    document.documentElement.style.setProperty(
-
-      "--reader-font",
-
-      fontSize + "px"
-
-    );
-
-    fontLabel.textContent = "Text " + fontSize + "px";
-
-    fontDown.disabled = fontSize <= 12;
-
-    fontUp.disabled = fontSize >= 24;
-
-  }
-
-  fontDown.addEventListener("click", function () {
-
-    fontSize = Math.max(12, fontSize - 1);
-
-    updateFontSize();
-
-  });
-
-  fontUp.addEventListener("click", function () {
-
-    fontSize = Math.min(24, fontSize + 1);
-
-    updateFontSize();
-
-  });
-
-  updateFontSize();
-
-  function makePage(kind, chapterName, heading, text, number) {
-
-    const page = document.createElement("div");
-
-    page.className = "page" + (kind ? " " + kind : "");
-
-    if (kind === "cover" || kind === "back-cover") {
-
-      page.dataset.density = "hard";
-
-    }
-
-    const inner = document.createElement("div");
-
-    inner.className = "page-inner";
-
-    if (kind === "cover") {
-
-      const ornament = document.createElement("div");
-
-      ornament.className = "ornament";
-
-      ornament.textContent = "✧ ❖ ✧";
-
-      const brand = document.createElement("p");
-
-      brand.textContent = "A SOVEREIGN PICTURES ORIGINAL";
-
-      const title = document.createElement("h1");
-
-      title.textContent = "AARYA";
-
-      const subtitle = document.createElement("p");
-
-      subtitle.innerHTML = "A LEGEND BEGINS<br><br>DRAG THE PAGE TO OPEN";
-
-      inner.append(ornament, brand, title, subtitle);
-
-    } else if (kind === "back-cover") {
-
-      const ornament = document.createElement("div");
-
-      ornament.className = "ornament";
-
-      ornament.textContent = "✧";
-
-      const title = document.createElement("h2");
-
-      title.textContent = "AARYA";
-
-      const brand = document.createElement("p");
-
-      brand.textContent = "A SOVEREIGN PICTURES ORIGINAL";
-
-      const ending = document.createElement("p");
-
-      ending.textContent = "THE LEGEND CONTINUES";
-
-      inner.append(ornament, title, brand, ending);
-
-    } else {
-
-      const chapter = document.createElement("div");
-
-      chapter.className = "chapter";
-
-      chapter.textContent = chapterName;
-
-      const title = document.createElement("h2");
-
-      title.textContent = heading;
-
-      const paragraph = document.createElement("p");
-
-      paragraph.textContent = text || "";
-
-      const pageNumber = document.createElement("div");
-
-      pageNumber.className = "page-number";
-
-      pageNumber.textContent = String(number);
-
-      inner.append(chapter, title, paragraph, pageNumber);
-
-    }
-
-    page.appendChild(inner);
-
-    return page;
-
-  }
-
-  function showBook(sample) {
-
-    bookElement.replaceChildren();
-
-    bookElement.appendChild(
-
-      makePage("cover", "", "", "", 0)
-
-    );
-
-    bookElement.appendChild(
-
-      makePage(
-
-        "",
-
-        "FREE PREVIEW",
-
-        sample.title || "Aarya",
-
-        sample.sample_content,
-
-        1
-
-      )
-
-    );
-
-    bookElement.appendChild(
-
-      makePage(
-
-        "",
-
-        "CONTINUE THE JOURNEY",
-
-        "The Story Continues",
-
-        "You've reached the end of the free preview.\n\nThe complete Aarya story will be available to active subscribers once premium reading is connected.",
-
-        2
-
-      )
-
-    );
-
-    bookElement.appendChild(
-
-      makePage("back-cover", "", "", "", 0)
-
-    );
-
-    if (!window.St || !window.St.PageFlip) {
-
-      status.textContent =
-
-        "The page-turn library did not load. Refresh and try again.";
-
-      counter.textContent = "Reader unavailable";
-
-      return;
-
-    }
-
-    pageFlip = new St.PageFlip(bookElement, {
-
-      width: 420,
-
-      height: 600,
-
-      size: "stretch",
-
-      minWidth: 260,
-
-      maxWidth: 1000,
-
-      minHeight: 320,
-
-      maxHeight: 1400,
-
-      drawShadow: true,
-
-      flippingTime: 850,
-
-      usePortrait: true,
-
-      startPage: 0,
-
-      autoSize: true,
-
-      maxShadowOpacity: 0.55,
-
-      showCover: true,
-
-      mobileScrollSupport: false,
-
-      clickEventForward: true,
-
-      useMouseEvents: true,
-
-      swipeDistance: 25,
-
-      showPageCorners: true,
-
-      disableFlipByClick: false
-
-    });
-
-    pageFlip.loadFromHTML(
-
-      document.querySelectorAll("#book .page")
-
-    );
-
-    pageFlip.on("flip", function () {
-
-      flipping = false;
-
-      updateControls();
-
-    });
-
-    pageFlip.on("changeState", function (event) {
-
-      const state = event && event.data;
-
-      flipping = state !== "read";
-
-      if (!flipping) {
-
-        updateControls();
-
-        scheduleResize();
-
-      }
-
-    });
-
-    prev.addEventListener("click", function () {
-
-      if (pageFlip && !flipping) pageFlip.flipPrev();
-
-    });
-
-    next.addEventListener("click", function () {
-
-      if (pageFlip && !flipping) pageFlip.flipNext();
-
-    });
-
-    chapterSelect.addEventListener("change", function () {
-
-      if (
-
-        pageFlip &&
-
-        !flipping &&
-
-        chapterSelect.value === "1"
-
-      ) {
-
-        pageFlip.turnToPage(1);
-
-      }
-
-    });
-
-    updateControls();
-
-    status.textContent =
-
-      "Aarya's cover is ready. Turn the cover to read the free preview.";
-
-  }
-
-  async function loadPreview() {
-
-    try {
-
-      if (!window.supabase) {
-
-        throw new Error("The database library did not load.");
-
-      }
-
-      const client = window.supabase.createClient(
-
-        SUPABASE_URL,
-
-        SUPABASE_KEY
-
-      );
-
-      const { data, error } = await client
-
-        .from("story_samples")
-
-        .select("title, sample_content")
-
-        .eq("slug", "aarya")
-
-        .eq("is_published", true)
-
-        .single();
-
-      if (error) throw error;
-
-      if (!data || !data.sample_content) {
-
-        throw new Error("No published preview was found.");
-
-      }
-
-      showBook(data);
-
-    } catch (error) {
-
-      console.error("Aarya preview error:", error);
-
-      status.textContent =
-
-        "We couldn't load the preview. Please refresh and try again.";
-
-      counter.textContent = "Preview unavailable";
-
-      prev.disabled = true;
-
-      next.disabled = true;
-
-    }
-
-  }
-
-  window.addEventListener("resize", scheduleResize);
-
-  window.addEventListener("orientationchange", scheduleResize);
-
-  if (window.visualViewport) {
-
-    window.visualViewport.addEventListener("resize", scheduleResize);
-
-  }
-
-  document.addEventListener("keydown", function (event) {
-
-    if (!pageFlip || flipping) return;
-
-    if (event.key === "ArrowRight") pageFlip.flipNext();
-
-    if (event.key === "ArrowLeft") pageFlip.flipPrev();
-
-    if (event.key === "Escape") {
-
-      setReaderMode(false);
-
-    }
-
-  });
-
-  loadPreview();
-
-})();
+renderPage();
 
 </script>
 
