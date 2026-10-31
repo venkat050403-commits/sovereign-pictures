@@ -8,577 +8,223 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#100d0a">
+<title>AARYA — The Fall | Sovereign Pictures</title>
 
-<title>AARYA | Sovereign Pictures</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
 <style>
 
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
 
-html, body {
+body{
 
-  margin: 0;
+  margin:0;
 
-  width: 100%;
+  background:#090909;
 
-  height: 100%;
+  color:#ead8ad;
 
-  overflow: hidden;
+  font-family:Georgia,serif;
 
-}
-
-body {
-
-  background: #100d0a;
-
-  color: #302419;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  -webkit-user-select: none;
-
-  user-select: none;
+  text-align:center;
 
 }
 
-#reader {
+header{
 
-  position: fixed;
+  padding:22px 12px;
 
-  inset: 0;
-
-  background: #100d0a;
-
-  touch-action: pan-y;
-
-  overflow: hidden;
+  border-bottom:1px solid #8c6b35;
 
 }
 
-.spread {
+.brand{
 
-  position: absolute;
+  font-size:13px;
 
-  inset: 0;
+  letter-spacing:5px;
 
-  display: flex;
-
-  width: 100%;
-
-  max-width: 1500px;
-
-  height: 100%;
-
-  margin: auto;
-
-  overflow: hidden;
+  color:#c9a45d;
 
 }
 
-.page {
+h1{
 
-  position: relative;
+  font-size:clamp(34px,7vw,58px);
 
-  display: flex;
+  letter-spacing:7px;
 
-  flex: 1 1 100%;
-
-  min-width: 0;
-
-  height: 100%;
-
-  align-items: center;
-
-  justify-content: center;
-
-  overflow-y: auto;
-
-  padding: 55px 26px;
-
-  padding-top: max(55px, env(safe-area-inset-top));
-
-  padding-bottom: max(55px, env(safe-area-inset-bottom));
-
-  background: radial-gradient(ellipse at center, #fff9eb, #f0e1c1);
-
-  -webkit-overflow-scrolling: touch;
+  margin:35px 0 8px;
 
 }
 
-.content {
+.subtitle{
 
-  width: 100%;
+  color:#c6a66c;
 
-  max-width: 570px;
+  letter-spacing:4px;
 
-  margin: auto;
-
-  font-size: 18px;
-
-  line-height: 1.9;
-
-  white-space: pre-line;
-
-  overflow-wrap: anywhere;
+  font-size:13px;
 
 }
 
-.cover { text-align: center; }
+.description{
 
-.brand {
+  max-width:650px;
 
-  color: #98723b;
+  margin:25px auto;
 
-  font-size: 11px;
+  padding:0 20px;
 
-  letter-spacing: 4px;
+  line-height:1.8;
 
-  text-transform: uppercase;
-
-}
-
-.cover h1 {
-
-  margin: 26px 0 12px;
-
-  font-size: clamp(40px, 8vw, 76px);
-
-  letter-spacing: 6px;
-
-  font-weight: normal;
+  color:#c9c0ad;
 
 }
 
-.cover h2 {
+button{
 
-  color: #98723b;
+  background:#c39a50;
 
-  font-size: 14px;
+  color:#090909;
 
-  font-weight: normal;
+  border:0;
 
-  letter-spacing: 3px;
+  padding:14px 25px;
 
-  text-transform: uppercase;
+  margin:12px;
 
-}
+  font-weight:bold;
 
-.gold-line {
+  letter-spacing:1px;
 
-  width: 75px;
-
-  height: 1px;
-
-  margin: 28px auto;
-
-  background: #b38b4a;
+  cursor:pointer;
 
 }
 
-.chapter-heading {
+button:disabled{opacity:.5}
 
-  margin-bottom: 28px;
+#status{
 
-  color: #98723b;
+  color:#d8bb80;
 
-  font-size: 12px;
+  margin:20px;
 
-  text-align: center;
-
-  text-transform: uppercase;
-
-  letter-spacing: 3px;
+  min-height:24px;
 
 }
 
-.page-number {
+#readerArea{
 
-  position: absolute;
+  display:none;
 
-  bottom: max(15px, env(safe-area-inset-bottom));
-
-  left: 0;
-
-  right: 0;
-
-  color: #9a825d;
-
-  font-size: 11px;
-
-  text-align: center;
-
-  pointer-events: none;
+  padding:15px 8px 35px;
 
 }
 
-#backButton {
+#book{
 
-  position: fixed;
+  margin:20px auto;
 
-  z-index: 60;
-
-  top: max(14px, env(safe-area-inset-top));
-
-  left: max(14px, env(safe-area-inset-left));
-
-  width: 44px;
-
-  height: 44px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border: 1px solid rgba(183, 143, 72, .65);
-
-  border-radius: 50%;
-
-  background: rgba(25, 19, 12, .92);
-
-  color: #f2d59a;
-
-  font-family: Arial, sans-serif;
-
-  font-size: 29px;
-
-  text-decoration: none;
-
-  opacity: 0;
-
-  visibility: hidden;
-
-  transition: opacity 150ms ease;
-
-  -webkit-tap-highlight-color: transparent;
+  max-width:100%;
 
 }
 
-#backButton.visible {
+#book .page{
 
-  opacity: 1;
+  background:#f4ead4;
 
-  visibility: visible;
+  color:#302719;
 
-}
-
-#fullStoryButton {
-
-  position: fixed;
-
-  z-index: 40;
-
-  top: max(14px, env(safe-area-inset-top));
-
-  right: max(14px, env(safe-area-inset-right));
-
-  min-height: 44px;
-
-  padding: 0 17px;
-
-  border: 1px solid #b38b4a;
-
-  border-radius: 24px;
-
-  background: rgba(25, 19, 12, .95);
-
-  color: #f2d59a;
-
-  font-family: Arial, sans-serif;
-
-  font-size: 12px;
-
-  letter-spacing: 1px;
-
-  cursor: pointer;
+  overflow:hidden;
 
 }
 
-#fullStoryButton:disabled {
+.pdf-page{
 
-  opacity: .65;
+  width:100%;
 
-  cursor: wait;
+  height:100%;
 
-}
+  display:flex;
 
-/* Embedded PDF */
+  justify-content:center;
 
-#pdfContainer {
+  align-items:center;
 
-  display: none;
-
-  position: fixed;
-
-  inset: 0;
-
-  z-index: 25;
-
-  background: #100d0a;
+  background:#f4ead4;
 
 }
 
-#pdfFrame {
+.pdf-page canvas{
 
-  display: block;
+  display:block;
 
-  width: 100%;
+  max-width:100%;
 
-  height: 100%;
+  max-height:100%;
 
-  border: 0;
-
-  background: white;
+  object-fit:contain;
 
 }
 
-#accessMessage {
+.controls{
 
-  display: none;
-
-  position: fixed;
-
-  z-index: 70;
-
-  left: 50%;
-
-  bottom: max(22px, env(safe-area-inset-bottom));
-
-  transform: translateX(-50%);
-
-  width: min(92%, 440px);
-
-  padding: 18px;
-
-  border: 1px solid rgba(179, 139, 74, .8);
-
-  border-radius: 12px;
-
-  background: rgba(25, 19, 12, .97);
-
-  color: #f5e8ce;
-
-  text-align: center;
-
-  box-shadow: 0 8px 35px rgba(0,0,0,.4);
-
-  font-family: Arial, sans-serif;
+  margin:15px auto;
 
 }
 
-#accessMessage.visible {
+#accessMessage{
 
-  display: block;
+  display:none;
 
-}
+  max-width:550px;
 
-#accessText {
+  margin:30px auto;
 
-  margin: 0 0 12px;
+  padding:22px;
 
-  font-size: 14px;
+  border:1px solid #8c6b35;
 
-  line-height: 1.6;
-
-}
-
-#accessLink {
-
-  display: none;
-
-  color: #f2d59a;
-
-  font-size: 13px;
-
-  text-decoration: underline;
+  line-height:1.7;
 
 }
 
-#closeMessage {
+#preview{
 
-  position: absolute;
+  max-width:650px;
 
-  top: 5px;
+  margin:35px auto;
 
-  right: 10px;
+  padding:25px;
 
-  border: 0;
+  border:1px solid #8c6b35;
 
-  background: transparent;
+  line-height:1.8;
 
-  color: #f2d59a;
-
-  font-size: 22px;
-
-  cursor: pointer;
+  color:#d5c8ad;
 
 }
 
-.flip-page {
+footer{
 
-  position: absolute;
+  padding:30px 10px;
 
-  z-index: 10;
+  color:#88775b;
 
-  top: 0;
-
-  bottom: 0;
-
-  width: 50%;
-
-  transform-style: preserve-3d;
-
-  perspective: 1600px;
-
-  pointer-events: none;
+  font-size:12px;
 
 }
 
-.flip-page.forward {
+@media(max-width:600px){
 
-  right: 0;
-
-  transform-origin: left center;
-
-  animation: turnForward 560ms ease-in-out forwards;
-
-}
-
-.flip-page.backward {
-
-  left: 0;
-
-  transform-origin: right center;
-
-  animation: turnBackward 560ms ease-in-out forwards;
-
-}
-
-.flip-face {
-
-  position: absolute;
-
-  inset: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  padding: 55px 22px;
-
-  overflow: hidden;
-
-  background: radial-gradient(ellipse at center, #fff9eb, #f0e1c1);
-
-  backface-visibility: hidden;
-
-  -webkit-backface-visibility: hidden;
-
-}
-
-.flip-face .content {
-
-  font-size: 16px;
-
-  line-height: 1.8;
-
-}
-
-.flip-face.back {
-
-  transform: rotateY(180deg);
-
-  background: linear-gradient(90deg, #d7c29c, #fff5df);
-
-}
-
-.flip-page.backward .flip-face.back {
-
-  transform: rotateY(-180deg);
-
-}
-
-.flip-page.backward .flip-face.front {
-
-  transform: rotateY(0deg);
-
-}
-
-.flip-page.backward {
-
-  animation-name: turnBackward;
-
-}
-
-@keyframes turnForward {
-
-  from { transform: rotateY(0deg); }
-
-  to { transform: rotateY(-180deg); }
-
-}
-
-@keyframes turnBackward {
-
-  from { transform: rotateY(0deg); }
-
-  to { transform: rotateY(180deg); }
-
-}
-
-@media (min-width: 600px) and (orientation: landscape) {
-
-  .spread {
-
-    width: min(100%, 1500px);
-
-  }
-
-  .page {
-
-    flex: 1 1 50%;
-
-    padding: 65px 32px 55px;
-
-  }
-
-  .page + .page {
-
-    border-left: 1px solid #d3bd93;
-
-  }
-
-  .content { font-size: 16px; }
-
-}
-
-@media (max-width: 480px) and (orientation: portrait) {
-
-  .page { padding-left: 24px; padding-right: 24px; }
-
-  .content { font-size: 17px; line-height: 1.85; }
-
-  #fullStoryButton {
-
-    font-size: 10px;
-
-    padding: 0 12px;
-
-  }
-
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .flip-page { animation-duration: 1ms !important; }
-
-  #backButton { transition: none; }
+  #readerArea{padding-left:3px;padding-right:3px}
 
 }
 
@@ -588,661 +234,443 @@ body {
 
 <body>
 
-<div id="reader" aria-label="Story reader"></div>
+<header>
 
-<div id="pdfContainer">
+  <div class="brand">SOVEREIGN PICTURES</div>
 
-  <iframe
+</header>
 
-    id="pdfFrame"
+<main>
 
-    title="AARYA — Part One: The Fall"
+  <h1>AARYA</h1>
 
-    allow="fullscreen"
+  <div class="subtitle">PART ONE — THE FALL</div>
 
-  ></iframe>
+  <p class="description">
 
-</div>
+    A kingdom. An ancient secret. A destiny that crosses universes.
 
-<a id="backButton" href="./index.html" aria-label="Back to homepage">‹</a>
+    Enter the world of AARYA.
 
-<button id="fullStoryButton" type="button">
+  </p>
 
-  READ FULL STORY
+  <div id="preview">
 
-</button>
+    <h2>THE FALL</h2>
 
-<div id="accessMessage" role="status" aria-live="polite">
+    <p>
 
-  <button id="closeMessage" type="button" aria-label="Close">×</button>
+      Beyond the universe, there existed another universe —
 
-  <p id="accessText"></p>
+      a world of towering mountains, endless forests, vast kingdoms,
 
-  <a id="accessLink" href="./login.html"></a>
+      and ancient secrets buried deep within time.
 
-</div>
+    </p>
 
-<script type="module">
+    <p>Some destinies are written before their stories begin.</p>
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+    <button id="readButton">READ FULL STORY</button>
 
-const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
+  </div>
 
-const SUPABASE_KEY = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
+  <div id="status">Checking your access when you open the story...</div>
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  <div id="accessMessage">
 
-  auth: {
+    <h2>STORIES MEMBERSHIP REQUIRED</h2>
 
-    persistSession: true,
+    <p>
 
-    autoRefreshToken: true,
+      Subscribe to Sovereign Pictures Stories to read the complete
 
-    detectSessionInUrl: true
+      AARYA experience.
 
-  }
+    </p>
 
-});
+    <button onclick="location.href='index.html'">BACK TO SOVEREIGN PICTURES</button>
 
-const STORY = {
+    <button onclick="location.href='login.html'">LOGIN</button>
 
-  title: "AARYA",
+  </div>
 
-  subtitle: "Part One: The Fall",
+  <section id="readerArea">
 
-  pages: [
+    <div id="book"></div>
 
-    { type: "cover", text: "SOVEREIGN PICTURES" },
+    <div class="controls">
 
-    {
+      <button id="previousButton">PREVIOUS</button>
 
-      heading: "A Temporary Preview",
+      <button id="nextButton">NEXT</button>
 
-      text: "Beyond the boundaries of the known universe, worlds existed that no human eye had ever witnessed.\n\nThis is a preview of AARYA: Part One — The Fall."
+    </div>
 
-    },
+    <p id="pageStatus"></p>
 
-    {
+    <button onclick="location.href='index.html'">BACK TO LIBRARY</button>
 
-      heading: "The Story Continues",
+  </section>
 
-      text: "Every world has a history. Every kingdom has secrets. And sometimes, the fate of an entire world rests upon the shoulders of someone who never asked for it."
+</main>
 
-    },
+<footer>
 
-    {
+  © Sovereign Pictures. All rights reserved.
 
-      heading: "A Universal Story",
+</footer>
 
-      text: "Aarya's journey begins in a world far beyond our own. What awaits her will change the fate of more than one universe."
+<script>
 
-    },
+const SUPABASE_URL =
 
-    {
+  "https://ffxmmzxknnrmglqvxwbc.supabase.co";
 
-      type: "cover",
+const SUPABASE_KEY =
 
-      text: "SOVEREIGN PICTURES"
+  "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
 
-    },
+const supabase = window.supabase.createClient(
 
-    {
+  SUPABASE_URL,
 
-      heading: "End of Preview",
+  SUPABASE_KEY,
 
-      text: "You have reached the end of the public preview.\n\nThe complete AARYA: Part One — The Fall is available to eligible Stories subscribers.\n\nTap READ FULL STORY above to continue."
+  {
+
+    auth:{
+
+      persistSession:true,
+
+      autoRefreshToken:true,
+
+      detectSessionInUrl:true
 
     }
 
-  ]
+  }
 
-};
+);
 
-const reader = document.getElementById("reader");
+pdfjsLib.GlobalWorkerOptions.workerSrc =
 
-const backButton = document.getElementById("backButton");
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-const fullStoryButton = document.getElementById("fullStoryButton");
+const statusBox = document.getElementById("status");
+
+const preview = document.getElementById("preview");
 
 const accessMessage = document.getElementById("accessMessage");
 
-const accessText = document.getElementById("accessText");
+const readerArea = document.getElementById("readerArea");
 
-const accessLink = document.getElementById("accessLink");
+const readButton = document.getElementById("readButton");
 
-const closeMessage = document.getElementById("closeMessage");
+let pageFlip = null;
 
-const pdfContainer = document.getElementById("pdfContainer");
+let pdfDocument = null;
 
-const pdfFrame = document.getElementById("pdfFrame");
+let rendering = false;
 
-let currentPage = 0;
+function showStatus(message){
 
-let startX = 0;
-
-let startY = 0;
-
-let swiping = false;
-
-let animating = false;
-
-let suppressClickUntil = 0;
-
-let hideTimer = null;
-
-function escapeHTML(value) {
-
-  return String(value).replace(/[&<>"']/g, char => ({
-
-    "&": "&amp;",
-
-    "<": "&lt;",
-
-    ">": "&gt;",
-
-    '"': "&quot;",
-
-    "'": "&#39;"
-
-  })[char]);
+  statusBox.textContent = message;
 
 }
 
-function isTwoPageMode() {
+function showAccessDenied(message){
 
-  return window.matchMedia(
+  readerArea.style.display = "none";
 
-    "(min-width: 600px) and (orientation: landscape)"
+  accessMessage.style.display = "block";
 
-  ).matches;
-
-}
-
-function hideBackButton() {
-
-  clearTimeout(hideTimer);
-
-  backButton.classList.remove("visible");
+  showStatus(message);
 
 }
 
-function showBackButton() {
+async function loadFullStory(){
 
-  backButton.classList.add("visible");
+  if(rendering) return;
 
-  clearTimeout(hideTimer);
+  rendering = true;
 
-  hideTimer = setTimeout(() => {
+  readButton.disabled = true;
 
-    backButton.classList.remove("visible");
+  try{
 
-  }, 2500);
-
-}
-
-function showAccessMessage(message, linkText = "", linkHref = "") {
-
-  accessText.textContent = message;
-
-  if (linkText && linkHref) {
-
-    accessLink.textContent = linkText;
-
-    accessLink.href = linkHref;
-
-    accessLink.style.display = "inline-block";
-
-  } else {
-
-    accessLink.style.display = "none";
-
-  }
-
-  accessMessage.classList.add("visible");
-
-}
-
-function hideAccessMessage() {
-
-  accessMessage.classList.remove("visible");
-
-}
-
-closeMessage.addEventListener("click", hideAccessMessage);
-
-function pageHTML(index) {
-
-  const item = STORY.pages[index];
-
-  if (!item) return '<div class="content"></div>';
-
-  if (item.type === "cover") {
-
-    return `
-
-      <div class="content cover">
-
-        <div class="brand">${escapeHTML(item.text || "SOVEREIGN PICTURES")}</div>
-
-        <div class="gold-line"></div>
-
-        <h1>${escapeHTML(STORY.title)}</h1>
-
-        <h2>${escapeHTML(STORY.subtitle)}</h2>
-
-        <div class="gold-line"></div>
-
-      </div>`;
-
-  }
-
-  return `
-
-    <div class="content">
-
-      ${item.heading
-
-        ? `<div class="chapter-heading">${escapeHTML(item.heading)}</div>`
-
-        : ""}
-
-      ${escapeHTML(item.text || "")}
-
-    </div>`;
-
-}
-
-function makePage(index) {
-
-  const page = document.createElement("section");
-
-  page.className = "page";
-
-  page.innerHTML = pageHTML(index) +
-
-    `<div class="page-number">${index + 1}</div>`;
-
-  return page;
-
-}
-
-function renderPages() {
-
-  const spread = document.createElement("div");
-
-  spread.className = "spread";
-
-  if (isTwoPageMode()) {
-
-    const first = Math.floor(currentPage / 2) * 2;
-
-    spread.appendChild(makePage(first));
-
-    if (first + 1 < STORY.pages.length) {
-
-      spread.appendChild(makePage(first + 1));
-
-    }
-
-  } else {
-
-    spread.appendChild(makePage(currentPage));
-
-  }
-
-  reader.replaceChildren(spread);
-
-}
-
-function directTurn(direction) {
-
-  const step = isTwoPageMode() ? 2 : 1;
-
-  const next = currentPage + direction * step;
-
-  if (next < 0 || next >= STORY.pages.length) return;
-
-  currentPage = next;
-
-  renderPages();
-
-  hideBackButton();
-
-}
-
-function animatedTurn(direction) {
-
-  if (animating) return;
-
-  if (!isTwoPageMode()) {
-
-    directTurn(direction);
-
-    return;
-
-  }
-
-  const step = 2;
-
-  const next = currentPage + direction * step;
-
-  if (next < 0 || next >= STORY.pages.length) return;
-
-  const spread = reader.querySelector(".spread");
-
-  if (!spread) return;
-
-  animating = true;
-
-  hideBackButton();
-
-  const flip = document.createElement("div");
-
-  flip.className = "flip-page " +
-
-    (direction > 0 ? "forward" : "backward");
-
-  const front = document.createElement("div");
-
-  front.className = "flip-face front";
-
-  const back = document.createElement("div");
-
-  back.className = "flip-face back";
-
-  if (direction > 0) {
-
-    front.innerHTML = pageHTML(currentPage + 1);
-
-    back.innerHTML = pageHTML(next);
-
-  } else {
-
-    front.innerHTML = pageHTML(currentPage);
-
-    back.innerHTML = pageHTML(next + 1);
-
-  }
-
-  flip.append(front, back);
-
-  spread.appendChild(flip);
-
-  setTimeout(() => {
-
-    currentPage = next;
-
-    renderPages();
-
-    animating = false;
-
-  }, 570);
-
-}
-
-/* TOUCH CONTROLS */
-
-reader.addEventListener("touchstart", event => {
-
-  if (event.touches.length !== 1 || animating) return;
-
-  startX = event.touches[0].clientX;
-
-  startY = event.touches[0].clientY;
-
-  swiping = false;
-
-}, { passive: true });
-
-reader.addEventListener("touchmove", event => {
-
-  if (!event.touches.length) return;
-
-  const dx = event.touches[0].clientX - startX;
-
-  const dy = event.touches[0].clientY - startY;
-
-  if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy)) {
-
-    swiping = true;
-
-  }
-
-}, { passive: true });
-
-reader.addEventListener("touchend", event => {
-
-  if (!event.changedTouches.length) return;
-
-  const dx = event.changedTouches[0].clientX - startX;
-
-  const dy = event.changedTouches[0].clientY - startY;
-
-  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
-
-    swiping = true;
-
-    suppressClickUntil = Date.now() + 500;
-
-    if (dx < 0) animatedTurn(1);
-
-    else animatedTurn(-1);
-
-  } else if (!swiping) {
-
-    showBackButton();
-
-  }
-
-  setTimeout(() => { swiping = false; }, 550);
-
-}, { passive: true });
-
-reader.addEventListener("click", () => {
-
-  if (Date.now() < suppressClickUntil || swiping || animating) return;
-
-  showBackButton();
-
-});
-
-/* SUBSCRIBER ACCESS */
-
-async function openFullStory() {
-
-  fullStoryButton.disabled = true;
-
-  fullStoryButton.textContent = "CHECKING ACCESS...";
-
-  hideAccessMessage();
-
-  try {
+    showStatus("Checking your Stories membership...");
 
     const {
 
-      data: { session },
+      data:{session},
 
-      error: sessionError
+      error:sessionError
 
     } = await supabase.auth.getSession();
 
-    if (sessionError || !session) {
+    if(sessionError || !session){
 
-      showAccessMessage(
-
-        "Please log in to access the complete AARYA story.",
-
-        "LOG IN",
-
-        "./login.html"
-
-      );
+      showAccessDenied("Please log in to continue.");
 
       return;
 
     }
 
-    const { data, error } = await supabase.functions.invoke(
+    showStatus("Verifying your subscription...");
+
+    const {data,error} = await supabase.functions.invoke(
 
       "get-premium-story",
 
-      { body: {} }
+      {
+
+        body:{}
+
+      }
 
     );
 
-    if (error) {
+    if(error){
 
-      let message = error.message || "Unable to verify your subscription.";
-
-      if (error.context && typeof error.context.json === "function") {
-
-        try {
-
-          const responseBody = await error.context.json();
-
-          if (responseBody?.error) {
-
-            message = responseBody.error;
-
-          }
-
-        } catch (_) {}
-
-      }
-
-      const lowerMessage = message.toLowerCase();
-
-      if (
-
-        lowerMessage.includes("subscription") ||
-
-        lowerMessage.includes("membership")
-
-      ) {
-
-        showAccessMessage(
-
-          "A Stories subscription is required to read the complete book.",
-
-          "RETURN TO SOVEREIGN PICTURES",
-
-          "./index.html"
-
-        );
-
-      } else if (
-
-        lowerMessage.includes("login") ||
-
-        lowerMessage.includes("session")
-
-      ) {
-
-        showAccessMessage(
-
-          "Your login session has expired. Please log in again.",
-
-          "LOG IN",
-
-          "./login.html"
-
-        );
-
-      } else {
-
-        showAccessMessage(message);
-
-      }
-
-      return;
+      throw new Error(error.message || "Access verification failed.");
 
     }
 
-    if (!data || !data.success || !data.signedUrl) {
+    if(!data || !data.success || !data.signedUrl){
 
-      showAccessMessage(
+      throw new Error(
 
-        data?.error || "The full story could not be opened. Please try again."
+        data?.error || "An active Stories subscription is required."
 
       );
 
-      return;
+    }
+
+    preview.style.display = "none";
+
+    accessMessage.style.display = "none";
+
+    showStatus("Loading your AARYA book...");
+
+    const response = await fetch(data.signedUrl);
+
+    if(!response.ok){
+
+      throw new Error("Unable to load the AARYA PDF.");
 
     }
 
-    /* DISPLAY PDF INSIDE THIS PAGE */
+    const pdfData = await response.arrayBuffer();
 
-    hideAccessMessage();
+    pdfDocument = await pdfjsLib.getDocument({
 
-    reader.style.display = "none";
+      data:pdfData
 
-    fullStoryButton.style.display = "none";
+    }).promise;
 
-    pdfContainer.style.display = "block";
+    await buildBook();
 
-    backButton.classList.add("visible");
+    readerArea.style.display = "block";
 
-    pdfFrame.src = data.signedUrl;
+    showStatus("");
 
-  } catch (error) {
+  }
 
-    console.error("AARYA access error:", error);
+  catch(error){
 
-    showAccessMessage(
+    console.error(error);
 
-      "Something went wrong while checking access. Please try again."
+    showAccessDenied(
+
+      error.message || "Something went wrong while opening the story."
 
     );
 
-  } finally {
+  }
 
-    fullStoryButton.disabled = false;
+  finally{
 
-    fullStoryButton.textContent = "READ FULL STORY";
+    rendering = false;
+
+    readButton.disabled = false;
 
   }
 
 }
 
-fullStoryButton.addEventListener("click", openFullStory);
+async function buildBook(){
 
-/* KEYBOARD CONTROLS */
+  const bookElement = document.getElementById("book");
 
-document.addEventListener("keydown", event => {
+  bookElement.innerHTML = "";
 
-  if (event.key === "ArrowLeft") animatedTurn(1);
+  const isMobile = window.innerWidth < 650;
 
-  if (event.key === "ArrowRight") animatedTurn(-1);
+  const pageWidth = isMobile ? 330 : 430;
 
-  if (event.key === "Escape") {
+  const pageHeight = isMobile ? 465 : 590;
 
-    window.location.href = "./index.html";
+  const pageElements = [];
+
+  for(let pageNumber=1; pageNumber<=pdfDocument.numPages; pageNumber++){
+
+    showStatus(
+
+      "Preparing book pages: " +
+
+      pageNumber + " / " + pdfDocument.numPages
+
+    );
+
+    const page = await pdfDocument.getPage(pageNumber);
+
+    const originalViewport = page.getViewport({scale:1});
+
+    const scale = Math.min(
+
+      (pageWidth - 20) / originalViewport.width,
+
+      (pageHeight - 20) / originalViewport.height
+
+    );
+
+    const viewport = page.getViewport({scale});
+
+    const canvas = document.createElement("canvas");
+
+    const context = canvas.getContext("2d");
+
+    canvas.width = Math.floor(viewport.width);
+
+    canvas.height = Math.floor(viewport.height);
+
+    await page.render({
+
+      canvasContext:context,
+
+      viewport:viewport
+
+    }).promise;
+
+    const pageElement = document.createElement("div");
+
+    pageElement.className = "page";
+
+    const pageContent = document.createElement("div");
+
+    pageContent.className = "pdf-page";
+
+    pageContent.appendChild(canvas);
+
+    pageElement.appendChild(pageContent);
+
+    pageElements.push(pageElement);
 
   }
 
-});
+  bookElement.innerHTML = "";
 
-/* SCREEN ROTATION */
+  pageElements.forEach(page=>{
 
-let previousMode = isTwoPageMode();
+    bookElement.appendChild(page);
 
-window.addEventListener("resize", () => {
+  });
 
-  const mode = isTwoPageMode();
+  if(pageFlip){
 
-  if (mode !== previousMode) {
+    pageFlip.destroy();
 
-    previousMode = mode;
-
-    if (mode) currentPage = Math.floor(currentPage / 2) * 2;
-
-    renderPages();
+    pageFlip = null;
 
   }
 
-});
+  pageFlip = new St.PageFlip(bookElement,{
 
-renderPages();
+    width:pageWidth,
+
+    height:pageHeight,
+
+    size:"stretch",
+
+    minWidth:280,
+
+    maxWidth:500,
+
+    minHeight:380,
+
+    maxHeight:700,
+
+    showCover:true,
+
+    mobileScrollSupport:false,
+
+    usePortrait:true,
+
+    drawShadow:true,
+
+    flippingTime:850,
+
+    maxShadowOpacity:0.45,
+
+    autoSize:true
+
+  });
+
+  pageFlip.loadFromHTML(
+
+    bookElement.querySelectorAll(".page")
+
+  );
+
+  updatePageStatus();
+
+}
+
+function updatePageStatus(){
+
+  if(!pageFlip || !pdfDocument) return;
+
+  document.getElementById("pageStatus").textContent =
+
+    "Page " + (pageFlip.getCurrentPageIndex()+1) +
+
+    " of " + pdfDocument.numPages;
+
+}
+
+document.getElementById("previousButton").addEventListener(
+
+  "click",()=>{
+
+    if(pageFlip){
+
+      pageFlip.flipPrev();
+
+      setTimeout(updatePageStatus,900);
+
+    }
+
+  }
+
+);
+
+document.getElementById("nextButton").addEventListener(
+
+  "click",()=>{
+
+    if(pageFlip){
+
+      pageFlip.flipNext();
+
+      setTimeout(updatePageStatus,900);
+
+    }
+
+  }
+
+);
+
+readButton.addEventListener("click",loadFullStory);
 
 </script>
 
