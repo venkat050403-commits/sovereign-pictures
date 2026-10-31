@@ -218,7 +218,7 @@ body {
 
   position: fixed;
 
-  z-index: 30;
+  z-index: 60;
 
   top: max(14px, env(safe-area-inset-top));
 
@@ -266,8 +266,6 @@ body {
 
 }
 
-/* Full story access button */
-
 #fullStoryButton {
 
   position: fixed;
@@ -308,7 +306,35 @@ body {
 
 }
 
-/* Access messages */
+/* Embedded PDF */
+
+#pdfContainer {
+
+  display: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 25;
+
+  background: #100d0a;
+
+}
+
+#pdfFrame {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  border: 0;
+
+  background: white;
+
+}
 
 #accessMessage {
 
@@ -316,7 +342,7 @@ body {
 
   position: fixed;
 
-  z-index: 50;
+  z-index: 70;
 
   left: 50%;
 
@@ -391,8 +417,6 @@ body {
   cursor: pointer;
 
 }
-
-/* Page-turn layer */
 
 .flip-page {
 
@@ -566,6 +590,20 @@ body {
 
 <div id="reader" aria-label="Story reader"></div>
 
+<div id="pdfContainer">
+
+  <iframe
+
+    id="pdfFrame"
+
+    title="AARYA — Part One: The Fall"
+
+    allow="fullscreen"
+
+  ></iframe>
+
+</div>
+
 <a id="backButton" href="./index.html" aria-label="Back to homepage">‹</a>
 
 <button id="fullStoryButton" type="button">
@@ -588,8 +626,6 @@ body {
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-/* SUPABASE CONNECTION */
-
 const SUPABASE_URL = "https://ffxmmzxknnrmglqvxwbc.supabase.co";
 
 const SUPABASE_KEY = "sb_publishable_sFi_I9me6VPQy0Saj5eQzg_csLKDtOt";
@@ -607,8 +643,6 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   }
 
 });
-
-/* PUBLIC PREVIEW */
 
 const STORY = {
 
@@ -677,6 +711,10 @@ const accessText = document.getElementById("accessText");
 const accessLink = document.getElementById("accessLink");
 
 const closeMessage = document.getElementById("closeMessage");
+
+const pdfContainer = document.getElementById("pdfContainer");
+
+const pdfFrame = document.getElementById("pdfFrame");
 
 let currentPage = 0;
 
@@ -1008,7 +1046,7 @@ reader.addEventListener("click", () => {
 
 });
 
-/* FULL STORY SUBSCRIPTION ACCESS */
+/* SUBSCRIBER ACCESS */
 
 async function openFullStory() {
 
@@ -1048,11 +1086,7 @@ async function openFullStory() {
 
       "get-premium-story",
 
-      {
-
-        body: {}
-
-      }
+      { body: {} }
 
     );
 
@@ -1066,7 +1100,7 @@ async function openFullStory() {
 
           const responseBody = await error.context.json();
 
-          if (responseBody && responseBody.error) {
+          if (responseBody?.error) {
 
             message = responseBody.error;
 
@@ -1136,9 +1170,19 @@ async function openFullStory() {
 
     }
 
-    showAccessMessage("Subscription verified. Opening the complete AARYA book...");
+    /* DISPLAY PDF INSIDE THIS PAGE */
 
-    window.location.assign(data.signedUrl);
+    hideAccessMessage();
+
+    reader.style.display = "none";
+
+    fullStoryButton.style.display = "none";
+
+    pdfContainer.style.display = "block";
+
+    backButton.classList.add("visible");
+
+    pdfFrame.src = data.signedUrl;
 
   } catch (error) {
 
